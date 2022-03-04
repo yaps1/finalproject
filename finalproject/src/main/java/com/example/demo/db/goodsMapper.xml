@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goods">
+ 	<select id="searchGoodsByMain" resultType="goodsVO">
+  		select g.goods_no,goods_image1,goods_name,goods_price,goods_addr 
+		 from goods g,goods_detail gd 
+		 where g.goods_no=gd.goods_no and g.goods_name like '%'||#{searchkeyword}||'%' 
+		 order by g.goods_no
+  	</select>
+  	
+  	<select id="listGRByMember" resultType="goodsReviewVO">
+  		select goods_no,goods_score,goods_review from goods_review where member_no=#{member_no} order by goods_review_no desc
+  	</select>
+  	
+  	<select id="saleGoodsByMember" resultType="goodsVO">
+  		select g.goods_no goods_no,goods_image1,goods_name,goods_price from goods g,goods_detail d 
+		 where g.goods_no=d.goods_no and member_no=#{member_no}
+  	</select>
+  	
+  	<select id="purchaseGoodsByMember" resultType="goodsVO">
+  		select g.goods_no,goods_image1,goods_name,goods_price from 
+		 (select goods_no,goods_name,goods_price from goods where goods_no in 
+		 (select g.goods_no from goods g,goods_purchase p where g.goods_no=p.goods_no and p.member_no=#{member_no})) g,
+		 goods_detail d where g.goods_no=d.goods_no
+  	</select>
+  	
+  	<select id="favorByMember" resultType="goodsVO">
+  		select a.goods_no goods_no,cnt,goods_image1,goods_name,goods_price,goods_addr
+		from (select goods_no,count(goods_no) cnt from goods_favor group by goods_no) a,
+		(select g.goods_no,goods_image1,goods_name,goods_price,goods_addr
+		from goods g,goods_detail d,goods_favor f where g.goods_no = d.goods_no and
+		d.goods_no = f.goods_no and f.member_no = #{member_no}) b where a.goods_no = b.goods_no
+  	</select>
+</mapper>

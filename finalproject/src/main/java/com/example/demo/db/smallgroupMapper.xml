@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="smallGroup">
+ 	<select id="searchSGByMain" resultType="sgVO">
+  		select sg_no,sg_title,member_nickname,to_char(sg_date,'yyyy/mm/dd') sg_date 
+		 from small_group s,member m 
+		 where s.member_no=m.member_no and 
+		 sg_title like '%'||#{searchkeyword}||'%' order by sg_no desc
+  	</select>
+  	
+  	<select id="listSGByMember" resultType="sgVO">
+  	  select sg_no,sg_title,to_char(sg_date,'yyyy/mm/dd') sg_date from small_group where member_no=#{member_no} order by sg_no desc
+  	</select>
+  	
+  	<select id="listSGCByMember" resultType="sgcVO">
+  	  select sg_no,sg_comment,to_char(sg_comment_date,'yyyy/mm/dd') sg_comment_date from small_group_comment where member_no=#{member_no} order by sg_comment_no desc
+  	</select>
+</mapper>

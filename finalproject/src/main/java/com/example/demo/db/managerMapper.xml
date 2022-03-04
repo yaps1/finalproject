@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="manager">
+ 	<select id="memberByMonth" resultType="memberChartVO">
+  		select to_char(member_join,'yyyy-mm') month, count(*) cnt 
+		 from member group by to_char(member_join,'yyyy-mm')
+  	</select> 
+  	
+  	<select id="memberlevel" resultType="memberVO">
+  		select  member_id,member_level from (select member_id,member_level from member order by member_level desc nulls last)
+	 	 where <![CDATA[rownum<=5]]>  
+  	</select>
+</mapper>
