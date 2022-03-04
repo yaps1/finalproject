@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+  <!-- 회원 번호 -->
+  <select id="getMemberNo" resultType="java.lang.Integer">
+  	select nvl(max(member_no),0)+1 from member
+  </select>
+  
+  <!-- 회원 가입 -->
+  <insert id="insertMember" parameterType="memberVO">
+  	insert into member values (#{member_no},#{member_id},#{member_pwd},#{member_name},#{member_nickname},#{member_gender},#{member_tel},#{member_birth},#{member_addr},#{member_loc},sysdate,0,1,'user')
+  </insert>
+  
+  <!-- 아이디 중복 체크 -->
+  <select id="id_check" resultType="java.lang.Integer">
+  	select nvl(count(member_id),0) from member where member_id=#{member_id} 
+  </select>
+  
+  <!-- 닉네임 중복 체크 -->
+  <select id="nickname_check" resultType="java.lang.Integer">
+  	select nvl(count(member_nickname),0) from member where member_nickname=#{member_nickname}
+  </select>
+  
+  <!-- 로그인 -->
+  <select id="isMember" resultType="memberVO">
+  	select * from member where member_id=#{member_id}
+  </select>
+ 
+  <!-- 아이디 찾기 마스킹 처리 부족-->
+  <select id="searchId" resultType="java.lang.String">
+	select replace(substr(member_id,0,instr(member_id,'@',1)-1),substr(member_id,2,1),'*') || substr(member_id,instr(member_id,'@',1)) from member where member_name=#{member_name} and member_tel=#{member_tel}
+  </select>
+  
+  <!-- 비밀번호 찾기 -->
+  <select id="searchPwd" resultType="java.lang.Integer">
+  	select nvl(count(*),0) from member where member_id=#{member_id} and member_name=#{member_name} and member_tel=#{member_tel}
+  </select>
+  
+  <!-- 비밀번호 재설정 -->
+  <update id="updatePwd" parameterType="java.lang.String">
+	update member set member_pwd=#{member_pwd} where member_id=#{member_id}  
+  </update>
+
+ 	<select id="detailMember" resultType="memberVO">
+  		select member_no,member_id,member_pwd,member_name,member_nickname,member_gender,member_tel,to_char(member_birth,'yyyy/mm/dd') member_birth,member_addr,member_addr,member_loc 
+  		 from member where member_no=#{member_no}
+  	</select> 
+  	
+  	<update id="updateMember" parameterType="memberVO">
+  		update member set member_pwd=#{member_pwd},member_nickname=#{member_nickname},member_tel=#{member_tel},member_addr=#{member_addr},member_loc=#{member_loc} 
+		 where member_no=#{member_no}
+  	</update>
+  	
+  	<delete id="deleteMember" parameterType="memberVO">
+  		delete member where member_no=#{member_no}
+  	</delete>
+
+</mapper>

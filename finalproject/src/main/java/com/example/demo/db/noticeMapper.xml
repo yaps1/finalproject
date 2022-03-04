@@ -3,44 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
-  <select id="totalRecord" resultType="noticeVO">
-  	<!-- select count(*) from notice -->
-  	 select notice_no,notice_title,notice_date,notice_hit from(
-	select rownum num,notice_no,notice_title,notice_date,notice_hit from(
-	select notice_no,notice_title,to_char(notice_date,'yy-mm-dd') notice_date,notice_hit from notice 
+	<select id="totalRecord" resultType="noticeVO">
+		<!-- select count(*) from notice -->
+	 	select notice_no,notice_title,notice_date,notice_hit from(
+		select rownum num,notice_no,notice_title,notice_date,notice_hit from(
+		select notice_no,notice_title,to_char(notice_date,'yy-mm-dd') notice_date,notice_hit from notice 
 	<if test="keyword != null">
 			where ${searchColumn} like '%'||#{keyword}||'%' 
 	</if>
-	order by notice_date desc, notice_no desc
-	))
-  </select>
-  <select id="findAll" resultType="noticeVO">
-    select notice_no,notice_title,notice_date,notice_hit from(
-	select rownum num,notice_no,notice_title,notice_date,notice_hit from(
-	select notice_no,notice_title,to_char(notice_date,'yy-mm-dd') notice_date,notice_hit from notice 
+		order by notice_date desc, notice_no desc
+		))
+	 </select>
+	 <select id="findAll" resultType="noticeVO">
+	   	select notice_no,notice_title,notice_date,notice_hit from(
+		select rownum num,notice_no,notice_title,notice_date,notice_hit from(
+		select notice_no,notice_title,to_char(notice_date,'yy-mm-dd') notice_date,notice_hit from notice 
 	<if test="keyword != null">
-			where ${searchColumn} like '%'||#{keyword}||'%' 
+		where ${searchColumn} like '%'||#{keyword}||'%' 
 	</if>
-	order by notice_date desc, notice_no desc
-	)) where num between #{start} and #{end}
-  </select>
+		order by notice_date desc, notice_no desc
+		)) where num between #{start} and #{end}
+	 </select>
+	 
+	 <select id="findByNo" resultType="noticeVO">
+		 select * from notice where notice_no=#{notice_no}
+	 </select>
+	 <select id="max" resultType="java.lang.Integer">
+		select max(notice_no) from notice
+	 </select>
+	 <delete id="delete">
+	 	delete notice where notice_no=#{notice_no}
+	 </delete>
+	 <insert id="insert" parameterType="noticeVO">
+		insert into notice values((select nvl(max(notice_no),0)+1 from notice),1,#{notice_title},sysdate,0,#{notice_content},#{notice_file})
+	 </insert>
+	 <update id="update" parameterType="noticeVO">
+	 	update notice set notice_title=#{notice_title},notice_content=#{notice_content},notice_file=#{notice_file} where notice_no=#{notice_no}
+	 </update>
+	 <update id="hit">
+	 	update notice set notice_hit=notice_hit+1 where notice_no=#{n.notice_no}
+	 </update>
   
-  <select id="findByNo" resultType="noticeVO">
-  select * from notice where notice_no=#{notice_no}
-  </select>
-  <select id="max" resultType="java.lang.Integer">
-	select max(notice_no) from notice
-  </select>
-  <delete id="delete">
-  	delete notice where notice_no=#{notice_no}
-  </delete>
-  <insert id="insert" parameterType="noticeVO">
-	insert into notice values((select nvl(max(notice_no),0)+1 from notice),1,#{notice_title},sysdate,0,#{notice_content},#{notice_file})
-  </insert>
-  <update id="update" parameterType="noticeVO">
-  	update notice set notice_title=#{notice_title},notice_content=#{notice_content},notice_file=#{notice_file} where notice_no=#{notice_no}
-  </update>
-  <update id="hit">
-  	update notice set notice_hit=notice_hit+1 where notice_no=#{n.notice_no}
-  </update>
+	 <select id="searchNoticeByMain" resultType="noticeVO">
+ 		select notice_no,notice_title,to_char(notice_date,'yyyy/mm/dd') notice_date from notice where notice_title like '%'||#{searchkeyword}||'%' order by notice_no desc
+	 </select> 
 </mapper>

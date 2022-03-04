@@ -14,4 +14,5 @@ public class QnaVO {
 	private int manager_no;
 	private int member_no;
 	private String member_nickname;
+
 }

@@ -43,4 +43,9 @@ public class NoticeDAO {
 	public int hitNotice(int notice_no) {
 		return DBManager.hitNotice(notice_no);
 	}
+	public List<NoticeVO> searchNoticeByMain(String searchkeyword){
+		return DBManager.searchNoticeByMain(searchkeyword);
+	}
 }
+
+

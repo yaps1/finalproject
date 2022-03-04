@@ -5,13 +5,24 @@
 <configuration>
 <properties resource="com/example/demo/db/db.properties"/>
 <typeAliases>
-	<typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
-	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
-	<typeAlias type="com.example.demo.vo.GoodsVO" alias="goodsVO"/>
 	<typeAlias type="com.example.demo.vo.GoodsDetailVO" alias="goodsDetailVO"/>
-	<typeAlias type="com.example.demo.vo.GoodsReviewVO" alias="goodsReviewVO"/>
 	<typeAlias type="com.example.demo.vo.GoodsFavorVO" alias="goodsFavorVO"/>
 	<typeAlias type="com.example.demo.vo.HotKeywordVO" alias="hotkeywordVO"/>
+	<typeAlias type="com.example.demo.vo.GoodsVO" alias="goodsVO"/>
+	<typeAlias type="com.example.demo.vo.GBVO" alias="gbVO"/>
+	<typeAlias type="com.example.demo.vo.GBJVO" alias="gbjVO"/>
+	<typeAlias type="com.example.demo.vo.GBDVO" alias="gbdVO"/>
+	<typeAlias type="com.example.demo.vo.GBCVO" alias="gbcVO"/>
+	<typeAlias type="com.example.demo.vo.SGVO" alias="sgVO"/>
+	<typeAlias type="com.example.demo.vo.SGCVO" alias="sgcVO"/>
+	<typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
+	<typeAlias type="com.example.demo.vo.MemberVO" alias="memberVO"/>
+	<typeAlias type="com.example.demo.vo.RestVO" alias="restVO"/>
+	<typeAlias type="com.example.demo.vo.RestReviewVO" alias="restReviewVO"/>
+	<typeAlias type="com.example.demo.vo.GoodsReviewVO" alias="goodsReviewVO"/>
+	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
+	<typeAlias type="com.example.demo.vo.MemberChartVO" alias="memberChartVO"/>
+
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -29,5 +40,11 @@
     <mapper resource="com/example/demo/db/qnaMapper.xml"/>
     <mapper resource="com/example/demo/db/hotKeywordMapper.xml"/>
     <mapper resource="com/example/demo/db/goodsMapper.xml"/>
+    <mapper resource="com/example/demo/db/groupbuyingMapper.xml"/>
+    <mapper resource="com/example/demo/db/smallgroupMapper.xml"/>
+    <mapper resource="com/example/demo/db/memberMapper.xml"/>
+    <mapper resource="com/example/demo/db/restMapper.xml"/>
+    <mapper resource="com/example/demo/db/managerMapper.xml"/>
+
   </mappers>
 </configuration>

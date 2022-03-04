@@ -35,5 +35,12 @@ public class QnaDAO {
 	public int updateQna(QnaVO q) {
 		return DBManager.updateQna(q);
 	}
+	public List<QnaVO> listQnaByMember(int member_no){
+		return DBManager.listQnaByMember(member_no);
+	}
 	
+	public QnaVO getQna(int qna_no) {
+		return DBManager.getQna(qna_no);
+	}
 }
+	

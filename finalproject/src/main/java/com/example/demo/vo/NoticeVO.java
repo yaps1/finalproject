@@ -1,6 +1,5 @@
 package com.example.demo.vo;
 
-import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,4 +15,5 @@ public class NoticeVO {
 	private String notice_content;
 	private String notice_file;
 	private MultipartFile uploadFile;
+
 }

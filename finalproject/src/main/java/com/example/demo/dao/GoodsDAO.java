@@ -67,4 +67,25 @@ public class GoodsDAO {
 	public int deleteFavor(GoodsFavorVO gf) {
 		return DBManager.deleteFavor(gf);
 	}
+	public List<GoodsVO> searchGoodsByMain(String searchkeyword){
+		return DBManager.searchGoodsByMain(searchkeyword);
+	}
+	
+	public List<GoodsReviewVO> listGRByMember(int member_no){
+		return DBManager.listGRByMember(member_no);
+	}
+	
+	public List<GoodsVO> saleGoodsByMember(int member_no){
+		return DBManager.saleGoodsByMember(member_no);
+	}
+	
+	public List<GoodsVO> purchaseGoodsByMember(int member_no){
+		return DBManager.purchaseGoodsByMember(member_no);
+	}
+	
+	public List<GoodsVO> favorByMember(int member_no){
+		return DBManager.favorByMember(member_no);
+	}
 }
+
+
