@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+  <select id="totalRecord" resultType="qnaVO">
+  	<!-- select count(*) from notice -->
+		select qna_no, qna_type, qna_title, qna_date,member_nickname,qna_process from(
+		select rownum num, qna_no, qna_type, qna_title, qna_date,member_nickname,qna_process from(
+		select qna_no, qna_type, qna_title, qna_date,member_nickname,qna_process 
+		from member m, qna q where m.member_no=q.member_no 
+		<if test="qna_process == 0">
+			and qna_process=0
+		</if>
+		<if test="qna_process == 1">
+			and qna_process=1
+		</if>
+		order by qna_date desc,qna_no desc))
+  </select>
+  <select id="listQna" resultType="qnaVO">
+		select qna_no, qna_type, qna_title, qna_date,member_nickname,qna_process from(
+		select rownum num, qna_no, qna_type, qna_title, qna_date,member_nickname,qna_process from(
+		select qna_no, qna_type, qna_title, to_char(qna_date,'yy-mm-dd') qna_date,member_nickname,qna_process 
+		from member m, qna q where m.member_no=q.member_no 
+		<if test="qna_process == 0">
+			and qna_process=0
+		</if>
+		<if test="qna_process == 1">
+			and qna_process=1
+		</if>
+		order by qna_date desc,qna_no desc))
+		where num between #{start} and #{end}
+  </select>
+  
+  <select id="findByNoQna" resultType="QnaVO">
+  select qna_no, qna_type, qna_title, to_char(qna_date,'yy-mm-dd') qna_date,member_nickname,qna_content,qna_process,qna_comment
+	from member m, qna q where m.member_no=q.member_no and qna_no=#{qna_no}
+  </select>
+  <delete id="delete">
+  	delete notice where notice_no=#{notice_no}
+  </delete>
+  <insert id="insert" parameterType="qnaVO">
+	insert into qna values((select nvl(max(qna_no),0)+1 from qna),#{qna_title},sysdate,#{qna_type},#{qna_content},null,0,1,#{member_no})
+  </insert>
+  <update id="update" parameterType="qnaVO">
+  	update qna set qna_comment=#{qna_comment}, qna_process=1 where qna_no=#{qna_no}
+  </update>
+</mapper>
