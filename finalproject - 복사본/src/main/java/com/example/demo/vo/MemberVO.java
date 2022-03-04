@@ -1,0 +1,22 @@
+package com.example.demo.vo;
+
+import java.util.Date;
+
+import lombok.Data;
+@Data
+public class MemberVO {
+	private int member_no;
+	private String member_id;
+	private String member_pwd;
+	private String member_name;
+	private String member_nickname;
+	private String member_gender;
+	private String member_tel;
+	private Date member_birth;
+	private String member_addr;
+	private String member_loc;
+	private Date member_join;
+	private int member_level;
+	private int jointype;
+	private String member_role;
+}
