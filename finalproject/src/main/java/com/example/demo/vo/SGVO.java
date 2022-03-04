@@ -1,6 +1,5 @@
 package com.example.demo.vo;
 
-
 import lombok.Data;
 @Data
 public class SGVO {
@@ -11,4 +10,5 @@ public class SGVO {
 	private int member_no;
 	private String member_nickname;
 	
+
 }

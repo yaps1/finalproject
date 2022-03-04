@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.dao.SGCDAO;
 import com.example.demo.dao.SGDAO;
 import com.example.demo.vo.SGCVO;
 import com.example.demo.vo.SGVO;
@@ -26,8 +25,7 @@ import lombok.Setter;
 public class SGController {
 	@Autowired
 	private SGDAO dao;
-	@Autowired
-	private SGCDAO cdao;
+
 	
 	//소모임 등록 폼
 	@RequestMapping(value = "/insertSG", method = RequestMethod.GET)
@@ -117,7 +115,7 @@ public class SGController {
 	@ResponseBody
 	public void insertSGC(SGCVO sc) {
 		//int sg_comment_no = cdao.getSGCNo();
-		sc.setSg_comment_no(cdao.getSGCNo());	
+		sc.setSg_comment_no(dao.getSGCNo());	
 		/*
 		일단 그냥 댓글이라고 봄
 		int sg_ref = sg_comment_no;
@@ -141,7 +139,7 @@ public class SGController {
 		sc.setSg_level(sg_level);
 		*/
 		
-		int re = cdao.insertSGC(sc);
+		int re = dao.insertSGC(sc);
 		int sg_no = sc.getSg_no();
 		String sg_comment = sc.getSg_comment();
 		if(re == 1) {
@@ -158,21 +156,21 @@ public class SGController {
 	@RequestMapping(value = "/listSGC",method = RequestMethod.GET)
 	@ResponseBody
 	public List<SGCVO> listOfSG(int sg_no) {
-		return cdao.listSGC(sg_no);
+		return dao.listSGC(sg_no);
 	}
 	
 	//소모임 댓글 개수 ajax >> 댓글이 1개 이상이면 삭제 금지
 	@RequestMapping(value = "/countSGC",method = RequestMethod.GET)
 	@ResponseBody
 	public int countSGC(int sg_no) {
-		return cdao.countSGC(sg_no);
+		return dao.countSGC(sg_no);
 	}
 	
 	//소모임 댓글 수정 ajax
 	@RequestMapping(value = "/updateSGC",method = RequestMethod.POST)
 	@ResponseBody
 	public int updateSGC(SGCVO sc) {
-		int re = cdao.updateSGC(sc);
+		int re = dao.updateSGC(sc);
 		if(re == 1) {
 			System.out.println("댓글 수정에 성공하였습니다.");
 		}else {
@@ -185,7 +183,7 @@ public class SGController {
 	@RequestMapping(value = "deleteSGC",method = RequestMethod.POST)
 	@ResponseBody
 	public int deleteSGC(int sg_comment_no) {
-		int re = cdao.deleteSGC(sg_comment_no);
+		int re = dao.deleteSGC(sg_comment_no);
 		if(re==1) {
 			System.out.println("댓글 삭제에 성공하였습니다.");
 		}else {

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="groupBuying">
+  <select id="listGB" resultType="gbVO">
+    select gb_no,gb_state,gb_category,gb_start_date,gb_end_date,gb_title,gb_capacity 
+	 from (select rownum num,gb_no,gb_state,gb_category,gb_start_date,gb_end_date,gb_title,gb_capacity 
+	 from ( select gb_no,gb_state,gb_category,to_char(gb_start_date,'yyyy/mm/dd') gb_start_date,
+	to_char(gb_end_date,'yyyy/mm/dd') gb_end_date,gb_title,gb_capacity 
+	 from group_buying 
+	<if test="keyword != null and gb_category ==null"> 
+	 where ${searchColumn} like '%'||#{keyword}||'%' 
+	</if>
+	<if test="keyword != null and gb_category !=null"> 
+	 where ${searchColumn} like '%'||#{keyword}||'%' and gb_category=#{gb_category} 
+	</if>
+	<if test="orderColumn != null and orderColumn != 'gb_no'">
+		order by ${orderColumn}
+	</if>
+	<if test="orderColumn == 'gb_no'">
+		order by gb_no desc
+	</if>
+	<if test="orderColumn == null">
+		order by gb_no desc
+	</if>
+	
+	))
+	where num between #{start} and #{end}
+  </select>
+  
+  <select id="totalRecord" resultType="java.lang.Integer">
+      select count(*) from group_buying
+      <if test="keyword != null and gb_category ==null"> 
+	  where ${searchColumn} like '%'||#{keyword}||'%' 
+	  </if>
+	  <if test="keyword != null and gb_category !=null"> 
+		  where ${searchColumn} like '%'||#{keyword}||'%' and gb_category=#{gb_category} 
+	  </if>
+  </select>
+  
+  <select id="joinNum" resultType="java.lang.Integer">
+  	select count(*) from group_buying_join where gbj_accept=1 and gb_no=#{gb_no}
+  </select>
+  
+  <select id="getNextNo" resultType="java.lang.Integer">
+  	select nvl(max(gb_no),0)+1 from group_buying
+  </select>
+  
+  <insert id="insertGB" parameterType="gbVO">
+  	insert into group_buying values(#{gb_no},0,#{gb_category},#{gb_start_date},#{gb_end_date},#{gb_title},#{gb_capacity},50)
+  </insert>
+  
+   <insert id="insertGBD" parameterType="gbdVO">
+  	insert into group_buying_detail values(#{gb_no},#{gb_content},#{gb_image1},#{gb_image2},#{gb_image3},null,#{gb_price})
+  </insert>
+  
+  <select id="findByNo" resultType="gbVO">
+    select gb_no,gb_state,gb_category,to_char(gb_start_date,'yyyy/mm/dd') gb_start_date,to_char(gb_end_date,'yyyy/mm/dd') gb_end_date ,gb_title,gb_capacity,member_no from group_buying where gb_no=#{gb_no}
+  </select>
+  
+  <select id="detailGB" resultType="gbdVO">
+  	select gb_image1,gb_image2,gb_image3,gb_image4,member_nickname,gb_price,gb_content 
+	from group_buying_detail gbd,group_buying gb,member m
+	where gb.member_no=m.member_no 
+	and gb.gb_no=gbd.gb_no 
+	and gbd.gb_no=#{gb_no}
+  </select>
+  
+  <select id="listGBC" resultType="gbcVO">
+  	select gb_comment_no,member_nickname,to_char(gb_comment_date,'yyyy/mm/dd') gb_comment_date,gb_comment,gb_ref,gb_level,gb_step  
+	from group_buying_comment gbc, member m 
+	where gbc.member_no=m.member_no and gbc.gb_no=#{gb_no} 
+	order by gb_ref desc, gb_step
+  </select>
+  
+  <select id="searchGBByMain" resultType="gbVO">
+  	select gb_no,gb_title,gb_state,gb_start_date,gb_end_date,gb_capacity 
+	 from group_buying 
+	 where gb_title like '%'||#{searchkeyword}||'%' order by gb_no desc
+  </select>
+  
+  <select id="listGBByMember" resultType="gbVO">
+  	select gb_no,gb_state,gb_title from group_buying where member_no=#{member_no} order by gb_no desc
+  </select>
+  
+  <select id="listGBCByMember" resultType="gbcVO">
+  	select gb_no,to_char(gb_comment_date,'yyyy/mm/dd') gb_comment_date,gb_comment from group_buying_comment 
+	 where member_no=#{member_no} order by gb_comment_no desc
+  </select>
+  
+  <select id="getNextJoinNo" resultType="java.lang.Integer">
+  	select nvl(max(gbj_no),0)+1 from group_buying_join
+  </select>
+  
+  <insert id="insertGBJ" parameterType="gbjVO">
+  	insert into group_buying_join values(#{gbj_no},0,#{gb_no},50)
+  </insert>
+  
+  <select id="getNextCommentNo" resultType="java.lang.Integer">
+  	select nvl(max(gb_comment_no),0)+1 from group_buying_comment
+  </select>
+  
+  <insert id="insertGBC" parameterType="gbcVO">
+  	insert into group_buying_comment values(#{gb_comment_no},#{gb_comment},sysdate,50,#{gb_no},#{gb_ref},#{gb_level},#{gb_step})
+  </insert>
+  
+</mapper>

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 public class SpringConfig {
@@ -15,6 +16,10 @@ public class SpringConfig {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	} 
 	
+	@Bean
+    public CommonsMultipartResolver multipartResolver() {
+        return new CommonsMultipartResolver();
+    }
 	
 	@Bean
 	public JavaMailSenderImpl javaMailSender() {
@@ -37,3 +42,6 @@ public class SpringConfig {
 		return r;
 	}
 }
+
+
+

@@ -3,7 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="rest">
+  
   <select id="getRestInfo" resultType="restVO">
   	select * from rest
   </select>
+  
+  <select id="listRestReview" resultType="restReviewVO">
+  	select * from rest_review where rest_no=#{rest_no}
+  </select>
+  
+  <select id="listRRByMember" resultType="restReviewVO">
+  	select rest_review_no,rest_score,rest_review_content from rest_review where member_no=#{member_no} order by rest_review_no desc
+  </select> 
 </mapper>

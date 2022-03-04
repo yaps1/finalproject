@@ -42,19 +42,13 @@ public class MemberController {
 	//회원가입 폼
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public void insert_form() {}
-	//회원가입 생년월일 String에서 Date로 변환
-	public Date transformDate(String year,String month,String day) {
-		String member_birth = year+"-"+month+"-"+day;
-		java.sql.Date d = java.sql.Date.valueOf(member_birth);
-		return d;
-	};
 	
 	//회원가입 제출
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public void insert_form(HttpServletRequest request,MemberVO m) {
 		m.setMember_no(dao.getMemberNo());
 		m.setMember_pwd(passwordEncoder.encode(m.getMember_pwd()));
-		m.setMember_birth(transformDate(request.getParameter("year"), request.getParameter("month"), request.getParameter("day")));
+		m.setMember_birth(request.getParameter("year")+request.getParameter("month")+request.getParameter("day"));
 		m.setMember_tel(request.getParameter("member_tel1")+request.getParameter("member_tel2")+request.getParameter("member_tel3"));
 		int re = dao.insertMember(m);
 		if(re == 1) {

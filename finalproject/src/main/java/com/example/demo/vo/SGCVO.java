@@ -1,7 +1,5 @@
 package com.example.demo.vo;
 
-import java.util.Date;
-
 import lombok.Data;
 @Data
 public class SGCVO {
@@ -15,4 +13,5 @@ public class SGCVO {
 	private int sg_ref;
 	private int sg_level;
 	private int sg_step;
+
 }

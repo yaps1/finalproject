@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.MemberVO;
+
 @Repository
 public class MemberDAO {
 	//회원 번호
@@ -42,5 +43,19 @@ public class MemberDAO {
 	//비밀번호 재설정
 	public int updatePwd(String member_pwd,String member_id) {
 		return DBManager.updatePwd(member_pwd, member_id);
+	}
+
+	public MemberVO detailMember(int member_no) {
+		return DBManager.detailMember(member_no);
+	}
+	
+	public int updateMember(MemberVO m) {
+		return DBManager.updateMember(m);
+	}
+
+	public int deleteMember(int member_no) {
+		return DBManager.deleteMember(member_no);
+		
+
 	}
 }

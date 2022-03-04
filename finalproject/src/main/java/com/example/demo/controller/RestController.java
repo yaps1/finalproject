@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.RestDAO;
-import com.example.demo.dao.RestReviewDAO;
-import com.example.demo.dao.SGCDAO;
-import com.example.demo.dao.SGDAO;
+
 import com.example.demo.vo.RestReviewVO;
 import com.example.demo.vo.RestVO;
 
@@ -23,8 +21,6 @@ import lombok.Setter;
 public class RestController {
 	@Autowired
 	private RestDAO dao;
-	@Autowired
-	private RestReviewDAO rdao;
 	
 	//맛집공유 게시판 이동
 	@RequestMapping("/rest")
@@ -41,7 +37,7 @@ public class RestController {
 	@RequestMapping(value = "/listRestReview",method = RequestMethod.GET)
 	@ResponseBody
 	public List<RestReviewVO> listRestReview(int rest_no){
-		List<RestReviewVO> list= rdao.listRestReview(rest_no);
+		List<RestReviewVO> list= dao.listRestReview(rest_no);
 		return list;
 	}
 
