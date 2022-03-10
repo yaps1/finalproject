@@ -15,7 +15,7 @@ public class MemberVO {
 	private String member_addr;
 	private String member_loc;
 	private String member_join;
-	private int member_level;
+	private double member_level;
 	private int member_jointype;
 	private String member_role;
 }

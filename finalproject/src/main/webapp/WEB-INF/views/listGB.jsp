@@ -29,7 +29,6 @@ $(function () {
 </script>
 </head>
 <body>
-	
 	<br>
 	<br>
 	<h2 style="text-align : center;"><strong>공동구매</strong></h2>

@@ -17,4 +17,5 @@ public class GoodsDetailVO {
 	private String goods_image3;
 	private String goods_image4;
 	private MultipartFile[] uploadFile;
+	private int cnt;
 }

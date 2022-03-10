@@ -10,8 +10,8 @@ public class SGCVO {
 	private int member_no;
 	private String member_nickname;
 	
-	private int sg_ref;
-	private int sg_level;
-	private int sg_step;
+	private int sg_ref; 	//서로 관련있는 글
+	private int sg_level;	//답글 깊이
+	private int sg_step;	//관련글 출력 순서
 
 }

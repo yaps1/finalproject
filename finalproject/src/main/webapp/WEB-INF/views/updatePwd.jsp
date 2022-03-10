@@ -11,6 +11,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
+		$(".btn-close").click(function(){
+		 	location.href="/login";
+		});
 		
 		//$("#member_pwd").on('keyup',function(){
 		//	if($("#member_pwd").val()=""){

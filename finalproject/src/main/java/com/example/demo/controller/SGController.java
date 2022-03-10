@@ -66,7 +66,7 @@ public class SGController {
 	
 	//소모임 상세 페이지
 	@RequestMapping(value = "/getSG",method = RequestMethod.GET)
-	public ModelAndView getSG(int sg_no) {
+	public ModelAndView getSG(@RequestParam(value = "sg_no") int sg_no) {
 		ModelAndView mav = new ModelAndView("getSG");
 		 mav.addObject("s", dao.getSG(sg_no));		
 		return mav;
@@ -114,38 +114,37 @@ public class SGController {
 	@RequestMapping(value = "/insertSGC", method = RequestMethod.POST)
 	@ResponseBody
 	public void insertSGC(SGCVO sc) {
-		//int sg_comment_no = cdao.getSGCNo();
-		sc.setSg_comment_no(dao.getSGCNo());	
-		/*
-		일단 그냥 댓글이라고 봄
+		//일단 그냥 댓글이라고 봄
+		int sg_comment_no = dao.getSGCNo();
 		int sg_ref = sg_comment_no;
 		int sg_step = 0;
 		int sg_level = 0;
+	
+		int reply = sc.getSg_comment_no(); //답댓글번호
+		System.out.println("부모댓글번호:"+reply);
 		
-		만약 답댓글이라면 
-		int reply = sc.getSg_comment_no();
 		if(reply != 0) {
-			SGCVO re = cdao.findByNo(sg_comment_no);
+			SGCVO re = dao.findBySGCNO(reply);
 			sg_ref = re.getSg_ref();
 			sg_step = re.getSg_step();
 			sg_level = re.getSg_level();
-			cdao.updateStep(sg_ref, sg_step);
+			dao.updateStep(sg_ref, sg_step);
 			sg_level++;
 			sg_step++;
+			
 		}
 		sc.setSg_comment_no(sg_comment_no);
 		sc.setSg_ref(sg_ref);
 		sc.setSg_step(sg_step);
 		sc.setSg_level(sg_level);
-		*/
 		
 		int re = dao.insertSGC(sc);
-		int sg_no = sc.getSg_no();
-		String sg_comment = sc.getSg_comment();
+		//int sg_no = sc.getSg_no();
+		//String sg_comment = sc.getSg_comment();
 		if(re == 1) {
 			System.out.println("소모임 댓글 등록 성공");
-			System.out.println(sg_no);
-			System.out.println(sg_comment);
+			//System.out.println(sg_no);
+			//System.out.println(sg_comment);
 			
 		}else {
 			System.out.println("소모임 댓글 등록 실패");

@@ -9,9 +9,16 @@
   	select nvl(max(member_no),0)+1 from member
   </select>
   
-  <!-- 회원 가입 -->
+  <!-- 일반 회원 가입 -->
   <insert id="insertMember" parameterType="memberVO">
-  	insert into member values (#{member_no},#{member_id},#{member_pwd},#{member_name},#{member_nickname},#{member_gender},#{member_tel},#{member_birth},#{member_addr},#{member_loc},sysdate,0,1,'user')
+  	insert into member(member_no, member_id,member_pwd,member_name,member_nickname,member_gender,member_tel, member_birth,member_addr,member_loc,member_join,member_level,member_jointype,member_role) values 
+  	(#{member_no},#{member_id},#{member_pwd},#{member_name},#{member_nickname},#{member_gender},#{member_tel},#{member_birth},#{member_addr},#{member_loc},sysdate,0,1,'user')
+  </insert>
+  
+  <!-- 카카오 회원가입 -->
+  <insert id="insertKakaoMember" parameterType="memberVO">
+    insert into member(member_no, member_id,member_pwd,member_name,member_nickname,member_gender,member_tel, member_birth,member_addr,member_loc,member_join,member_level,member_jointype,member_role) values 
+  	(#{member_no},#{member_id},#{member_pwd},#{member_name},#{member_nickname},#{member_gender},#{member_tel},#{member_birth},#{member_addr},#{member_loc},sysdate,0,2,'user')
   </insert>
   
   <!-- 아이디 중복 체크 -->
@@ -29,9 +36,9 @@
   	select * from member where member_id=#{member_id}
   </select>
  
-  <!-- 아이디 찾기 마스킹 처리 부족-->
+  <!-- 아이디 찾기-->
   <select id="searchId" resultType="java.lang.String">
-	select replace(substr(member_id,0,instr(member_id,'@',1)-1),substr(member_id,2,1),'*') || substr(member_id,instr(member_id,'@',1)) from member where member_name=#{member_name} and member_tel=#{member_tel}
+	select member_id from member where member_name=#{member_name} and member_tel=#{member_tel}
   </select>
   
   <!-- 비밀번호 찾기 -->
@@ -43,22 +50,39 @@
   <update id="updatePwd" parameterType="java.lang.String">
 	update member set member_pwd=#{member_pwd} where member_id=#{member_id}  
   </update>
+  
+  <!-- 전체 레코드 수 -->
+  <select id="totalRecord" resultType="java.lang.Integer">
+  	select count(*) from member
+  </select>
+  
+  <!-- 회원관리 -->
+  <select id="listMember" resultType="memberVO">
+	select * from
+		( select rownum num, member_no,member_id,member_name,member_nickname
+		from (select * from member order by member_no))
+		where num between #{start} and #{end}
+  </select>
 
- 	<select id="detailMember" resultType="memberVO">
-  		select member_no,member_id,member_pwd,member_name,member_nickname,member_gender,member_tel,to_char(member_birth,'yyyy/mm/dd') member_birth,member_addr,member_addr,member_loc 
-  		 from member where member_no=#{member_no}
-  	</select> 
+  <!-- 마이페이지 회원정보 -->
+  <select id="detailMember" resultType="memberVO">
+  	select member_no,member_id,member_pwd,member_name,member_nickname,member_gender,member_tel,to_char(member_birth,'yyyy/mm/dd') member_birth,member_addr,member_addr,member_loc 
+  	from member where member_no=#{member_no}
+  </select> 
   	
-  	<update id="updateMember" parameterType="memberVO">
-  		update member set member_pwd=#{member_pwd},member_nickname=#{member_nickname},member_tel=#{member_tel},member_addr=#{member_addr},member_loc=#{member_loc} 
-		 where member_no=#{member_no}
-  	</update>
-  	
-  	<delete id="deleteMember" parameterType="memberVO">
-  		delete member where member_no=#{member_no}
-  	</delete>
-	<!-- 닉네임 찾기 -->
-	<select id="findNick" resultType="memberVO">
-		select * from member where member_nickname like #{nick}||'%' 
-	</select>
+  <!-- 마이페이지 내 정보 수정 -->
+  <update id="updateMember" parameterType="memberVO">
+  	update member set member_pwd=#{member_pwd},member_nickname=#{member_nickname},member_tel=#{member_tel},member_addr=#{member_addr},member_loc=#{member_loc} 
+	where member_no=#{member_no}
+  </update>
+
+  <!-- 닉네임 찾기 -->
+  <select id="findNick" resultType="memberVO">
+	select * from member where member_nickname like #{nick}||'%' 
+  </select>
+  <!-- 회원탈퇴 -->
+  <delete id="deleteMember" parameterType="memberVO">
+  	delete member where member_no=#{member_no}
+  </delete>
+
 </mapper>

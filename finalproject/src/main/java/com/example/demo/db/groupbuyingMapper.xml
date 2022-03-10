@@ -48,7 +48,7 @@
   </select>
   
   <insert id="insertGB" parameterType="gbVO">
-  	insert into group_buying values(#{gb_no},0,#{gb_category},#{gb_start_date},#{gb_end_date},#{gb_title},#{gb_capacity},50)
+  	insert into group_buying values(#{gb_no},0,#{gb_category},#{gb_start_date},#{gb_end_date},#{gb_title},#{gb_capacity},#{member_no})
   </insert>
   
    <insert id="insertGBD" parameterType="gbdVO">
@@ -68,10 +68,10 @@
   </select>
   
   <select id="listGBC" resultType="gbcVO">
-  	select gb_comment_no,member_nickname,to_char(gb_comment_date,'yyyy/mm/dd') gb_comment_date,gb_comment,gb_ref,gb_level,gb_step  
+  	select gbc.member_no,gb_comment_no,member_nickname,to_char(gb_comment_date,'yyyy/mm/dd') gb_comment_date,gb_comment,gb_ref,gb_level,gb_step  
 	from group_buying_comment gbc, member m 
 	where gbc.member_no=m.member_no and gbc.gb_no=#{gb_no} 
-	order by gb_ref desc, gb_step
+	order by gb_ref desc, gb_step,gb_comment_no
   </select>
   
   <select id="searchGBByMain" resultType="gbVO">
@@ -94,7 +94,7 @@
   </select>
   
   <insert id="insertGBJ" parameterType="gbjVO">
-  	insert into group_buying_join values(#{gbj_no},0,#{gb_no},50)
+  	insert into group_buying_join values(#{gbj_no},0,#{gb_no},#{member_no},0)
   </insert>
   
   <select id="getNextCommentNo" resultType="java.lang.Integer">
@@ -102,7 +102,19 @@
   </select>
   
   <insert id="insertGBC" parameterType="gbcVO">
-  	insert into group_buying_comment values(#{gb_comment_no},#{gb_comment},sysdate,50,#{gb_no},#{gb_ref},#{gb_level},#{gb_step})
+  	insert into group_buying_comment values((select nvl(max(gb_comment_no),0)+1 from group_buying_comment),#{gb_comment},sysdate,#{member_no},#{gb_no},#{gb_ref},#{gb_level},#{gb_step})
   </insert>
+  
+  <delete id="deleteGBD">
+  	delete group_buying_detail where gb_no=#{gb_no}
+  </delete>
+  
+  <delete id="deleteGB">
+  	delete group_buying where gb_no=#{gb_no}
+  </delete>
+  
+  <delete id="deleteGBC">
+  	delete group_buying_comment where gb_comment_no=#{gb_comment_no}
+  </delete>
   
 </mapper>
