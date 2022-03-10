@@ -34,7 +34,7 @@
  <div class="p-1 bg-secondary bg-gradient text-end text-white d-flex justify-content-end">
          <c:if test="${not empty m}">
 			<ul style="display: inline-block;">
-			<li class="text-end text-white" id="top-header" style="float: left;"><a href="#">마이페이지</a><li>
+			<li class="text-end text-white" id="top-header" style="float: left;"><a href="mypage?member_no=${m.member_no }">마이페이지</a><li>
 			<li class="text-end text-white" id="top-header" style="float: left;"><a href="#">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
 			<li class="text-end text-white" id="top-header" style="float: right;"><a href="logout">로그아웃</a><li> 	
 	         </ul>
@@ -64,7 +64,7 @@
             <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">중고거래</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">공동구매</a>
+            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="/listGB">공동구매</a>
           </li>
           
         <!-- 드롭 다운 메뉴 -->

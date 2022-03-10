@@ -16,57 +16,60 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 .container {
-  background-color : #EAEAEA;
-  width: 60%;
-  border-radius: 5px; 5px;
+	background-color : #EAEAEA;
+	width: 60%;
+	border-radius: 5px; 5px;
 }
 .top{
-  background-color : white;
-  width:800px;
-  margin: auto;
-  padding: 5px;
-  border-radius: 5px; 5px;
+	background-color : white;
+	width:800px;
+	margin: auto;
+	padding: 5px;
+	border-radius: 5px; 5px;
 }
 #carouselExampleIndicators{
-  border-radius: 5px; 5px;
-  width:80%;
-  height: 500px;
-  margin: auto;
-  text-align: center;
+	border-radius: 5px; 5px;
+	width:80%;
+	height: 500px;
+	margin: auto;
+	text-align: center;
 }
 img{
-  max-height: 500px;
+	max-height: 500px;
 }
 .middle{
-  width: 500px;
-  height: 200px;
-  margin: auto;	
-  text-align: center;
+	width: 500px;
+	height: 200px;
+	margin: auto;	
+	text-align: center;
 }
 .content{
-  border-radius: 5px; 5px;
-  width: 800px;
-  margin: auto;
-  padding:10px;
-  text-align: center;
-  background-color: white;
+	border-radius: 5px; 5px;
+	width: 800px;
+	margin: auto;
+	padding:10px;
+	text-align: center;
+	background-color: white;
 }
 .comment{
-  width: 800px;
-  margin: auto;
-  padding:10px;
-  text-align: center;
+	width: 800px;
+	margin: auto;
+	padding:10px;
+	text-align: center;
 }
 a{
- text-decoration-line : none;
+	text-decoration-line : none;
 }
 table{
-  width: 800px;
-  margin: auto;
-  padding:10px;
+	width: 800px;
+	margin: auto;
+	padding:10px;
 }
 #joinGBModal{
-  text-align: center;
+	text-align: center;
+}
+.btn_group{
+	float: right;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -75,11 +78,19 @@ table{
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function () {
+	let member_no = $("#member_no").val();
+	let member_no_writer = $("#member_no_writer").val();
+	
+	$(function () {
+		if(member_no == member_no_writer){
+			$("#btn_update").css("display","inline-block");
+			$("#btn_delete").css("display","inline-block");
+		}
+	});
+	
 	let gbj_no = $("#gbj_no").val();
 	let gb_no = $("#gb_no").val();
 	$("#joinGB").click(function name() {
-		//alert(gb_no);
-		
 		$.ajax({
   			url:"/insertGBJ",
   			type:"POST",
@@ -98,12 +109,22 @@ $(function () {
 		data:{gb_no:gb_no},
 		success:function(data){
 			$.each(data,function(){
+				//let member_no = $("#member_no").val();
 				let gb_level = this.gb_level;
 				let gb_comment_date;
 				let gb_comment;
 				let member_nickname;
+				let member_no_comment = this.member_no;
+				let gb_comment_no = this.gb_comment_no;
+				let display;
+				
+				if(member_no==member_no_comment){
+					display = "inline-block";
+				}else{
+					display = "none";
+				}
+				
 				if(gb_level>0){
-					
 					for(i=0;i<gb_level;i++){
 						gb_comment_date = "&nbsp;&nbsp;&nbsp;&nbsp;";
 						gb_comment = "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -123,6 +144,7 @@ $(function () {
 		        $(tr).append($("<td></td>").html(gb_comment_date));
 		        $(tr).append($("<td></td>").html(gb_comment));
 		        $(tr).append($("<td></td>").html(member_nickname));
+		        $(tr).append($("<td></td>").html("<button gb_comment_no="+gb_comment_no+" style='display: "+display+";' onclick='deleteComment("+gb_comment_no+")' class='btn btn-outline-secondary'>삭제</button>"));
 		        $("#listgbc").append(tr);
 			});
 		}
@@ -154,10 +176,52 @@ $(function () {
 	$(document).on("click","#nickname_reset",function(){
 		$("#member_nickname").val("");
     });
+	
+	//공동구매 게시글 삭제
+	$("#btn_delete").click(function() {
+		if (confirm("공동구매 게시글을 정말 삭제하시겠습니까??") == true){    
+			let gb_no = $("#gb_no").val();
+			$.ajax({
+	  			url:"/deleteGB",
+	  			type:"POST",
+	  			data:{gb_no:gb_no},
+	  			success:function(data){
+	  				location.href="/listGB";
+	  			}
+	  		});
+		 }else{   
+		     return false;
+		 }	
+	});
+	
+	$("#btn_update").click(function() {
+		let gb_no = $("#gb_no").val();
+		location.href="/updateGB?gb_no="+gb_no;
+	});
+	
 });
+
+//댓글 삭제
+function deleteComment(n) {
+	let gb_no = $("#gb_no").val();
+	if (confirm("댓글을 정말 삭제하시겠습니까??") == true){  
+		$.ajax({
+  			url:"/deleteGBC",
+  			type:"POST",	
+  			data:{gb_comment_no:n},
+  			success:function(data){
+  				location.href="/detailGB?gb_no="+gb_no;
+  			}
+  		});
+	 }else{   
+	     return false;
+	 }
+}
 </script>
 </head>
 <body>
+	<input type="hidden" value="${m.member_no }" id="member_no">
+	<input type="hidden" value="${g.member_no }" id="member_no_writer">
 	<br>
 	<br>
 	<h2 style="text-align : center;"><strong>공동구매 상세</strong></h2>
@@ -165,7 +229,15 @@ $(function () {
 	<!-- 네비게이션바 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid" style="text-align : center; width: 60%">
-	    <a class="navbar-brand" href="/listGB">목록</a>
+	   
+	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	      <li class="nav-item">
+	       <a class="navbar-brand" href="/listGB">목록</a>
+	      </li>
+	      <li class="nav-item">
+	       <a class="navbar-brand" href="/insertGB">등록</a>
+	      </li>
+	    </ul>
 	  </div>
 	</nav>
 	<br>
@@ -178,7 +250,11 @@ $(function () {
     <c:if test="${g.gb_state==1}">&nbsp;진행중</c:if>
 	<c:if test="${g.gb_state==0}">&nbsp;공구 종료</c:if>
 	</span>
-	&nbsp;&nbsp;${g.gb_start_date } ~ ${g.gb_end_date }<br>
+	&nbsp;&nbsp;${g.gb_start_date } ~ ${g.gb_end_date }
+	<div class="btn_group">
+	<button id="btn_update" class="btn btn-outline-secondary" style="display: none;">수정</button>
+	<button id="btn_delete" class="btn btn-outline-secondary" style="display: none;">삭제</button>
+	</div>
 	</div>
 	<br>
 	<div>
@@ -219,7 +295,7 @@ $(function () {
 	<br>
 	<h3><strong>${g.gb_title }</strong></h3>
 	<h5><strong>${gbd.gb_price } 원</strong></h5>
-	<p>${joinNum } / ${g.gb_capacity }</p>
+	<p><span id="joinNum">${joinNum }</span> / <span id="gb_capacity">${g.gb_capacity }</span></p>
 	<input class="btn btn-warning" type="button" value="참여하기" data-toggle="modal" data-target="#joinGBModal" id="btnjoin">
 	</div>
 	<br>
@@ -252,8 +328,11 @@ $(function () {
     <br>
     <form id="insertGBC">
     	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+    	<!-- 
     	<input type="hidden" id="gb_comment_no" name="gb_comment_no" value="${gb_comment_no }">
+    	 -->
     	<input type="hidden" value="${g.gb_no}" id="gb_no" name="gb_no">
+    	<input type="hidden" value="${m.member_no}" id="member_no" name="member_no">
     	<input type="hidden" id="gb_ref" name="gb_ref" value="0">
     	<input type="hidden" id="gb_level" name="gb_level" value="0">
     	<input type="hidden" id="gb_step" name="gb_step" value="0">
@@ -270,6 +349,7 @@ $(function () {
 	   <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	   <input type="hidden" value="${gbj_no}" id="gbj_no" name="gbj_no">
 	   <input type="hidden" value="${g.gb_no}" id="gb_no" name="gb_no">
+	   <input type="hidden" value="${m.member_no}" id="member_no" name="member_no">
    </form>
    
    <br>

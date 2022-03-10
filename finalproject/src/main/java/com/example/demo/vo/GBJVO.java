@@ -8,4 +8,5 @@ public class GBJVO {
 	private int gbj_accept;
 	private int gb_no;
 	private int member_no;
+	private int is_view;
 }

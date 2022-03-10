@@ -53,7 +53,14 @@ public class MypageController {
 	//마이페이지 회원정보
 	@RequestMapping("/mypage")
 	public void detailMember(int member_no,Model model) {
-		model.addAttribute("m", dao_member.detailMember(member_no));
+		MemberVO m = dao_member.detailMember(member_no);
+		model.addAttribute("m", m);
+		String tel1 = m.getMember_tel().substring(0, 3);
+		String tel2 = m.getMember_tel().substring(3, 7);
+		String tel3 = m.getMember_tel().substring(7,11 );
+		model.addAttribute("tel1", tel1);
+		model.addAttribute("tel2", tel2);
+		model.addAttribute("tel3", tel3);
 	}
 	
 	//마이페이지 작성글
@@ -252,5 +259,19 @@ public class MypageController {
 	@RequestMapping("/getQna")
 	public QnaVO getQna(int qna_no) {
 		return dao_qna.getQna(qna_no);
+	}
+	
+	//마이페이지 닉네임 중복 확인
+	@RequestMapping(value = "/nicknameCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String nicknameCheck(String member_nickname) throws Exception{
+		//System.out.println("nicknameCheck() 동작");
+		int re = dao_member.nicknameCheck(member_nickname);
+		//System.out.println("re:" + re);
+		if(re != 0) {
+			return "중복";		//닉네임 중복
+		} else {
+			return "사용가능";		//닉네임 중복x
+		}	
 	}
 }

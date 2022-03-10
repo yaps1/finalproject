@@ -8,6 +8,7 @@ public class GBCVO {
 	private String gb_comment;
 	private String gb_comment_date;
 	private String member_nickname;
+	private int member_no;
 	private int gb_no;
 	private int gb_ref;
 	private int gb_level;

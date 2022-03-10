@@ -12,4 +12,12 @@
   		select  member_id,member_level from (select member_id,member_level from member order by member_level desc nulls last)
 	 	 where <![CDATA[rownum<=5]]>  
   	</select>
+  	
+  	<select id="goodsTop3" resultType="goodsVO">
+  	select * from ( 
+		select goods_category,count(*) cnt from goods  
+		where goods_no in (select goods_no from goods_detail where goods_state=3) 
+		group by goods_category order by count(*) desc) 
+		where  <![CDATA[rownum<=3]]>
+  	</select>
 </mapper>

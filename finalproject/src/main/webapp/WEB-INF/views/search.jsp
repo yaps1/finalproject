@@ -5,11 +5,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<style type="text/css">
+.searchContainer{
+	width: 70%;
+	margin: auto;
+}
+h4{
+	color: #555f73;
+	font-weight: bold;
+}
+#goods{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+#goods div{
+	margin-right: 15px;
+	border-radius: 15px;
+	background: silver;
+}
+img{
+	width: 150px;
+	height: 250px;
+	padding: 10px;
+}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function () {
 	$("#search").click(function() {
 		let searchkeyword = $("#searchkeyword").val();
+		if(searchkeyword == null || searchkeyword == undefined || searchkeyword == ""){ alert('검색어를 입력해주세요.'); $('#searchkeyword').focus(); return false;} 
+		
 		$("#goods").empty();
 		$("#gb").empty();
 		$("#sg").empty();
@@ -21,12 +51,15 @@ $(function () {
 	        data: {searchkeyword:searchkeyword},
 	        success:function(data){
 	            $.each(data,function(){
-	            	let tr = $("<tr id='g_tr'></tr>").attr("goods_no",this.goods_no);
-	                $(tr).append($("<td></td>").html(this.goods_image1));
-	                $(tr).append($("<td></td>").html(this.goods_name));
-	                $(tr).append($("<td></td>").html(this.goods_price));
-	                $(tr).append($("<td></td>").html(this.goods_addr));
-	                $("#goods").append(tr);
+	            	let div = $("<div class='card' style='width: 18rem;'></div>");
+	            	let img = $("<img class='card-img-top'>").attr("src","../images/"+this.goods_image1);
+	            	$(div).append(img);
+	            	let div2 = $("<div class='card-body'></div>");
+	            	$(div2).append($("<h6 class='card-title'></h6>").html(this.goods_name));
+	            	$(div2).append($("<p class='card-text'></p>").html(this.goods_price+"원"));
+	            	$(div2).append($("<a href='/detailGoods?goods_no=${goods_no}' class='btn btn-outline-secondary'>상품확인</a>"));
+	            	$(div).append(div2);
+	                $("#goods").append(div);
 	            });
 	    }});
 	    
@@ -95,7 +128,7 @@ $(function () {
 	    
 	    $(document).on("click","#n_tr",function(){
             let notice_no = $(this).attr("notice_no");
-            location.href = "getNoticeByNoticeNo?notice_no="+notice_no;
+            location.href = "detailNotice?notice_no="+notice_no;
         });
 		
 	    $.ajax({
@@ -137,79 +170,86 @@ $(function () {
 	        success:function(data){
 	        	 $("#cntTotal").append("<h2><h2>").html("통합검색 검색결과("+data+"건)");
 	    }});
-	        
 	});
 });
 </script>
 </head>
 <body>
 	<br>
+	<br>
+	<h2 style="text-align : center;"><strong><a href="/search.jsp" class="link-dark" style="text-decoration-line : none;">통합검색</a></strong></h2>
+	<br>
 	
+	<!-- 검색창 -->
 	<nav class="navbar navbar-light bg-light">
-	  <div class="container-fluid">
+	  <div class="container-fluid" style="text-align: center; width: 25%;">
 	    <form class="d-flex" name="search-form" autocomplete="off">
-	      <input style="width: 10rem;height: 3rem;" class="form-control me-2" type="text" placeholder="Search" aria-label="Search"  name="searchkeyword" id="searchkeyword" value="">
-	      <input style="width: 5rem;height: 3rem;" type="button" id="search" value="검색" class="btn btn-outline-success">
+	      <input style="width: 20rem;height: 3rem;" class="form-control me-2" type="text" placeholder="통합검색" aria-label="Search"  name="searchkeyword" id="searchkeyword" value="${searchkeyword }">
+	      <input style="width: 5rem;height: 3rem;" type="button" id="search" value="검색" class="btn btn-outline-secondary">
 	    </form>
 	  </div>
 	</nav>
 	<br>
-	<h2 style="text-align : center;" id="cntTotal"><strong>통합검색 검색결과</strong></h2>
-	
+	<br>
+	<h3 style="text-align : center;color: #555f73;" id="cntTotal"><strong>검색결과</strong></h3>
 	<br>
 	<hr>
-	<h4 id="cntGoods">중고거래 검색결과</h4>
-	<table border="1" width="80%">
-        <thead>
-            <tr>
-                <td>사진</td>
-                <td>상품명</td>
-                <td>가격</td>
-                <td>지역</td>
-            </tr>
-        </thead>
-        <tbody id="goods"></tbody>
-    </table>
-
-	<hr>
-	<h4 id="cntGB">공동구매 검색결과</h4>
-	<table border="1" width="80%">
-        <thead>
-            <tr>
-                <td>번호</td>
-                <td>진행상태</td>
-                <td>제목</td>
-                <td>모집인원</td>
-            </tr>
-        </thead>
-        <tbody id="gb"></tbody>
-    </table>
-    
-	<hr>
-	<h4 id="cntSG">커뮤니티 소모임 검색결과</h4>
-	<table border="1" width="80%">
-        <thead>
-            <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>작성일</td>
-            </tr>
-        </thead>
-        <tbody id="sg"></tbody>
-    </table>
-	
-	<hr>
-	<h4 id="cntNotice">공지사항 검색결과</h4>
-	<table border="1" width="80%">
-        <thead>
-            <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성일</td>
-            </tr>
-        </thead>
-        <tbody id="notice"></tbody>
-    </table>
+	<br>
+	<div class="searchContainer">
+		<h4 id="cntGoods">중고거래 검색결과</h4>
+		<br>
+		<div id="goods"></div>
+		<br>
+		<hr>
+		<br>
+		<h4 id="cntGB">공동구매 검색결과</h4>
+		<br>
+		<table border="1" width="80%" class="table table-secondary table-hover">
+	        <thead>
+	            <tr>
+	                <td>번호</td>
+	                <td>진행상태</td>
+	                <td>제목</td>
+	                <td>모집인원</td>
+	            </tr>
+	        </thead>
+	        <tbody id="gb"></tbody>
+	    </table>
+	    <br>
+		<hr>
+		<br>
+		<h4 id="cntSG">커뮤니티 소모임 검색결과</h4>
+		<br>
+		<table border="1" width="80%" class="table table-secondary table-hover">
+	        <thead>
+	            <tr>
+	                <td>번호</td>
+	                <td>제목</td>
+	                <td>작성자</td>
+	                <td>작성일</td>
+	            </tr>
+	        </thead>
+	        <tbody id="sg"></tbody>
+	    </table>
+		<br>
+		<hr>
+		<br>
+		<h4 id="cntNotice">공지사항 검색결과</h4>
+		<br>
+		<table border="1" width="80%" class="table table-secondary table-hover">
+	        <thead>
+	            <tr>
+	                <td>번호</td>
+	                <td>제목</td>
+	                <td>작성일</td>
+	            </tr>
+	        </thead>
+	        <tbody id="notice"></tbody>
+	    </table>
+	    <br>
+	    <hr>
+    </div>
+    <br>
+    <br>
 </body>
 </html>

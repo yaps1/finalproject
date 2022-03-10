@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat">
+ 	<select id="listChatRoomByMember" resultType="chatRoomVO">
+ 		select r.room_no,room_name from chat_room r,chat_room_join j where r.room_no=j.room_no and member_no=#{member_no}
+ 	</select>
+ 	
+ 	<insert id="insertChatMessage" parameterType="chatMessageVO">
+ 		insert into chat_message values((select nvl(max(message_no),0)+1 from chat_message),#{message},sysdate,#{member_no},#{room_no},null)
+ 	</insert>
+ 	
+ 	<insert id="insertChatImage" parameterType="chatMessageVO">
+ 		insert into chat_message values((select nvl(max(message_no),0)+1 from chat_message),null,sysdate,#{member_no},#{room_no},#{chat_image})
+ 	</insert>
+ 	
+ 	<select id="listChatMessage" resultType="chatMessageVO">
+ 		select message_no,message,time,member_nickname,room_no,chat_image from chat_message c,member m where m.member_no=c.member_no and room_no=#{room_no} order by message_no
+ 	</select>
+</mapper>

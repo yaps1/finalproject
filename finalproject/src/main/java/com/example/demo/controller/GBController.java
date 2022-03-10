@@ -218,7 +218,7 @@ public class GBController {
         model.addAttribute("gbd",dao.detailGB(gb_no));
         model.addAttribute("joinNum", dao.joinNum(gb_no));
         model.addAttribute("gbj_no", dao.getNextJoinNo());
-        model.addAttribute("gb_comment_no", dao.getNextCommentNo());
+        //model.addAttribute("gb_comment_no", dao.getNextCommentNo());
     }
     
     //공동구매 댓글 목록
@@ -244,5 +244,21 @@ public class GBController {
         dao.insertGBC(g);
         return "ok";
     }
-
+    
+    //공동구매 삭제
+    @ResponseBody
+    @RequestMapping(value="/deleteGB",method = RequestMethod.POST)
+    public String deleteGB(int gb_no) {
+        dao.deleteGBD(gb_no);
+        dao.deleteGB(gb_no);
+        return "ok";
+    }
+    
+    //공동구매 댓글 삭제
+    @ResponseBody
+    @RequestMapping(value="/deleteGBC",method = RequestMethod.POST)
+    public String deleteGBC(int gb_comment_no) {
+        dao.deleteGBC(gb_comment_no);
+        return "ok";
+    }
 }

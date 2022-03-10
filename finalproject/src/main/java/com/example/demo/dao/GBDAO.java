@@ -79,4 +79,16 @@ public class GBDAO {
 	public int insertGBC(GBCVO g) {
         return DBManager.insertGBC(g);
     }
+	
+	public int deleteGBD(int gb_no) {
+        return DBManager.deleteGBD(gb_no);
+    }
+	
+	public int deleteGB(int gb_no) {
+        return DBManager.deleteGB(gb_no);
+    }
+	
+	public int deleteGBC(int gb_comment_no) {
+        return DBManager.deleteGBC(gb_comment_no);
+    }
 }

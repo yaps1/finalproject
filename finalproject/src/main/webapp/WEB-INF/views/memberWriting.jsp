@@ -6,20 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style type="text/css">
 body{
 	margin-top: 100px;
 	line-height: 1.6
 }
 .container{
-	width: 1000px;
-	margin: 0 auto;
+	width: 70%;
+	margin: auto;
 }
 
-
 ul.tabs{
-	margin: 0px;
+	margin-left: 0px;
 	padding: 0px;
 	list-style: none;
 }
@@ -29,6 +28,7 @@ ul.tabs li{
 	display: inline-block;
 	padding: 15px 15px;
 	cursor: pointer;
+	border-radius: 15px;
 }
 
 ul.tabs li.current{
@@ -40,12 +40,25 @@ ul.tabs li.current{
 	display: none;
 	background: #ededed;
 	padding: 15px;
+	border-radius: 15px;
+	padding-bottom: 50px;
 }
 
 .tab-content.current{
 	display: inherit;
 }
+.fontColor{
+	color: #555f73;
+}
+.fontTitle{
+	font-weight: bold;
+}
+th,td{
+	text-align: center;
+	text-valign: middle;
+}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
@@ -102,7 +115,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberGB",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntGB").append("<h4><h4>").html("공동구매("+data+"건)");
+		        	$("#cntGB").append("<h4'><h4>").html("공동구매("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -110,7 +123,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberSG",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntSG").append("<h4><h4>").html("커뮤니티 소모임("+data+"건)");
+		        	$("#cntSG").append("<h4><h4>").html("커뮤니티 소모임("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -118,7 +131,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberWriting",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	 $("#cntWriting").append("<h4><h4>").html("작성한 게시글("+data+"건)");
+		        	 $("#cntWriting").append("<h4><h4>").html("작성한 게시글("+data+"건)").addClass("fontTitle");
 		    }});
 		};
 		
@@ -191,7 +204,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberGBC",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntGBC").append("<h5><h5>").html("공동구매("+data+"건)");
+		        	$("#cntGBC").append("<h5><h5>").html("공동구매("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -199,7 +212,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberSGC",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntSGC").append("<h5><h5>").html("소모임("+data+"건)");
+		        	$("#cntSGC").append("<h5><h5>").html("소모임("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -207,7 +220,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberComment",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	 $("#cntComment").append("<h4><h4>").html("작성한 댓글("+data+"건)");
+		        	 $("#cntComment").append("<h4><h4>").html("작성한 댓글("+data+"건)").addClass("fontTitle");
 		    }});
 		});
 		
@@ -228,8 +241,34 @@ ul.tabs li.current{
 		    	data:{member_no:member_no},
 		        success:function(data){
 		            $.each(data,function(){
+		            	let score = this.goods_score;
+		            	if(score==5){
+		            		goods_score = "<img src='../images/star5.png'>";
+		            	}else if(score<5 && score>=4.5){
+		            		goods_score = "<img src='../images/star4_5.png'>";
+		            		//goods_score = score;
+		            	}else if(score<4.5 && score>=4){
+		            		goods_score = "<img src='../images/star4.png'>";
+		            		//goods_score = score;
+		            	}else if(score<4 && score>=3.5){
+		            		goods_score = "<img src='../images/star3_5.png'>";
+		            	}else if(score<3.5 && score>=3){
+		            		goods_score = "<img src='../images/star3.png'>";
+		            	}else if(score<3 && score>=2.5){
+		            		goods_score = "<img src='../images/star2_5.png'>";
+		            	}else if(score<2.5 && score>=2){
+		            		goods_score = "<img src='../images/star2.png'>";
+		            	}else if(score<2 && score>=1.5){
+		            		goods_score = "<img src='../images/star1_5.png'>";
+		            	}else if(score<1.5 && score>=1){
+		            		goods_score = "<img src='../images/star1.png'>";
+		            	}else if(score<1 && score>=0.5){
+		            		goods_score = "<img src='../images/star0_5.png'>";
+		            	}else{
+		            		goods_score = "<img src='../images/star0.png'>";
+		            	}
 		            	let tr = $("<tr id='gr_tr'></tr>").attr("goods_no",this.goods_no);
-		                $(tr).append($("<td></td>").html(this.goods_score));
+		                $(tr).append($("<td></td>").html(goods_score));
 		                $(tr).append($("<td></td>").html(this.goods_review));
 		                $("#goodsreview").append(tr);
 		            });
@@ -246,8 +285,32 @@ ul.tabs li.current{
 		    	data:{member_no:member_no},
 		        success:function(data){
 		            $.each(data,function(){
+		            	let score = this.rest_score;
+		            	if(score==5){
+		            		rest_score = "<img src='../images/star5.png'>";
+		            	}else if(score<5 && score>=4.5){
+		            		rest_score = "<img src='../images/star4_5.png'>";
+		            	}else if(score<4.5 && score>=4){
+		            		rest_score = "<img src='../images/star4.png'>";
+		            	}else if(score<4 && score>=3.5){
+		            		rest_score = "<img src='../images/star3_5.png'>";
+		            	}else if(score<3.5 && score>=3){
+		            		rest_score = "<img src='../images/star3.png'>";
+		            	}else if(score<3 && score>=2.5){
+		            		rest_score = "<img src='../images/star2_5.png'>";
+		            	}else if(score<2.5 && score>=2){
+		            		rest_score = "<img src='../images/star2.png'>";
+		            	}else if(score<2 && score>=1.5){
+		            		rest_score = "<img src='../images/star1_5.png'>";
+		            	}else if(score<1.5 && score>=1){
+		            		rest_score = "<img src='../images/star1.png'>";
+		            	}else if(score<1 && score>=0.5){
+		            		rest_score = "<img src='../images/star0_5.png'>";
+		            	}else{
+		            		rest_score = "<img src='../images/star0.png'>";
+		            	}
 		            	let tr = $("<tr id='rr_tr'></tr>").attr("rest_no",this.rest_no);
-		                $(tr).append($("<td></td>").html(this.rest_score));
+		                $(tr).append($("<td></td>").html(rest_score));
 		                $(tr).append($("<td></td>").html(this.rest_review_content));
 		                $("#restreview").append(tr);
 		            });
@@ -263,7 +326,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberGR",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntGoodsReview").append("<h5><h5>").html("중고거래("+data+"건)");
+		        	$("#cntGoodsReview").append("<h5><h5>").html("중고거래("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -271,7 +334,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberRR",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	$("#cntRestReview").append("<h5><h5>").html("커뮤니티 맛집공유("+data+"건)");
+		        	$("#cntRestReview").append("<h5><h5>").html("커뮤니티 맛집공유("+data+"건)").addClass("fontColor");
 		    }});
 			
 			$.ajax({
@@ -279,7 +342,7 @@ ul.tabs li.current{
 		    	url: "/cntMemberReview",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	 $("#cntReview").append("<h4><h4>").html("작성한 후기("+data+"건)");
+		        	 $("#cntReview").append("<h4><h4>").html("작성한 후기("+data+"건)").addClass("fontTitle");
 		    }});
 		});
 		
@@ -332,10 +395,10 @@ ul.tabs li.current{
 		            	if(data.qna_type == 1){
 		            		type="비매너 회원 신고";
 		            	}
-			            $("#qna_title").val(data.qna_title);
-			            $("#qna_content").val(data.qna_content);
-			            $("#qna_comment").val(data.qna_comment);
-			            $("#type").val(type);
+			            $("#qna_title").html(data.qna_title);
+			            $("#qna_content").html(data.qna_content);
+			            $("#qna_comment").html(data.qna_comment);
+			            $("#type").html(type);
 			    }});
 	        });
 			
@@ -344,7 +407,7 @@ ul.tabs li.current{
 		    	url: "/cntQna",
 		        data: {member_no:member_no},
 		        success:function(data){
-		        	 $("#cntQna").append("<h4><h4>").html("작성한 문의사항("+data+"건)");
+		        	 $("#cntQna").append("<h4><h4>").html("작성한 문의사항("+data+"건)").addClass("fontTitle");
 		    }});
 		});
 	
@@ -352,144 +415,184 @@ ul.tabs li.current{
 </script>
 </head>
 <body>
-<input type="hidden" value="${m.member_no }" id="member_no">
-<div class="container">
-	<ul class="tabs">
-		<li class="tab-link current" data-tab="tab-1" id="content">작성한 게시물</li>
-		<li class="tab-link" data-tab="tab-2" id="comment">작성한 댓글</li>
-		<li class="tab-link" data-tab="tab-3" id="review">작성한 후기</li>
-		<li class="tab-link" data-tab="tab-4" id="qna">작성한 문의사항</li>
-	</ul>
-
-	<div id="tab-1" class="tab-content current">
-		<br>
-		<h4 id="cntWriting">작성한 게시글</h4>
-		<hr>
-		<h5 id="cntGB">공동구매</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>번호</td>
-	                <td>진행상태</td>
-	                <td>제목</td>
-	            </tr>
-	        </thead>
-	        <tbody id="gb"></tbody>
-	    </table>
-	    <br>
-	    <h5 id="cntSG">커뮤니티 소모임</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>번호</td>
-	                <td>제목</td>
-	                <td>작성일</td>
-	            </tr>
-	        </thead>
-	        <tbody id="sg"></tbody>
-	    </table>	
-	</div>
+	<br>
+	<br>
+	<h2 style="text-align : center;"><strong><a href="/mypage?member_no=${m.member_no }" class="link-dark" style="text-decoration-line : none;">마이페이지</a></strong></h2>
+	<br>
 	
-	<div id="tab-2" class="tab-content">
-		<br>
-		<h4 id="cntComment">작성한 댓글</h4>
-		<hr>
-		<h5 id="cntGBC">공동구매</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>내용</td>
-	                <td>작성일</td>
-	            </tr>
-	        </thead>
-	        <tbody id="gbc"></tbody>
-	    </table>
-	    <br>
-	    <h5 id="cntSGC">커뮤니티 소모임</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>내용</td>
-	                <td>작성일</td>
-	            </tr>
-	        </thead>
-	        <tbody id="sgc"></tbody>
-	    </table>
-	</div>
-	<div id="tab-3" class="tab-content">
-		<br>
-		<h4 id="cntReview">작성한 후기</h4>
-		<hr>
-		<h5 id="cntGoodsReview">중고거래</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>별점</td>
-	                <td>후기</td>
-	            </tr>
-	        </thead>
-	        <tbody id="goodsreview"></tbody>
-	    </table>
-	    <br>
-	    <h5 id="cntRestReview">커뮤니티 맛집공유</h5>
-		<table border="1" width="80%">
-	        <thead>
-	            <tr>
-	                <td>별점</td>
-	                <td>후기</td>
-	            </tr>
-	        </thead>
-	        <tbody id="restreview"></tbody>
-	    </table>
-	</div>
-	<div id="tab-4" class="tab-content">
-		<br>
-		<h4 id="cntQna">작성한 문의사항</h4>
-		<hr>
-		<table border="1" width="100%">
-	        <thead>
-	            <tr>
-	                <td>제목</td>
-	                <td>내용</td>
-	                <td>진행상황</td>
-	                <td>확인</td>
-	            </tr>
-	        </thead>
-	        <tbody id="listQna"></tbody>
-	    </table>
-	</div>
+	<!-- 네비게이션바 -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid" style="text-align : center; width: 70%">
+	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	      <li class="nav-item">
+	       <a class="navbar-brand" href="#">작성글</a>
+	      </li>
+	      <li class="nav-item">
+	       <a class="navbar-brand" href="/memberGoods?member_no=${m.member_no }">상품</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<br>
+	<br>
 	
-	<div class="modal fade" id="qnaModal" data-backdrop="static">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"><strong>문의사항</strong></h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       		분류 <input type='text' readonly='readonly' id="type"><br>
-     		제목<br> 
-     		<textarea style='width:80%' readonly='readonly' id="qna_title"></textarea><br>
-     		문의 내용<br>
-     		<textarea style='width:80%' readonly='readonly' id="qna_content"></textarea><br>
-     		<hr>
-     		답변<br>
-     		<textarea style='width:80%' readonly='readonly' id="qna_comment"></textarea>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        </div>
-        
-	      </div>
-	    </div>
+	<!-- 작성한 글 탭 -->
+	<input type="hidden" value="${m.member_no }" id="member_no">
+	<div class="container">
+		<ul class="tabs" style="text-align: center;">
+			<li class="tab-link current" data-tab="tab-1" id="content"><strong>작성한 게시물</strong></li>
+			<li class="tab-link" data-tab="tab-2" id="comment"><strong>작성한 댓글</strong></li>
+			<li class="tab-link" data-tab="tab-3" id="review"><strong>작성한 후기</strong></li>
+			<li class="tab-link" data-tab="tab-4" id="qna"><strong>작성한 문의사항</strong></li>
+		</ul>
+	
+		<div id="tab-1" class="tab-content current">
+			<br>
+			<h4 id="cntWriting">작성한 게시글</h4>
+			<hr>
+			<h5 id="cntGB">공동구매</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>번호</td>
+		                <td>진행상태</td>
+		                <td>제목</td>
+		            </tr>
+		        </thead>
+		        <tbody id="gb"></tbody>
+		    </table>
+		    <br>
+		    <h5 id="cntSG">커뮤니티 소모임</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>번호</td>
+		                <td>제목</td>
+		                <td>작성일</td>
+		            </tr>
+		        </thead>
+		        <tbody id="sg"></tbody>
+		    </table>	
+		</div>
+		
+		<div id="tab-2" class="tab-content">
+			<br>
+			<h4 id="cntComment">작성한 댓글</h4>
+			<hr>
+			<h5 id="cntGBC">공동구매</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>내용</td>
+		                <td>작성일</td>
+		            </tr>
+		        </thead>
+		        <tbody id="gbc"></tbody>
+		    </table>
+		    <br>
+		    <h5 id="cntSGC">커뮤니티 소모임</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>내용</td>
+		                <td>작성일</td>
+		            </tr>
+		        </thead>
+		        <tbody id="sgc"></tbody>
+		    </table>
+		</div>
+		<div id="tab-3" class="tab-content">
+			<br>
+			<h4 id="cntReview">작성한 후기</h4>
+			<hr>
+			<h5 id="cntGoodsReview">중고거래</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>별점</td>
+		                <td>후기</td>
+		            </tr>
+		        </thead>
+		        <tbody id="goodsreview"></tbody>
+		    </table>
+		    <br>
+		    <h5 id="cntRestReview">커뮤니티 맛집공유</h5>
+			<table border="1" width="80%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>별점</td>
+		                <td>후기</td>
+		            </tr>
+		        </thead>
+		        <tbody id="restreview"></tbody>
+		    </table>
+		</div>
+		<div id="tab-4" class="tab-content">
+			<br>
+			<h4 id="cntQna">작성한 문의사항</h4>
+			<hr>
+			<table border="1" width="100%" class="table table-striped table-hover">
+		        <thead>
+		            <tr>
+		                <td>제목</td>
+		                <td>내용</td>
+		                <td>진행상황</td>
+		                <td>확인</td>
+		            </tr>
+		        </thead>
+		        <tbody id="listQna"></tbody>
+		    </table>
+		</div>
+		
+		<div class="modal fade" id="qnaModal" data-backdrop="static">
+	    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+	      <div class="modal-content">
+	      
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h4 class="modal-title"><strong>문의사항</strong></h4>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal Body -->
+			<div class="accordion" id="accordionPanelsStayOpenExample">
+			  <div class="accordion-item">
+			    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+			      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+			        <strong>분류</strong>&nbsp;&nbsp;<span id="type" style="color: red;"></span>
+			      </button>
+			    </h2>
+			    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+			      <div class="accordion-body">
+			        <strong><p id="qna_title"></p></strong>
+			        <p id="qna_content"></p>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="accordion-item">
+			    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+			        <strong>답변</strong>
+			      </button>
+			    </h2>
+			    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+			      <div class="accordion-body">
+			        <strong><textarea id="qna_comment" readonly="readonly" disabled="disabled" style="width: 100%;resize: none;height: 150px"></textarea></strong>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+	        
+	        
+	        <!-- Modal footer -->
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        </div>	        
+		      </div>
+		    </div>
+		</div>
 	</div>
-</div>
-
+	<br>
+	<br>
 </body>
 </html>
