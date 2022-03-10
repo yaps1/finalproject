@@ -96,12 +96,7 @@ $(function(){
 });
 </script>
 <style type="text/css">
-	body{
-		margin: 0 auto;	
-		justify-content: center;
-		width: 80%;
-
-	}
+	
 	a{
 	text-decoration: none; /* 링크의 밑줄 제거 */
   	color: inherit; /* 링크의 색상 제거 */
@@ -115,7 +110,10 @@ $(function(){
 
 </style>
 </head>
+<!--<jsp:include page="header2.jsp"></jsp:include>-->
 <body>
+<!-- body 대신 div-->
+<div style="margin: 0 auto;	justify-content: center; width: 80%;">
 	<hr>
 	<div id="hot">
 	<p class="fs-1" style="text-align: center;">인기검색어</p>
@@ -168,5 +166,7 @@ $(function(){
 	    </div>
 	  </div>
 	</div>
+</div>	<!-- 바디 수정? test -->
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

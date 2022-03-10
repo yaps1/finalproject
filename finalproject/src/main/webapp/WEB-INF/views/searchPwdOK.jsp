@@ -31,7 +31,9 @@
  			}
  		}
  		
- 		
+ 		$(".btn-close").click(function(){
+ 		 	location.href="/login";
+ 		});
  		
  		
  	});

@@ -243,14 +243,25 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-	//회원 가입
+	//일반 회원 가입
 	public static int insertMember(MemberVO m) {
+		//System.out.println("등록할 회원의 객체:"+m);
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insertMember", m);
 		session.commit();
 		session.close();
 		return re;
 	}
+	//카카오 회원가입
+	public static int insertKakaoMember(MemberVO m) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("member.insertKakaoMember", m);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
 	//아이디 중복 체크
 	public static int id_check(String member_id) {
 		SqlSession session = factory.openSession();
@@ -327,7 +338,7 @@ public class DBManager {
 		return re;
 	}
 	//소모임 전체 레코드 수
-	public static int getTotalRecord() {
+	public static int getTotalRecordSG() {
 		SqlSession session = factory.openSession();
 		int no = session.selectOne("smallGroup.totalRecord");
 		session.close();
@@ -374,11 +385,11 @@ public class DBManager {
 	
 	
 	//소모임 댓글 번호
-		public static int getSGCNo(){
-			SqlSession session = factory.openSession();
-			int re = session.selectOne("smallGroup.getSGCNo");
-			session.close();
-			return re;
+	public static int getSGCNo(){
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("smallGroup.getSGCNo");
+		session.close();
+		return re;
 	}
 		
 	//소모임 댓글 등록 ㅠ
@@ -424,14 +435,15 @@ public class DBManager {
 		return re;
 	}
 	
-	/*소모임 댓글번호로 댓글 찾기
-	public static SGCVO findByNo(int sg_comment_no) {
+	//소모임 댓글번호로 댓글 찾기
+	public static SGCVO findBySGCNO(int sg_comment_no) {
 		SqlSession session = factory.openSession();
 		SGCVO sc = session.selectOne("smallGroup.findByNo", sg_comment_no);
 		session.close();
 		return sc;
-	}*/
-	/*update step 테스트
+	}
+	
+	//update step
 	public static void updateStep(int sg_ref, int sg_step) {
 		HashMap map = new HashMap();
 		map.put("sg_ref", sg_ref);
@@ -441,8 +453,25 @@ public class DBManager {
 		session.update("smallGroup.updateStep", map);
 		session.commit();
 		session.close();
-	}*/
+	}
 
+	//맛집 번호
+	public static int getRestNO(){
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("rest.getRestNO");
+		session.close();
+		return re;
+	}
+	
+	//맛집 추가
+	public static int insertRest(RestVO rest) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("rest.insertRest", rest);
+		session.commit();
+		session.close();
+		return re;
+	}
+		
 	//맛집 공유 리스트
 	public static List<RestVO> getRestInfo(){
 		SqlSession session = factory.openSession();
@@ -459,6 +488,77 @@ public class DBManager {
 		return list;
 	}
 	
+	//맛집 사진 리스트
+	public static List<RestReviewVO> listRestPic(int rest_no){
+		SqlSession session = factory.openSession();	
+		List<RestReviewVO> list = session.selectList("rest.listRestPic", rest_no);
+		session.close();
+		return list;
+	}
+	//맛집 후기 번호
+	public static int getRestReviewNO(){
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("rest.getRestReviewNO");
+		session.close();
+		return re;
+	}
+	
+	//맛집 후기 추가
+	public static int insertRestReview(RestReviewVO r) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("rest.insertRestReview", r);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//별점 평균 구하기 위한 식당 후기 수
+	public static int getReviewCount(int rest_no) {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("rest.getReviewCount", rest_no);
+		session.close();
+		return re;
+	}
+	
+	//별점 합 
+	public static int getSumRestScore(int rest_no) {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("rest.getSumRestScore", rest_no);
+		session.close();
+		return re;
+	}
+	
+	//평균 별점 반영
+	public static Double updateRestAvgScore(Double rest_avg_score, int rest_no) {
+		SqlSession session = factory.openSession();
+		HashMap map = new HashMap();
+		map.put("rest_avg_score", rest_avg_score);
+		map.put("rest_no", rest_no);
+		Double re = (double) session.update("rest.updateRestAvgScore", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	//관리자 회원 전체 레코드 수
+	public static int getTotalRecordMember() {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("member.totalRecord");
+		session.close();
+		return no;
+	}
+	
+	//관리자 회원 목록
+	public static List<MemberVO> listMember(HashMap map){
+		SqlSession session = factory.openSession();
+		List<MemberVO> list = session.selectList("member.listMember",map);
+		session.close();
+		return list;
+	}
+	
+
+	//윤서우
 	//공동구매 전체 레코드 수
 	public static int getTotalRecord(HashMap map) {
 		SqlSession session = factory.openSession();
@@ -582,7 +682,7 @@ public class DBManager {
         return re;
 	}
 	
-	//회원탈퇴,삭제
+	//회원탈퇴,관리자 회원관리 강퇴
 	public static int deleteMember(int member_no){
 		SqlSession session = factory.openSession();
         int re = session.delete("member.deleteMember",member_no);
@@ -729,5 +829,7 @@ public class DBManager {
         session.close();
         return re;
 	}
+
+
 
 }

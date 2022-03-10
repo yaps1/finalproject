@@ -12,4 +12,6 @@
   		select  member_id,member_level from (select member_id,member_level from member order by member_level desc nulls last)
 	 	 where <![CDATA[rownum<=5]]>  
   	</select>
+  	
+  
 </mapper>

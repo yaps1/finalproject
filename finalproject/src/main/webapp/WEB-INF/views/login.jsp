@@ -11,6 +11,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="http://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
+$(function(){
+	if($("#username").val()!=""){
+		console.log("바로로그인 처리합니다.");
+		$("#login_form").submit();
+	}
+})
+
 Kakao.init("41aa90fae3f6af0081985acd2e51880e");
 function KakaoLogin(){
 	Kakao.Auth.loginForm({
@@ -19,30 +26,45 @@ function KakaoLogin(){
 			console.log(authObj);
 			Kakao.API.request({
 				url:"/v2/user/me",
-				success:function(res){
+				success:function(res){					
+					console.log("로그인 성공");
 					console.log(res);
 					let nickname = res.kakao_account.profile.nickname;
 					let email = res.kakao_account.email;
 					let gender = res.kakao_account.gender;
 					let birthday = res.kakao_account.birthday;
-					console.log(nickname,email,gender,birthday);
-					//location.href="/KakaoLoginOK/"+email;
-					// window.location.assign("loginOK")
+					//console.log(nickname,email,gender,birthday);
+					let member_gender;
+					if(gender=="female"){
+						member_gender = "여";
+						//console.log(member_gender);
+					}else if(gender == "male"){
+						member_gender = "남";
+					}
 					
+					let data = {
+							member_nickname:nickname,
+							member_id : email,
+							member_gender : member_gender,
+							member_birth : birthday
+					}
+					//카카오 로그인 DB저장
+					$.ajax({
+						url:"KakaoLoginOK",
+						data:data,
+						success:function(r){
+							console.log("로그인됌");
+							location.href="login";
+						}
+					})//카카오 로그인 ajax끝
+
 				}
 			});
 		}
 	});
-//카카오 로그아웃 기능은 아직 구현 못함 
-}
-</script>
-<script type="text/javascript">
-	$(function(){
-		$("#searchId").click(function(){
-			$("#searchId").modal();
-		});
-	});
-	
+
+}//카카오 로그인 함수 끝
+
 </script>
 </head>
 <body style="height: 1000px; padding: 200px;">
@@ -53,20 +75,22 @@ function KakaoLogin(){
      
       <!-- 로그인 표시 -->
       <div class="modal-header p-5 border-bottom-0" style="margin: 0 auto;">
-        <h1 class="fw-bold mb-0 text-secondary">4989 로그인</h1>
+        <img src="../images/4989_logo.png" width="120px" height="55px;">
+        <p class="display-5 fw-bold mb-0 mx-1 text-secondary">로그인</p>
       </div>
       
 	<!-- 전체 폼 -->
       <div class="modal-body p-5 pt-0">
-        <form class="login_form" action="login" method="post">
+      <form  id="login_form"   class="login_form" action="login" method="post">
         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
         <!-- 아이디, 비밀번호 입력-->
           <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-4" id="floatingInput" name="username" placeholder="name@example.com">
+            <input id="username" type="email" class="form-control rounded-4" id="floatingInput" value="${username }"  name="username" placeholder="name@example.com">
+            
            <label for="floatingInput"><i class="bi bi-person-fill" style="margin-right: 10px;"></i>Email ID</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password">
+            <input type="password"  value="${password }" class="form-control rounded-4" id="floatingPassword" name="password" placeholder="Password" autocomplete="off" >
             <label for="floatingPassword"><i class="bi bi-lock-fill" style="margin-right: 10px;"></i>Password</label>
           </div>
         <!-- 아이디저장, 아이디 찾기, 비밀번호 찾기 -->  
@@ -80,7 +104,7 @@ function KakaoLogin(){
 	         </div>
          </div>
         <!-- 로그인 -->
-          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin-top: 10px;">로그인</button>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary fw-bold" type="submit" style="margin-top: 10px;">로그인</button>
        	<!-- 회원가입창으로 이동-->
 	          <div class="form-floating mb-3" style="position: relative; margin-top: 5px;">
 	           <h2 class="fs-5 fw-bold mb-3 text-secondary" style="float: left; margin-left: 20px;">아직 4989의 회원이 아닌가요?</h2>

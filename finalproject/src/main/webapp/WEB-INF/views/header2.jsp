@@ -34,7 +34,7 @@
  <div class="p-1 bg-secondary bg-gradient text-end text-white d-flex justify-content-end">
          <c:if test="${not empty m}">
 			<ul style="display: inline-block;">
-			<li class="text-end text-white" id="top-header" style="float: left;"><a href="#">마이페이지</a><li>
+			<li class="text-end text-white" id="top-header" style="float: left;"><a href="mypage">마이페이지</a><li>
 			<li class="text-end text-white" id="top-header" style="float: left;"><a href="#">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
 			<li class="text-end text-white" id="top-header" style="float: right;"><a href="logout">로그아웃</a><li> 	
 	         </ul>
@@ -52,7 +52,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom p-0 m-0" aria-label="Tenth navbar example">
    <!-- 로고 -->
     <div>
-   		<img src="../images/4989_logo.png" style="width: 200px; height: 100px; padding-left: 40px;" >
+   		<a href="main"><img src="../images/4989_logo.png" style="width: 200px; height: 100px; padding-left: 40px;" ></a>
    	</div>
    	<!-- 메뉴 전체 div -->
     <div class="container position-relative" style="margin: 0 auto; padding-left: 0; padding-right: 150px;">
@@ -64,7 +64,7 @@
             <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">중고거래</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">공동구매</a>
+            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="listGB">공동구매</a>
           </li>
           
         <!-- 드롭 다운 메뉴 -->
@@ -82,7 +82,7 @@
             <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">공지사항</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="#">문의사항</a>
+            <a class="nav-link fw-bold text-secondary pt-5 pb-5" href="listQna">문의사항</a>
           </li>
         </ul>
         

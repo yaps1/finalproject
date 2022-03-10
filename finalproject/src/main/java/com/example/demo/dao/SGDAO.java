@@ -30,7 +30,7 @@ public class SGDAO {
 	
 	//소모임 리스트
 	public List<SGVO> listSG(HashMap map){
-		totalRecord = DBManager.getTotalRecord();
+		totalRecord = DBManager.getTotalRecordSG();
 		totalPage = (int)(Math.ceil(totalRecord/(double)pageSize));
 		return DBManager.listSG(map);
 	}
@@ -81,16 +81,16 @@ public class SGDAO {
 		return DBManager.deleteSGC(sg_comment_no);
 	}
 	
-	/*
+	
 	//소모임 댓글번호로 불러오기
-	public SGCVO findByNo(int sg_comment_no) {
-		return DBManager.findByNo(sg_comment_no);
+	public SGCVO findBySGCNO(int sg_comment_no) {
+		return DBManager.findBySGCNO(sg_comment_no);
 	}
 	
 	//소모임 대댓글 updateStep
 	public void updateStep(int sg_ref, int sg_step) {
 		DBManager.updateStep(sg_ref, sg_step);
-	}*/
+	}
 		
 		
 	public List<SGVO> searchSGByMain(String searchkeyword){

@@ -17,4 +17,6 @@ public class ManagerDAO {
 	public List<MemberVO> memberlevel() {
 		return DBManager.memberlevel();
 	}
+	
+	
 }

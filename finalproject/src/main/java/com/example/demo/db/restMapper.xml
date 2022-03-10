@@ -4,13 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="rest">
   
+  <!-- 맛집 번호 -->
+  <select id="getRestNO" resultType="java.lang.Integer">
+  	select nvl(max(rest_no),0)+1 from rest
+  </select>
+  
+  <!-- 맛집 추가 -->
+  <insert id="insertRest" parameterType="restVO">
+	insert into rest values (#{rest_no},#{rest_name},#{rest_tel},#{rest_addr},#{rest_avg_score})
+  </insert>
+  
+  <!-- 식당 정보 -->
   <select id="getRestInfo" resultType="restVO">
   	select * from rest
   </select>
   
+  <!-- 식당 리뷰 리스트 -->
   <select id="listRestReview" resultType="restReviewVO">
   	select * from rest_review where rest_no=#{rest_no}
   </select>
+  
+  <!-- 식당 이미지 리스트 -->
+  <select id="listRestPic" resultType="java.lang.String">
+  	select rest_image from rest_review where rest_no=#{rest_no}
+  </select>
+  
+  <!-- 식당 후기 번호 -->
+  <select id="getRestReviewNO" resultType="java.lang.Integer">
+  	select nvl(max(rest_review_no),0)+1 from rest_review
+  </select>
+  
+  <!-- 식당 후기 추가 -->
+  <insert id="insertRestReview" parameterType="restReviewVO">
+  	insert into rest_review values (#{rest_review_no},#{rest_review_content},#{rest_score},sysdate,#{rest_image},#{member_no},#{rest_no},#{member_nickname})
+  </insert>
+  
+  <!-- 별점 평균 구하기 위한 식당 후기 수 -->
+  <select id="getReviewCount" resultType="java.lang.Integer">
+  	select nvl(count(rest_review_no),0) from rest_review where rest_no=#{rest_no}
+  </select>
+  
+  <!-- 별점 총합 구하기 rest_review의 rest_score의 평균 = rest의 rest_avg_score-->
+  <select id="getSumRestScore" resultType="java.lang.Integer">
+  	select sum(rest_score) from rest_review where rest_no=#{rest_no}
+  </select>
+  
+  <!-- 별점 평균 반영하기 -->
+  <update id="updateRestAvgScore">
+  	update rest set rest_avg_score=#{rest_avg_score} where rest_no=#{rest_no}
+  </update>
   
   <select id="listRRByMember" resultType="restReviewVO">
   	select rest_review_no,rest_score,rest_review_content from rest_review where member_no=#{member_no} order by rest_review_no desc

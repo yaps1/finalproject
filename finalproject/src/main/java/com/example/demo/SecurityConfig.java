@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		
 		http.authorizeHttpRequests()
-		.mvcMatchers("/view/**","/images/**","/join","/login","/searchId","/searchIdOK","/searchPwd","/searchPwdOK","/updatePwd","/insertSG","/deleteSG","/listOfSG","/insertSGC","/updateSGC","/deleteSGC","/id_check","/sendNumber","/nickname_check","/loginKakaoOK","/getRestInfo","/listRestReview").permitAll()
+		.mvcMatchers("/images/**","/main","/join","/login","/searchId","/searchIdOK","/searchPwd","/searchPwdOK","/updatePwd","/insertSG","/deleteSG","/listOfSG","/insertSGC","/updateSGC","/deleteSGC","/id_check","/sendNumber","/nickname_check","/kakao_login","/getRestInfo","/listRestReview","/managerListMember","/KakaoLoginOK").permitAll()
 		.anyRequest().authenticated();
 		
 		http.formLogin().loginPage("/login")
@@ -31,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().ignoringAntMatchers("/updateSGC");
 		http.csrf().ignoringAntMatchers("/deleteSGC");
 		http.csrf().ignoringAntMatchers("/listRestReview");
+		http.csrf().ignoringAntMatchers("/deleteListMember");
+		http.csrf().ignoringAntMatchers("/insertRestReview");
+		
 		http.httpBasic(); 
 		
 		

@@ -79,4 +79,7 @@ public class GBDAO {
 	public int insertGBC(GBCVO g) {
         return DBManager.insertGBC(g);
     }
+	
+	
+	
 }

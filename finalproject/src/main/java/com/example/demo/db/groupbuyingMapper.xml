@@ -105,4 +105,5 @@
   	insert into group_buying_comment values(#{gb_comment_no},#{gb_comment},sysdate,50,#{gb_no},#{gb_ref},#{gb_level},#{gb_step})
   </insert>
   
+
 </mapper>

@@ -8,5 +8,6 @@ public class RestVO {
 	private String rest_name;
 	private String rest_tel;
 	private String rest_addr;
-	private int rest_avg_score;
+	//private int rest_avg_score;
+	private Double rest_avg_score;
 }
