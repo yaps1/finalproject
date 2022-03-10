@@ -18,6 +18,8 @@ import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.RestReviewVO;
 import com.example.demo.vo.RestVO;
+import com.example.demo.vo.ChatMessageVO;
+import com.example.demo.vo.ChatRoomVO;
 import com.example.demo.vo.GBCVO;
 import com.example.demo.vo.GBDVO;
 import com.example.demo.vo.GBJVO;
@@ -557,7 +559,6 @@ public class DBManager {
 		return list;
 	}
 	
-
 	//윤서우
 	//공동구매 전체 레코드 수
 	public static int getTotalRecord(HashMap map) {
@@ -795,6 +796,15 @@ public class DBManager {
         return list;
 	}
 	
+	
+	//관리자 판매 카테고리 top3
+	public static List<GoodsVO> goodsTop3(){
+		SqlSession session = factory.openSession();
+        List<GoodsVO> list = session.selectList("manager.goodsTop3");
+        session.close();
+        return list;
+	}
+	
 	//공동구매 참여 다음 번호
 	public static int getNextJoinNo() {
 		SqlSession session = factory.openSession();
@@ -829,7 +839,66 @@ public class DBManager {
         session.close();
         return re;
 	}
-
-
+	
+	//공동구매 상세 삭제
+	public static int deleteGBD(int gb_no) {
+		SqlSession session = factory.openSession();
+        int re = session.delete("groupBuying.deleteGBD",gb_no);
+        session.commit();
+        session.close();
+        return re;
+	}
+	
+	//공동구매 삭제
+	public static int deleteGB(int gb_no) {
+		SqlSession session = factory.openSession();
+        int re = session.delete("groupBuying.deleteGB",gb_no);
+        session.commit();
+        session.close();
+        return re;
+	}
+	
+	//공동구매 댓글 삭제
+	public static int deleteGBC(int gb_comment_no) {
+		SqlSession session = factory.openSession();
+        int re = session.delete("groupBuying.deleteGBC",gb_comment_no);
+        session.commit();
+        session.close();
+        return re;
+	}
+	
+	//채팅창 목록
+	public static List<ChatRoomVO> listChatRoomByMember(int member_no){
+        SqlSession session = factory.openSession();
+        List<ChatRoomVO> list = session.selectList("chat.listChatRoomByMember",member_no);
+        session.close();
+        return list;
+	}
+	
+	//채팅 메시지 등록
+	public static int insertChatMessage(ChatMessageVO c) {
+        SqlSession session = factory.openSession();
+        int re = session.insert("chat.insertChatMessage",c);
+        session.commit();
+        session.close();
+        return re;
+	}
+	
+	//채팅 이미지 등록
+	public static int insertChatImage(ChatMessageVO c) {
+        SqlSession session = factory.openSession();
+        int re = session.insert("chat.insertChatImage",c);
+        session.commit();
+        session.close();
+        return re;
+	}
+	
+	//채팅 메시지 목록
+	public static List<ChatMessageVO> listChatMessage(int room_no){
+        SqlSession session = factory.openSession();
+        List<ChatMessageVO> list = session.selectList("chat.listChatMessage",room_no);
+        session.close();
+        return list;
+	}
 
 }

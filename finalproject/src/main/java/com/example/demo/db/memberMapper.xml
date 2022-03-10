@@ -19,7 +19,6 @@
   <insert id="insertKakaoMember" parameterType="memberVO">
     insert into member(member_no, member_id,member_pwd,member_name,member_nickname,member_gender,member_tel, member_birth,member_addr,member_loc,member_join,member_level,member_jointype,member_role) values 
   	(#{member_no},#{member_id},#{member_pwd},#{member_name},#{member_nickname},#{member_gender},#{member_tel},#{member_birth},#{member_addr},#{member_loc},sysdate,0,2,'user')
-  
   </insert>
   
   <!-- 아이디 중복 체크 -->
@@ -64,19 +63,23 @@
 		from (select * from member order by member_no))
 		where num between #{start} and #{end}
   </select>
-	
+
+  <!-- 마이페이지 회원정보 -->
   <select id="detailMember" resultType="memberVO">
-	select member_no,member_id,member_pwd,member_name,member_nickname,member_gender,member_tel,to_char(member_birth,'yyyy/mm/dd') member_birth,member_addr,member_addr,member_loc 
-	from member where member_no=#{member_no}
+  	select member_no,member_id,member_pwd,member_name,member_nickname,member_gender,member_tel,to_char(member_birth,'yyyy/mm/dd') member_birth,member_addr,member_addr,member_loc 
+  	 from member where member_no=#{member_no}
   </select> 
-	
+  	
+  <!-- 마이페이지 내 정보 수정 -->
   <update id="updateMember" parameterType="memberVO">
-	update member set member_pwd=#{member_pwd},member_nickname=#{member_nickname},member_tel=#{member_tel},member_addr=#{member_addr},member_loc=#{member_loc} 
-    where member_no=#{member_no}
+  	update member set member_pwd=#{member_pwd},member_nickname=#{member_nickname},member_tel=#{member_tel},member_addr=#{member_addr},member_loc=#{member_loc} 
+	 where member_no=#{member_no}
   </update>
-	
+  	
+  <!-- 회원탈퇴 -->
   <delete id="deleteMember" parameterType="memberVO">
-    delete member where member_no=#{member_no}
+  	delete member where member_no=#{member_no}
   </delete>
-  
+
+
 </mapper>

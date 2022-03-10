@@ -76,7 +76,9 @@ public class MemberDAO {
 
 	public int deleteMember(int member_no) {
 		return DBManager.deleteMember(member_no);
-		
-
+	}
+	
+	public int nicknameCheck(String member_nickname) {
+		return DBManager.nickname_check(member_nickname);
 	}
 }

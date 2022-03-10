@@ -33,7 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().ignoringAntMatchers("/listRestReview");
 		http.csrf().ignoringAntMatchers("/deleteListMember");
 		http.csrf().ignoringAntMatchers("/insertRestReview");
-		
+		http.csrf().ignoringAntMatchers("/nicknameCheck");
+		http.csrf().ignoringAntMatchers("/deleteGB");
+		http.csrf().ignoringAntMatchers("/getRoom");
+		http.csrf().ignoringAntMatchers("/createRoom");
+		http.csrf().ignoringAntMatchers("/insertChatMessage");
+		http.csrf().ignoringAntMatchers("/insertChatImage");
+		http.csrf().ignoringAntMatchers("/deleteGBC");
+		http.csrf().ignoringAntMatchers("/listChatMessage");
+
 		http.httpBasic(); 
 		
 		
