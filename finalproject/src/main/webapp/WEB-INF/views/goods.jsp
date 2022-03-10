@@ -44,20 +44,40 @@
 		form.submit();
 	}
 	function addr(e){
-		var member_no = $(e).attr("name");
-		
-		let form = document.createElement('form');
-		form.action = 'goods';
-		form.method = 'post';
+		var uid = <%=(Integer)session.getAttribute("member_no")%>;
+		//console.log(uid);
+        if(uid==null){ 
+        	$("#myModal").modal('show');
+        }else{
+    		var member_no = $(e).attr("name");
+    		
+    		let form = document.createElement('form');
+    		form.action = 'goods';
+    		form.method = 'post';
 
-		form.innerHTML = "<input type='hidden' name='member_no' value="+member_no+">";
-		form.innerHTML += "<input type='hidden' name='${_csrf.parameterName }' value='${_csrf.token }'>";
-		
-		// 폼을 제출하려면 반드시 폼이 문서 안에 있어야 합니다.
-		document.body.append(form);
+    		form.innerHTML = "<input type='hidden' name='addr' value="+member_no+">";
+    		form.innerHTML += "<input type='hidden' name='${_csrf.parameterName }' value='${_csrf.token }'>";
+    		
+    		// 폼을 제출하려면 반드시 폼이 문서 안에 있어야 합니다.
+    		document.body.append(form);
 
-		form.submit();
+    		form.submit();
+        }
 	}
+	
+	function insert() {
+		var uid = <%=(Integer)session.getAttribute("member_no")%>;
+		//console.log(uid);
+        if(uid==null){ 
+        	 $("#myModal").modal('show');
+
+        }else{
+        	location.href="insertGoods";
+        }
+	}
+	$('#my-modal').modal({
+	    show: 'false'
+	}); 
 </script>
 <style type="text/css">
 	body{
@@ -231,19 +251,19 @@
 	</div>
 	<div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		  <button class="btn btn-secondary me-md-2" type="button">상품등록하기</button>
-		  <c:if test="${member_no ==null  or member_no==0}">
-		  <h3 class="btn btn-primary" onclick="addr(this)" name="4">우리동네 거래하기</h3>
+		  <h3 class="btn btn-secondary me-md-2" onclick="insert()" >상품등록하기</h3>
+		  <c:if test="${addr ==null  or addr==0}">
+		  <h3 class="btn btn-primary" onclick="addr(this)" name="${m.member_no }">우리동네 거래하기</h3>
 		  </c:if>
-		  <c:if test="${member_no>0 }">
+		  <c:if test="${addr>0 }">
 		  <h3 class="btn btn-primary" onclick="addr(this)" name="0">전체지역 거래하기</h3>
 		  </c:if>
 		</div>
 		<br>
-		<c:if test="${member_no ==null  or member_no==0}">
+		<c:if test="${addr ==null  or addr==0}">
 		  	<p class="fs-1" style="text-align: center">전체지역 중고거래</p>
 		</c:if>
-		<c:if test="${member_no>0 }">
+		<c:if test="${addr>0 }">
 		  	<p class="fs-1" style="text-align: center">우리동네 중고거래</p>
 		</c:if>
 
@@ -265,7 +285,7 @@
 		  <c:forEach var="g" items="${list }">
 		    <div class="col">
 		      <div class="card" style="width: 18rem;">
-				  <a href="detailGoods?goods_no=${g.goods_no }"><img src="../upload/${g.goods_image1 }" class="card-img-top"></a>
+				  <a href="detailGoods?goods_no=${g.goods_no }"><img src="../images/${g.goods_image1 }" class="card-img-top" style="width: 286px; height: 200px;"></a>
 				  <div class="card-body">
 				    <h5 class="card-title">${g.goods_name }</h5>
 				    <p class="card-text">${g.goods_price }</p>
@@ -294,5 +314,24 @@
 		</ul>
 	</div>
 
+
+	<div class="modal" tabindex="-1" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">로그인 알림</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p>로그인이 필요한 항목입니다.</p>
+	        <p>로그인하시겠습니까?.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='login'">로그인</button>
+	      </div>
+	    </div>
+	  </div>
+	 </div>
 </body>
 </html>

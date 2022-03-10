@@ -14,7 +14,7 @@ function update(){
 	var qna_comment = document.getElementsByClassName("qna")[0].value;
 	var qna_no = document.getElementById('qnano').value;
 	location.href = '/listQna?qna_comment='+qna_comment+"&qna_no="+qna_no;
-	
+
 }
 
 </script>

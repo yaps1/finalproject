@@ -42,7 +42,7 @@
 <hr>
 <p class="fs-1" style="text-align: center">공지사항 작성</p>
 	<form action="insertNotice" method="post"
-					enctype="multipart/form-data">
+					enctype="multipart/form-data">					
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div class="mb-3">
 	<table border="2">

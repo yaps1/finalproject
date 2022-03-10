@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,12 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.GoodsDAO;
 import com.example.demo.vo.GoodsDetailVO;
 import com.example.demo.vo.GoodsFavorVO;
+import com.example.demo.vo.GoodsPurchaseVO;
+import com.example.demo.vo.GoodsReviewVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.MemberVO;
 
 @Controller
 public class GoodsController {
@@ -34,18 +39,15 @@ public class GoodsController {
 			String keywordGoods,   //검색어를 받아오기 위한 변수
 			String goods_category, //카테고리를 받아오기 위한변수
 			String orderColumn,//정렬칼럼을 받아 오기 위한 변수
-			String member_no,//동네정보 불러오기 위한 변수
+			String addr,// 지역거래
 			@RequestParam(value = "pageNUM", defaultValue = "1")  int pageNUM//페이지 번호를 받아오기 위한 변수
 			) {
 
 		if(orderColumn == null && session.getAttribute("orderColumn")!=null) {
 			orderColumn = (String)session.getAttribute("orderColumn");
 		}
-		if(member_no == null && session.getAttribute("member_no")!=null) {
-			member_no = (String)session.getAttribute("member_no");
-			if(member_no.equals("0")) {
-				 session.removeAttribute("member_no");
-			}
+		if(addr== null && session.getAttribute("addr")!=null) {
+			addr = (String)session.getAttribute("addr");
 		}
 
 		if(goods_category!=null) {
@@ -63,11 +65,30 @@ public class GoodsController {
 			}
 		}
 		
+		if(addr==null || addr.equals("0")) {
+			addr=null;
+			session.removeAttribute("addr");
+		}
+		
+		int member_no=0;
+		if(session.getAttribute("m")!=null) {
+			MemberVO m= (MemberVO)session.getAttribute("m");
+			member_no = m.getMember_no();
+			
+		}
+		if(member_no==0) {
+			session.removeAttribute("member_no");
+		}else if(member_no!=0) {
+			session.setAttribute("member_no", member_no);
+			GoodsVO  g= new GoodsVO();
+			g.setMember_no(member_no);
+		}
+
 		System.out.println("정렬칼럼:"+orderColumn);
 		System.out.println("pageNUM:"+pageNUM);
 		System.out.println("검색어:|"+keywordGoods+"|");
 		System.out.println("카테고리:|"+goods_category+"|");
-		System.out.println("member_no:|"+member_no+"|");
+		System.out.println("addr:|"+addr+"|");
 			//현재페이지에 보여줄 시작레코드와 마지막레코드의 위치를 계산한다.
 		int start = (pageNUM-1)* dao.pageSIZE + 1;
 		int end = start + dao.pageSIZE - 1;
@@ -80,14 +101,14 @@ public class GoodsController {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("goods_category", goods_category);
+		map.put("addr", addr);
 		map.put("member_no", member_no);
-		
 		//dao를 통해 검색한 결과를 model에 저장한다.
 		//이대 findAll메소드에서 전체레코드수를 구하고 
 		//그 값을 갖고 전체페이지수도 계산합니다.
 		model.addAttribute("list", dao.listAllGoods(map));
 		model.addAttribute("member_no", member_no);
-		
+		model.addAttribute("addr", addr);
 		
 		int totalPage = dao.totalPage;
 
@@ -127,8 +148,8 @@ public class GoodsController {
 		if(orderColumn != null) {
 			session.setAttribute("orderColumn", orderColumn);
 		}
-		if(member_no != null) {
-			session.setAttribute("member_no", member_no);
+		if(addr!=null) {
+			session.setAttribute("addr", addr);
 		}
 	}
 	
@@ -136,22 +157,44 @@ public class GoodsController {
 	public void detailGoods(int goods_no, Model model,HttpSession session) {
 		GoodsDetailVO gd = dao.getGoodsImage(goods_no);
 		model.addAttribute("gd", gd);
-		model.addAttribute("g", dao.getGoodsInfo(goods_no));
-		session.setAttribute("goods_no",goods_no);
-		
-		GoodsFavorVO gf = new GoodsFavorVO();
-		gf.setGoods_no(goods_no);
-		gf.setMember_no(4);
-		
-		String num = dao.favorGoods(gf);
+		session.setAttribute("g", dao.getGoodsInfo(goods_no));
+		//session.setAttribute("goods_no",goods_no);
 		int check=0;
-		
-		if(num==null) {
-			check=0;
-		}else {
-			check=1;
+		int checkPurchase=0;
+		GoodsFavorVO gf = new GoodsFavorVO();
+		GoodsPurchaseVO gp = new GoodsPurchaseVO();
+		if(session.getAttribute("m")!=null) {
+			MemberVO m = (MemberVO)session.getAttribute("m");
+
+			if(!(m.getMember_no()+"").equals("")) {
+				gf.setGoods_no(goods_no);
+				gf.setMember_no(m.getMember_no());
+				String num = dao.favorGoods(gf);
+				if(num==null) {
+					check=0;
+				}else {
+					check=1;
+				}
+				
+				gp.setGoods_no(goods_no);
+				gp.setMember_no(m.getMember_no());
+				checkPurchase = dao.checkPurchase(gp);
+			}
 		}
+		
+		
+		String goods_image1=gd.getGoods_image1();
+		String goods_image2=gd.getGoods_image2();
+		String goods_image3=gd.getGoods_image3();
+		String goods_image4=gd.getGoods_image4();
+		//System.out.println(gd.getGoods_image1());
+
 		model.addAttribute("check", check);
+		model.addAttribute("checkPurchase", checkPurchase);
+		model.addAttribute("goods_image1", goods_image1);
+		model.addAttribute("goods_image2", goods_image2);
+		model.addAttribute("goods_image3", goods_image3);
+		model.addAttribute("goods_image4", goods_image4);
 	}
 	@RequestMapping("/seller")
 	public void seller(int goods_no, Model model,
@@ -229,21 +272,110 @@ public class GoodsController {
 		  return mav; 
 	}
 	@RequestMapping("/favorGoods")
-	public ModelAndView favorGoods(int goods_no,int member_no) {
+	public ModelAndView favorGoods(int goods_no, HttpSession session) {
 		ModelAndView mav = new ModelAndView("redirect:/detailGoods?goods_no="+goods_no);
 		
 		GoodsFavorVO gf = new GoodsFavorVO();
 		gf.setGoods_no(goods_no);
-		gf.setMember_no(member_no);
-
-		String num = dao.favorGoods(gf);
-		if(num==null) {
-			dao.insertFavor(gf);
-		}else {
-			dao.deleteFavor(gf);
+		if(session.getAttribute("m")!=null) {
+			MemberVO m = (MemberVO) session.getAttribute("m");
+			gf.setMember_no(m.getMember_no());
+	
+			String num = dao.favorGoods(gf);
+			if(num==null) {
+				dao.insertFavor(gf);
+			}else {
+				dao.deleteFavor(gf);
+			}
 		}
 
 		return mav;
 	}
+	@RequestMapping(value="/insertGoods", method = RequestMethod.GET)
+	public void insertGoodsForm() {
+		
+	}
+	@RequestMapping(value="/insertGoods", method = RequestMethod.POST)
+	public ModelAndView insertGoodsSubmit(HttpServletRequest request,GoodsVO g, GoodsDetailVO gd) {
+		ModelAndView mav = new ModelAndView("redirect:/goods");
+		String path = request.getRealPath("images");
+		System.out.println("path:"+path);
+		gd.setGoods_image1("");
+		gd.setGoods_image2("");
+		gd.setGoods_image3("");
+		gd.setGoods_image4("");
+
+		MultipartFile []uploadFile = gd.getUploadFile();
+		String fname[] = new String[4];
+		for(int i =0; i<uploadFile.length;i++) {
+			fname[i]=uploadFile[i].getOriginalFilename();
+		}
+		if(fname[0]!=null&&!fname[0].equals("")) {
+			gd.setGoods_image1(fname[0]);
+		}
+		if(fname[1]!=null&&!fname[1].equals("")) {
+			gd.setGoods_image2(fname[1]);
+		}
+		if(fname[2]!=null&&!fname[2].equals("")) {
+			gd.setGoods_image3(fname[2]);
+		}
+		if(fname[3]!=null&&!fname[3].equals("")) {
+			gd.setGoods_image4(fname[3]);
+		}
+		/*
+		 * for(int i=0; i<fname.length;i++) { System.out.println(fname[i]); }
+		 */
+		int re1 = dao.insertGoods(g);
+		int re2 = dao.insertGoodsDetail(gd);
+		if(re1 != 1||re2!=1) {
+			mav.setViewName("error");
+			mav.addObject("msg", "상품등록에 실패하였습니다.");
+		}else {
+			try {
+				for(int i=0; i<fname.length;i++) {
+					if(fname[i] != null && !fname[i].equals("")) {
+						byte[] data = uploadFile[i].getBytes();
+						FileOutputStream fos = new FileOutputStream(path + "/"+fname[i]);
+						fos.write(data);
+						fos.close();
+					}
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("예외발생 : "+e.getMessage());
+			}	
+		}
+		return mav;
+	}
 	
+	@RequestMapping(value="/reviewGoods", method = RequestMethod.GET)
+	public void reviewGoodsForm(int goods_no,Model model) {
+		model.addAttribute("goods_no", goods_no);
+	}
+	@RequestMapping(value="/reviewGoods", method = RequestMethod.POST)
+	public ModelAndView reviewGoodsSubmit(GoodsReviewVO gr) {
+		ModelAndView mav = new ModelAndView("redirect:/goods");
+		int re = dao.reviewGoods(gr);
+		if(re!=1) {
+			mav.setViewName("error");
+			mav.addObject("msg", "리뷰등록에 실패하였습니다.");
+		}
+		return mav;
+	}
+	@RequestMapping("/purchaseGoods")
+	public String purchaseGoods(GoodsPurchaseVO gp) {
+
+		int goods_no = gp.getGoods_no();
+		dao.updatePurchase(goods_no);
+		return dao.purchaseGoods(gp)+"";
+	}
+	@RequestMapping("purchaseGoodsNick")
+	public void purchaseGoodsNick(int goods_no,int member_no) {
+		GoodsPurchaseVO gp = new GoodsPurchaseVO();
+		gp.setGoods_no(goods_no);
+		gp.setMember_no(member_no);
+		dao.updatePurchase(goods_no);
+		dao.purchaseGoods(gp);
+		
+	}
 }

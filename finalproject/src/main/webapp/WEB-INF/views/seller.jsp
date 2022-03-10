@@ -212,12 +212,12 @@ function MovePage(e) {
 		</c:forEach>
 		
 		<ul style="list-style: none;">
-			<c:if test="${prev > 0 }"><li><a href="listNotice?pageNUM=${first-1 }" id='prev'>이전</a></li></c:if>
+			<c:if test="${prev > 0 }"><li><a href="seller?pageNUM=${first-1 }" id='prev'>이전</a></li></c:if>
 			<c:forEach var="i" begin="${first }" end="${last }">
-				<c:if test="${i == pageNUM }"><li class='on'><a href="listNotice?pageNUM=${i }">${i }</a></li></c:if>
-				<c:if test="${i != pageNUM }"><li><a href="listNotice?pageNUM=${i }">${i }</a></li></c:if>
+				<c:if test="${i == pageNUM }"><li class='on'><a href="seller?pageNUM=${i }">${i }</a></li></c:if>
+				<c:if test="${i != pageNUM }"><li><a href="seller?pageNUM=${i }">${i }</a></li></c:if>
 			</c:forEach>
-			<c:if test="${last < totalPage }"><li><a href="listNotice?pageNUM=${last+1 }" id='next'>다음</a></li></c:if>
+			<c:if test="${last < totalPage }"><li><a href="seller?pageNUM=${last+1 }" id='next'>다음</a></li></c:if>
 		</ul>
 		
 		<br>

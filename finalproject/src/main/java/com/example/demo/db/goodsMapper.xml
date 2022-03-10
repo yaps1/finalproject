@@ -15,41 +15,43 @@
 	<if test="goods_category!=null">
 		and goods_category = #{goods_category}
 	</if> 
+	<if test="addr != null and addr !=0">
+		and goods_addr like (select member_addr from member where member_no=#{member_no})
+	</if>
 	<if test="keywordGoods != null">
 		and goods_name like '%'||#{keywordGoods}||'%'
 	</if>
 	order by goods_no desc)
-	<if test="member_no != null and member_no !=0">
-		where goods_addr like (select member_addr from member where member_no=#{member_no})
-	</if>
 	</select>
 	<select id="listAllGoods" resultType="goodsVO">
-		select goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from
-		(select rownum n,goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date,goods_category from 
+		select  goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from(
+		select  rownum n,goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from
+		(select goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date,goods_category from 
 		(select g.goods_no o,g.goods_name,g.goods_price,g.goods_addr,to_char(g.goods_date,'yy-mm-dd') goods_date, nvl(gfc.c,0) cnt,g.goods_category from goods g
+
 		left join 
 		(select goods_no gn,count(*) c from goods_favor group by goods_no) gfc 
-		on(g.goods_no=gfc.gn )) cn ,
+		on(g.goods_no=gfc.gn )
+		
+		) cn ,
 		goods_detail gd
 		where gd.goods_no=cn.o 
 	<if test="goods_category!=null">
 		and goods_category = #{goods_category}
 	</if> 
+	<if test="addr != null and addr !=0">
+		and goods_addr like (select member_addr from member where member_no=#{member_no})
+	</if>
 	<if test="keywordGoods != null">
 		and goods_name like '%'||#{keywordGoods}||'%'
 	</if>
-		order by goods_no desc)
-		where n between #{start} and #{end}
-	<if test="member_no != null and member_no !=0">
-		and goods_addr like (select member_addr from member where member_no=#{member_no})
-	</if>
-	
-	<if test="orderColumn != null">
+	<if test='orderColumn !=null'>
 		order by ${orderColumn} desc
 	</if>
-		
-	 </select>
-	 <select id="max" resultType="java.lang.Integer">
+		))where n between #{start} and #{end}
+
+	</select>
+	<select id="max" resultType="java.lang.Integer">
 		select max(goods_no) from goods
 	 </select>
 	 <select id="getGoodsImage" resultType="goodsDetailVO">
@@ -109,7 +111,12 @@
 	 <select id="favorGoods" resultType="java.lang.String">
 	 	select goods_favor_no from goods_favor where goods_no=#{goods_no} and member_no = #{member_no}
 	 </select>
-
+	<insert id="insertGoods" parameterType="goodsVO">
+		insert into goods values ((select nvl(max(goods_no),0)+1 from goods),#{goods_name},#{goods_price},#{goods_addr},#{goods_category},sysdate,#{member_no})
+	</insert>
+	<insert id="insertGoodsDetail" parameterType="goodsVO">
+		insert into goods_detail values ((select nvl(max(goods_no),0) from goods),#{goods_state},#{goods_content},1,#{goods_deliver},#{goods_image1},#{goods_image2},#{goods_image3},#{goods_image4})
+	</insert>
  	<select id="searchGoodsByMain" resultType="goodsVO">
   		select g.goods_no,goods_image1,goods_name,goods_price,goods_addr 
 		 from goods g,goods_detail gd 
@@ -140,4 +147,18 @@
 		from goods g,goods_detail d,goods_favor f where g.goods_no = d.goods_no and
 		d.goods_no = f.goods_no and f.member_no = #{member_no}) b where a.goods_no = b.goods_no
   	</select>
+  	<insert id="reviewGoods" parameterType="goodsReviewVO">
+  		insert into goods_review values ((select nvl(max(goods_review_no),0)+1 from goods_review),#{goods_review},#{goods_score},#{member_no},#{goods_no})
+  	</insert>
+  	<insert id="purchaseGoods" parameterType="goodsPurchaseVO">
+  		insert into goods_purchase values((select nvl(max(goods_purchase_no),0)+1 from goods_purchase),#{goods_no},#{member_no})
+  	</insert>
+  	<update id="updatePurchase">
+  		update goods_detail set goods_condition =3 where goods_no = #{goods_no}
+  	</update>
+  	<select id="checkPurchase" resultType="java.lang.Integer">
+  		select goods_purchase_no from(
+  		select nvl(max(goods_purchase_no),0) goods_purchase_no from goods_purchase where goods_no=#{goods_no} and member_no=#{member_no})
+  	</select>
+  	
 </mapper>

@@ -11,14 +11,31 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 function insert()  {
+	var alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+	var alertTrigger = document.getElementById('liveAlertBtn');
+	
+	function alert(message, type) {
+	  var wrapper = document.createElement('div')
+	  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+	
+	  alertPlaceholder.append(wrapper);
+	}
+	$(".alert").remove(".alert");
 	var val = $("#select option:selected").val();
 	//alert(val);
-	if(val==1 || val==2){
-		insertQ.submit();
+	var qnaContent=$("#qnaContent").val();
+	var qnaTitle=$("#qnaTitle").val();
+	if(val == 0){
+		alert("문의사항을 선택해주세요","danger");
+	}else if(qnaTitle == ""){
+		alert("문의사항 제목을 입력해주세요","danger");
+	}else if(qnaContent == ""){
+		alert("문의사항 내용을 입력해주세요","danger");
 	}else{
-		alert("문의사항을 선택해주세요");
+		insertQ.submit();
 	}
-	}
+	
+}
 function getItem(){
 	  
 	  var result = $("#select option:selected").text();
@@ -36,6 +53,7 @@ function getItem(){
 		    = "";
 	    }
 	}
+
 </script>
 <style type="text/css">
 	body{
@@ -51,15 +69,16 @@ function getItem(){
   	div{
   		border: 2px;
   	}
+
 </style>
 </head>
 <body>
 <hr>
-	<div>
-
+	<div id="liveAlertPlaceholder"></div>
+	<div style="width: 90%; margin: 0 auto;">
 	<p class="fs-1" style="text-align: center">문의사항 작성</p>
 	<form action="insertQna" method="post" id="sm" name="insertQ">
-	<input type="hidden" name="member_no" value="4">
+	<input type="hidden" name="member_no" value="${m.member_no }">
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		<select class="form-select" aria-label="Default select example" id="select" name="qna_type" onclick="getItem()">
 		  <option value="0" selected >문의사항을 선택해주세요</option>
@@ -67,21 +86,20 @@ function getItem(){
 		  <option value="2" name="qna_type">기타문의사항</option>
 		</select>
 		<div id='result' class="form-control" disabled readonly></div>
-		
+		<br>
 		<div class="mb-3">
-		  <label for="exampleFormControlInput1" class="form-label">제목</label>
-		  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요" name="qna_title">
+		  <label for="qnaTitle" class="form-label">제목</label>
+		  <input type="text" class="form-control" id="qnaTitle" placeholder="제목을 입력해주세요" name="qna_title">
 		</div>
 		<div class="mb-3">
-		  <label for="exampleFormControlTextarea1" class="form-label">문의 내용</label>
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" cols="100" name="qna_content"></textarea>
+		  <label for="qnaContent" class="form-label">문의 내용</label>
+		  <textarea class="form-control" id="qnaContent" rows="8" cols="100" name="qna_content" style="resize: none;"></textarea>
 		</div>
-		<div class="d-grid gap-2 col-6 mx-auto">
-			<nav>
-			<button type="button" class="btn btn-primary btn-lg" form="sm" onclick="insert()">문의사항 등록</button>
+	
+		<label class="d-md-flex justify-content-md-middle" style="margin: 0 auto; display: inline; justify-content: center;">
+			<button type="button" class="btn btn-primary btn-lg" form="sm" id="liveAlertBtn" onclick="insert()">문의사항 등록</button>
 			<button type="button" class="btn btn-secondary btn-lg" onclick="location.href = '#' ">&nbsp;&nbsp;&nbsp;&nbsp;취소&nbsp;&nbsp;&nbsp;&nbsp;</button>
-			</nav>
-		</div>
+		</label>
 	</form>
 	</div>
 	

@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
@@ -57,5 +59,9 @@ public class MemberDAO {
 		return DBManager.deleteMember(member_no);
 		
 
+	}
+	//닉네임 찾기
+	public  List<MemberVO> findNick(String nick){
+		return DBManager.findNick(nick);
 	}
 }

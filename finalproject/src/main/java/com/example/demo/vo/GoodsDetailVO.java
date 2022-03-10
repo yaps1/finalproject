@@ -1,5 +1,8 @@
 package com.example.demo.vo;
 
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -13,4 +16,5 @@ public class GoodsDetailVO {
 	private String goods_image2;
 	private String goods_image3;
 	private String goods_image4;
+	private MultipartFile[] uploadFile;
 }

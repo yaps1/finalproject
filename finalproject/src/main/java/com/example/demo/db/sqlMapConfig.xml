@@ -7,6 +7,7 @@
 <typeAliases>
 	<typeAlias type="com.example.demo.vo.GoodsDetailVO" alias="goodsDetailVO"/>
 	<typeAlias type="com.example.demo.vo.GoodsFavorVO" alias="goodsFavorVO"/>
+	<typeAlias type="com.example.demo.vo.GoodsPurchaseVO" alias="goodsPurchaseVO"/>
 	<typeAlias type="com.example.demo.vo.HotKeywordVO" alias="hotkeywordVO"/>
 	<typeAlias type="com.example.demo.vo.GoodsVO" alias="goodsVO"/>
 	<typeAlias type="com.example.demo.vo.GBVO" alias="gbVO"/>

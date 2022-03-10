@@ -31,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().ignoringAntMatchers("/updateSGC");
 		http.csrf().ignoringAntMatchers("/deleteSGC");
 		http.csrf().ignoringAntMatchers("/listRestReview");
+		http.csrf().ignoringAntMatchers("/insertNotice");
+		http.csrf().ignoringAntMatchers("/insertGoods");
 		http.httpBasic(); 
 		
 		

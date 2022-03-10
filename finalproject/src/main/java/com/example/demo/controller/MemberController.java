@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.io.Console;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -236,5 +237,16 @@ public class MemberController {
 			mav.addObject("msg", "비밀번호 재설정에 실패하였습니다");
 		}
 		return mav;
+	}
+	
+	@RequestMapping("/findNick")
+	public void findName(int goods_no,HttpSession session) {
+		session.setAttribute("goods_no", goods_no);
+	}
+	@RequestMapping("/findNickName")
+	@ResponseBody
+	public List<MemberVO> findNickName(String nick) {
+		
+		return dao.findNick(nick);
 	}
 }

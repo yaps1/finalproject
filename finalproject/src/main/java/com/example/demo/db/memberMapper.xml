@@ -57,5 +57,8 @@
   	<delete id="deleteMember" parameterType="memberVO">
   		delete member where member_no=#{member_no}
   	</delete>
-
+	<!-- 닉네임 찾기 -->
+	<select id="findNick" resultType="memberVO">
+		select * from member where member_nickname like #{nick}||'%' 
+	</select>
 </mapper>

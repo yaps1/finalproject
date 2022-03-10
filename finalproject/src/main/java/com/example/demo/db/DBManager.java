@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.GoodsDetailVO;
 import com.example.demo.vo.GoodsFavorVO;
+import com.example.demo.vo.GoodsPurchaseVO;
 import com.example.demo.vo.GoodsReviewVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.NoticeVO;
@@ -234,7 +235,53 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-
+	public static int insertGoods(GoodsVO g) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("goods.insertGoods",g);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int insertGoodsDetail(GoodsDetailVO gd) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("goods.insertGoodsDetail",gd);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int reviewGoods(GoodsReviewVO gr) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("goods.reviewGoods",gr);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int purchaseGoods(GoodsPurchaseVO gp) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("goods.purchaseGoods",gp);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int updatePurchase(int goods_no) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("goods.updatePurchase",goods_no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static List<MemberVO> findNick(String nick) {
+		SqlSession session = factory.openSession();
+		List<MemberVO> list = session.selectList("member.findNick",nick);
+		session.close();
+		return list;
+	}
+	public static int checkPurchase(GoodsPurchaseVO gp) {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("goods.checkPurchase",gp);
+		session.close();
+		return re;
+	}
 	//김지현
 	//회원 번호
 	public static int getMemberNo(){
@@ -459,6 +506,7 @@ public class DBManager {
 		return list;
 	}
 	
+	//윤서우
 	//공동구매 전체 레코드 수
 	public static int getTotalRecord(HashMap map) {
 		SqlSession session = factory.openSession();

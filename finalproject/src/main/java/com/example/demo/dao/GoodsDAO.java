@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.GoodsDetailVO;
 import com.example.demo.vo.GoodsFavorVO;
+import com.example.demo.vo.GoodsPurchaseVO;
 import com.example.demo.vo.GoodsReviewVO;
 import com.example.demo.vo.GoodsVO;
 
@@ -85,6 +86,24 @@ public class GoodsDAO {
 	
 	public List<GoodsVO> favorByMember(int member_no){
 		return DBManager.favorByMember(member_no);
+	}
+	public int insertGoods(GoodsVO g) {
+		return DBManager.insertGoods(g);
+	}
+	public int insertGoodsDetail(GoodsDetailVO gd) {
+		return DBManager.insertGoodsDetail(gd);
+	}
+	public int reviewGoods(GoodsReviewVO gr) {
+		return DBManager.reviewGoods(gr);
+	}
+	public int purchaseGoods(GoodsPurchaseVO gp) {
+		return DBManager.purchaseGoods(gp);
+	}
+	public int updatePurchase(int goods_no) {
+		return DBManager.updatePurchase(goods_no);
+	}
+	public int checkPurchase(GoodsPurchaseVO gp) {
+		return DBManager.checkPurchase(gp);
 	}
 }
 

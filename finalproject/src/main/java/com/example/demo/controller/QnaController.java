@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.QnaDAO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.QnaVO;
 
 import lombok.Setter;
@@ -34,7 +35,7 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/insertQna", method = RequestMethod.POST)
-	public ModelAndView insertSubmit(QnaVO q) {
+	public ModelAndView insertSubmit(QnaVO q ) {
 		ModelAndView mav = new ModelAndView("redirect:/listQna");
 		int re = dao.insertQna(q);
 		if(re != 1) {
