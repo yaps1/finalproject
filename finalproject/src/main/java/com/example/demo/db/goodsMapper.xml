@@ -24,7 +24,14 @@
 	order by goods_no desc)
 	</select>
 	<select id="listAllGoods" resultType="goodsVO">
-		select  goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from(
+		select  
+		ROUND(TO_DATE(sysdate, 'YYYY-MM-DD HH24:MI:SS')
+           - TO_DATE(goods_date, 'YYYY-MM-DD HH24:MI:SS'), 0) AS dd
+      , ROUND((TO_DATE(sysdate, 'YYYY-MM-DD HH24:MI:SS')
+             - TO_DATE(goods_date, 'YYYY-MM-DD HH24:MI:SS')) * 24, 0) AS hh
+      , ROUND((TO_DATE(sysdate, 'YYYY-MM-DD HH24:MI:SS')
+              - TO_DATE(goods_date, 'YYYY-MM-DD HH24:MI:SS')) * 24 * 60, 0) AS mm,
+		goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from(
 		select  rownum n,goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date from
 		(select goods_no,goods_image1,goods_name,goods_price,goods_addr,cnt,goods_date,goods_category from 
 		(select g.goods_no o,g.goods_name,g.goods_price,g.goods_addr,to_char(g.goods_date,'yy-mm-dd') goods_date, nvl(gfc.c,0) cnt,g.goods_category from goods g

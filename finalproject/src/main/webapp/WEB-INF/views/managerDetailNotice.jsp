@@ -25,7 +25,7 @@ function btn_delete(){
 } 
 </script>
 <style type="text/css">
-	body{
+	.container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -44,6 +44,8 @@ function btn_delete(){
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
+<div id="container"></div>
 <hr>
 	<table border="2">
 	    <tr>
@@ -82,5 +84,7 @@ function btn_delete(){
 		<button type="button" class="btn btn-outline-secondary" style="float: right"; onclick="btn_delete()">삭제</button>
 		<button type="button" class="btn btn-outline-secondary" style="float: right"; onclick="location.href = 'managerNotice' ">목록</button>
 	</form>
+	</body>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -52,7 +52,7 @@ img{
 	padding:10px;
 	text-align: center;
 }
-a{
+#gb_a{
 	text-decoration-line : none;
 }
 table{
@@ -228,10 +228,10 @@ function deleteComment(n) {
 	   
 	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="/listGB">목록</a>
+	       <a class="navbar-brand" href="/listGB" id="gb_a">목록</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="/insertGB">등록</a>
+	       <a class="navbar-brand" href="/insertGB" id="gb_a">등록</a>
 	      </li>
 	    </ul>
 	  </div>
@@ -373,6 +373,7 @@ function deleteComment(n) {
 	<br>
 	<br>
 	<br>
-	<jsp:include page="footer.jsp"></jsp:include>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

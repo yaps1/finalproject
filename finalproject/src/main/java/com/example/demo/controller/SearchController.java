@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.GBDAO;
 import com.example.demo.dao.GoodsDAO;
+import com.example.demo.dao.HotKeyWordDAO;
 import com.example.demo.dao.NoticeDAO;
 import com.example.demo.dao.SGDAO;
 import com.example.demo.vo.GBVO;
@@ -42,6 +44,8 @@ public class SearchController {
 	@Autowired
 	private NoticeDAO dao4;
 	
+	@Autowired
+	private HotKeyWordDAO dao5;
 	//중고거래 검색
 	@ResponseBody
 	@RequestMapping("/searchGoodsByMain")
@@ -219,28 +223,21 @@ public class SearchController {
 	@RequestMapping("/searchkeyword")
 	public String searchkeyword(String searchkeyword, HttpSession session) {
 		session.setAttribute("searchkeyword", searchkeyword);
+		/*
+		 * String keyword = searchkeyword; int re1= dao5.insertKeyword(keyword);
+		 * if(re1==1) { System.out.println("작동함"); }else if(re1!=1) {
+		 * System.out.println("작동하지않음"); }
+		 */
 		return "redirect:/search";
 	}
-
 	
-	/*
-	@RequestMapping("/test")
-	public void testSearch(HttpSession session,String searchkeyword) {
-		
-		 if(searchkeyword == null) {
-	        if(session.getAttribute("searchkeyword")!=null) {
-	        	searchkeyword = (String)session.getAttribute("searchkeyword");
-	        }
-	     }
-		 
-		 if(searchkeyword != null) {
-	        session.setAttribute("searchkeyword", searchkeyword);
-	     }
-	     //request.setAttribute("searchkeyword", searchkeyword);
-		
-		 //model.addAttribute("searchkeyword", searchkeyword);
-		 //ModelAndView mav = new ModelAndView();
-		 //mav.addObject("searchkeyword", searchkeyword);
-	}
-	*/
+	@ResponseBody
+    @RequestMapping(value="/insertKeyword",method = RequestMethod.POST)
+    public String insertKeyword(String searchkeyword) {
+        dao5.insertKeyword(searchkeyword);
+        return "ok";
+    }
+
+
+
 }

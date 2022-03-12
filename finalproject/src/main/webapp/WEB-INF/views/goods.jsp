@@ -80,53 +80,23 @@
 	}); 
 </script>
 <style type="text/css">
-	body{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
 		text-align: center;
 	}
-	a{
-	text-decoration: none; /* 링크의 밑줄 제거 */
-  	color: inherit; /* 링크의 색상 제거 */
-  	}
   	.p1{
   		display:inline;
   		white-space: nowrap;
   	}
-  	
-  	ul {
-	    text-align: center;
-	    display: inline-block;
-	    border: 1px solid #ccc;
-	    border-right: 0;
-	    padding-left: 0px;
-	}
 
-	ul li {
-	    text-align: center;
-	    float: left;
-	}
-	
-	ul li a {
-	    display: block;
-	    font-size: 14px;
-	    padding: 9px 12px;
-	    border-right: solid 1px #ccc;
-	    box-sizing: border-box;
-	}
-	
-	ul li.on {
-	    background: gray;
-	}
-	
-	ul li.on a {
-	    color: #fff;
-	}
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <hr>
+<div id="container">
 	<div class="accordion accordion-flush" id="accordionFlushExample" style="float: left;">
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="flush-headingOne">
@@ -291,6 +261,9 @@
 				    <p class="card-text">${g.goods_price }</p>
 				    <p class="card-text">${g.goods_addr }</p>
 				    <p class="card-text">♥ ${g.cnt }</p>
+				    <c:if test="${g.dd >0 }"><p class="card-text">${g.dd }일 전</p></c:if>
+				    <c:if test="${g.hh > 0 and g.hh<24 }"><p class="card-text">${g.hh }시간 전</p></c:if>
+				    <c:if test="${g.mm >= 0 and g.mm<60  }"><p class="card-text">${g.mm }분 전</p></c:if>			
 				  </div>
 				</div>
 		    </div>
@@ -303,17 +276,21 @@
 	</div>
 	<br>
 	<br>
-	<div style="clear:none;"> 
-		<ul style="list-style: none;">
-			<c:if test="${prev > 0 }"><li><a href="goods?pageNUM=${first-1 }" id='prev'>이전</a></li></c:if>
+	<div> 
+	<nav aria-label="Page navigation example">
+		<ul style="list-style: none;" class="pagination justify-content-center">
+			<c:if test="${prev > 0 }"><li class="page-item"><a href="goods?pageNUM=${first-1 }" id='prev' class="page-link">이전</a></li></c:if>
 			<c:forEach var="i" begin="${first }" end="${last }">
-				<c:if test="${i == pageNUM }"><li class='on'><a href="goods?pageNUM=${i }">${i }</a></li></c:if>
-				<c:if test="${i != pageNUM }"><li><a href="goods?pageNUM=${i }">${i }</a></li></c:if>
+				<c:if test="${i == pageNUM }"><li class="page-item active"><a href="goods?pageNUM=${i }" class="page-link">${i }</a></li></c:if>
+				<c:if test="${i != pageNUM }"><li class="page-item"><a href="goods?pageNUM=${i }" class="page-link">${i }</a></li></c:if>
 			</c:forEach>
-			<c:if test="${last < totalPage }"><li><a href="goods?pageNUM=${last+1 }" id='next'>다음</a></li></c:if>
+			<c:if test="${last < totalPage }"><li class="page-item"><a href="goods?pageNUM=${last+1 }" id='next' class="page-link">다음</a></li></c:if>
 		</ul>
+	</nav>
 	</div>
-
+</div>
+<br>
+<jsp:include page="footer.jsp"></jsp:include>
 
 	<div class="modal" tabindex="-1" id="myModal">
 	  <div class="modal-dialog">

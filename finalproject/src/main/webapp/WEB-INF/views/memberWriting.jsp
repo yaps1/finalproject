@@ -417,7 +417,6 @@ th,td{
 <body>
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div style="margin-top: 100px;line-height: 1.6; ">
-	
 	<h2 style="text-align : center;"><strong><a href="/mypage?member_no=${m.member_no }" class="link-dark" style="text-decoration-line : none;">마이페이지</a></strong></h2>
 	<br>
 	
@@ -596,6 +595,10 @@ th,td{
 	</div>
 	<br>
 	<br>
+<<<<<<< HEAD
+<jsp:include page="footer.jsp"></jsp:include>
+=======
 	<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> branch 'master' of https://github.com/yaps1/finalproject.git
 </body>
 </html>

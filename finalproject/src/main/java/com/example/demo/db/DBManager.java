@@ -14,6 +14,7 @@ import com.example.demo.vo.GoodsFavorVO;
 import com.example.demo.vo.GoodsPurchaseVO;
 import com.example.demo.vo.GoodsReviewVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotKeywordVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.MemberVO;
@@ -973,6 +974,15 @@ public class DBManager {
         List<ChatMessageVO> list = session.selectList("chat.listChatMessage",room_no);
         session.close();
         return list;
+	}
+	
+	
+	public static int insertKeyword(String keyword) {
+		 SqlSession session = factory.openSession();
+	        int re = session.insert("keyword.insertKeyword",keyword);
+	        session.commit();
+	        session.close();
+	        return re;
 	}
 
 }
