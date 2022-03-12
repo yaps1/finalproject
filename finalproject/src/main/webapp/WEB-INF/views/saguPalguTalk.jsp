@@ -114,6 +114,13 @@
 	});//function끝
 </script>
 <style type="text/css">
+li{
+	list-style: none;
+}
+
+ol{
+	list-style: none;
+}
 
 ul.tabs{
 	margin-left: 0px;
@@ -154,7 +161,7 @@ ul.tabs li.current{
 </head>
 <body>
 <jsp:include page="header2.jsp"></jsp:include>
-
+<input type="hidden" value="${m.member_no }">
 
 <!-- Modal -->
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="padding-top: 300px;">
@@ -198,7 +205,7 @@ ul.tabs li.current{
 		
 		<div id="tab-2" class="tab-content" style="width: 80%; margin: 0 auto; text-align: center; padding-top:40px;">
 			<div class="pt-3 pb-3" style="background: white; width: 70%; margin: 0 auto; border-radius: 15px;">
-			<a href="#" style="list-style: none; color: inherit; text-decoration: none;"><i class="bi bi-chat-dots-fill display-3">4989톡</i></a>
+			<a href="room" style="list-style: none; color: inherit; text-decoration: none;"><i class="bi bi-chat-dots-fill display-3">4989톡</i></a>
 		    </div>
 		    
 		</div>
