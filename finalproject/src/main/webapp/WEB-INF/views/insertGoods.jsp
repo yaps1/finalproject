@@ -109,7 +109,7 @@ function checkNumber(event) {
 	}
 </script>
 <style type="text/css">
-	body{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -132,7 +132,9 @@ function checkNumber(event) {
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <hr>
+<div id="container">
 	<div style="border: 1px solid;" class="d-grid gap-3">
 	<br>
 	<p class="fs-1 text-center fw-bold" style="text-align: center">중고거래 상품등록</p>
@@ -300,7 +302,9 @@ function checkNumber(event) {
 		</form>
 		</div>
 	</div>
-	
+</div>
+<br>
+<jsp:include page="footer.jsp"></jsp:include>
 	
 </body>
 </html>

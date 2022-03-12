@@ -26,6 +26,8 @@
 	<typeAlias type="com.example.demo.vo.ChatMessageVO" alias="chatMessageVO"/>
 	<typeAlias type="com.example.demo.vo.ChatRoomJoinVO" alias="chatRoomJoinVO"/>
 	<typeAlias type="com.example.demo.vo.ChatRoomVO" alias="chatRoomVO"/>
+	<typeAlias type="com.example.demo.vo.HotKeywordVO" alias="hotKeywordVO"/>
+	<typeAlias type="com.example.demo.vo.AlarmVO" alias="alarmVO"/>
 
 </typeAliases>
   <environments default="development">
@@ -50,6 +52,7 @@
     <mapper resource="com/example/demo/db/restMapper.xml"/>
     <mapper resource="com/example/demo/db/managerMapper.xml"/>
     <mapper resource="com/example/demo/db/chatMapper.xml"/>
+    <mapper resource="com/example/demo/db/alarmMapper.xml"/>
 
   </mappers>
 </configuration>

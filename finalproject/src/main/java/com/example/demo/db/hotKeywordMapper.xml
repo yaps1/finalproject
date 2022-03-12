@@ -9,5 +9,8 @@
 		select keyword ,count(*) count from hotkeyword group by keyword order by count desc))
 		where n between 1 and 10
   </select>
-
+  
+  <insert id="insertKeyword" parameterType="java.lang.String">
+  	insert into hotkeyword values(#{keyword},sysdate)
+  </insert>
 </mapper>

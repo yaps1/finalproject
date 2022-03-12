@@ -15,4 +15,7 @@ public class GoodsVO {
 	private int cnt;
 	private String member_nickname;
 	private double member_level;
+	private int dd;
+	private int hh;
+	private int mm;
 }

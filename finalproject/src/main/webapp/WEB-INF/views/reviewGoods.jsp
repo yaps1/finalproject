@@ -43,6 +43,7 @@
 			alert("리뷰내용을 남겨주세요",'warning');
 		}else{
 			insertR.submit();
+			window.close();
 		}
 	}
 </script>

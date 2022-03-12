@@ -13,7 +13,7 @@
 
 </script>
 <style type="text/css">
-	body{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -32,7 +32,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <hr>
+<div id="container">
 	<table border="2">
 	    <tr>
 	      <th>제목</th>
@@ -63,5 +65,7 @@
 	<c:if test="${n.notice_no > 1 }"><button type="button" class="btn btn-outline-secondary" onclick="location.href = 'detailNotice?notice_no=${n.notice_no-1 }' ">이전글</button></c:if>
 	<c:if test="${n.notice_no < max }"><button type="button" class="btn btn-outline-secondary" onclick="location.href = 'detailNotice?notice_no=${n.notice_no +1 }' ">다음글</button></c:if>
 	<button type="button" class="btn btn-outline-secondary" style="float: right"; onclick="location.href = 'listNotice' ">목록</button>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

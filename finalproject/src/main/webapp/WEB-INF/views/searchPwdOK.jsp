@@ -24,10 +24,10 @@
  			let code = document.getElementById("code").value;
  			
  			if(email_injeung==code){
- 				alert("같은 값입니다.");
+ 				alert("인증완료되었습니다.");
  				location.href='/updatePwd';
  			}else{
- 				alert("다른 값입니다.");		
+ 				alert("입력값이 틀렸습니다.");		
  			}
  		}
  		

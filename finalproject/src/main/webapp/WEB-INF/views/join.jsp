@@ -377,7 +377,7 @@
 	</div>
 <!-- 모달창 끝 -->
 
-<div style="padding:100px 300px; height: 1300px;">
+<div style="padding:100px 100px; height: 1300px;">
 	<div class="col-md-7 col-lg-8 border" style="margin: 0 auto; padding: 0 250px;">
 		<!-- 회원가입 제목 -->
 		<div class="pt-3 mt-5 mb-5" style="display: inline-block; width: 100%; padding-left: 90px;">
@@ -593,8 +593,9 @@
 		</div>	
 
            <!-- 회원가입 버튼 -->
-           <div class="pt-3 mb-5">
-        		 <button class="w-100 btn btn-primary btn-lg" id="btn" type="button" style="height: 60px;" >회원가입</button>
+           <div class="pt-3 mb-5" style="text-align: center;">
+        		 <button class="w-100 btn btn-primary btn-lg mb-1" id="btn" type="button" style="height: 60px;" >회원가입</button>
+          		 <a href="/login" class="fs-4">취소</a>
            </div>
           
           

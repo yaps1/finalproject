@@ -56,7 +56,7 @@ function getItem(){
 
 </script>
 <style type="text/css">
-	body{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -73,7 +73,9 @@ function getItem(){
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <hr>
+<div id="container">
 	<div id="liveAlertPlaceholder"></div>
 	<div style="width: 90%; margin: 0 auto;">
 	<p class="fs-1" style="text-align: center">문의사항 작성</p>
@@ -102,6 +104,8 @@ function getItem(){
 		</label>
 	</form>
 	</div>
-	
+	<br>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

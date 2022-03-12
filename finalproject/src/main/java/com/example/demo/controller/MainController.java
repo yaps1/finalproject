@@ -35,6 +35,7 @@ public class MainController {
 		session.removeAttribute("goods_category");
 		session.removeAttribute("orderColumn");
 		session.removeAttribute("addr");
+		session.removeAttribute("keywordGoods");
 		if(delete==1) {
 			mav = new ModelAndView("redirect:/goods");
 		}else if(delete ==2) {
@@ -42,7 +43,7 @@ public class MainController {
 		}else if(delete==3) {
 			mav = new ModelAndView("redirect:/listNotice");
 		}else if(delete==4) {
-			mav = new ModelAndView("redirect:/listQna");
+			mav = new ModelAndView("redirect:/insertQna");
 		}
 		return mav;
 	}

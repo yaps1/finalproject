@@ -151,6 +151,7 @@ public class GoodsController {
 		if(addr!=null) {
 			session.setAttribute("addr", addr);
 		}
+
 	}
 	
 	@RequestMapping("/detailGoods")

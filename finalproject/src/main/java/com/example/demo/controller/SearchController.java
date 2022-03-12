@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.GBDAO;
 import com.example.demo.dao.GoodsDAO;
+import com.example.demo.dao.HotKeyWordDAO;
 import com.example.demo.dao.NoticeDAO;
 import com.example.demo.dao.SGDAO;
 import com.example.demo.vo.GBCVO;
@@ -44,6 +45,8 @@ public class SearchController {
 	@Autowired
 	private NoticeDAO dao4;
 	
+	@Autowired
+	private HotKeyWordDAO dao5;
 	//중고거래 검색
 	@ResponseBody
 	@RequestMapping("/searchGoodsByMain")
@@ -221,7 +224,19 @@ public class SearchController {
 	@RequestMapping("/searchkeyword")
 	public String searchkeyword(String searchkeyword, HttpSession session) {
 		session.setAttribute("searchkeyword", searchkeyword);
+		/*
+		 * String keyword = searchkeyword; int re1= dao5.insertKeyword(keyword);
+		 * if(re1==1) { System.out.println("작동함"); }else if(re1!=1) {
+		 * System.out.println("작동하지않음"); }
+		 */
 		return "redirect:/search";
 	}
 	
+	@ResponseBody
+    @RequestMapping(value="/insertKeyword",method = RequestMethod.POST)
+    public String insertKeyword(String searchkeyword) {
+        dao5.insertKeyword(searchkeyword);
+        return "ok";
+    }
+
 }
