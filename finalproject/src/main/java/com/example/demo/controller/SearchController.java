@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import com.example.demo.dao.GBDAO;
 import com.example.demo.dao.GoodsDAO;
 import com.example.demo.dao.NoticeDAO;
 import com.example.demo.dao.SGDAO;
+import com.example.demo.vo.GBCVO;
 import com.example.demo.vo.GBVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.NoticeVO;
@@ -221,26 +223,5 @@ public class SearchController {
 		session.setAttribute("searchkeyword", searchkeyword);
 		return "redirect:/search";
 	}
-
 	
-	/*
-	@RequestMapping("/test")
-	public void testSearch(HttpSession session,String searchkeyword) {
-		
-		 if(searchkeyword == null) {
-	        if(session.getAttribute("searchkeyword")!=null) {
-	        	searchkeyword = (String)session.getAttribute("searchkeyword");
-	        }
-	     }
-		 
-		 if(searchkeyword != null) {
-	        session.setAttribute("searchkeyword", searchkeyword);
-	     }
-	     //request.setAttribute("searchkeyword", searchkeyword);
-		
-		 //model.addAttribute("searchkeyword", searchkeyword);
-		 //ModelAndView mav = new ModelAndView();
-		 //mav.addObject("searchkeyword", searchkeyword);
-	}
-	*/
 }
