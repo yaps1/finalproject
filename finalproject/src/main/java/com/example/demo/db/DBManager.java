@@ -19,6 +19,7 @@ import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.RestReviewVO;
 import com.example.demo.vo.RestVO;
+import com.example.demo.vo.AlarmVO;
 import com.example.demo.vo.ChatMessageVO;
 import com.example.demo.vo.ChatRoomVO;
 import com.example.demo.vo.GBCVO;
@@ -606,6 +607,32 @@ public class DBManager {
 		return list;
 	}
 	
+	//공동구매 알림 
+	public static List<AlarmVO> alarmGBJ(int member_no){
+		SqlSession session = factory.openSession();
+		List<AlarmVO> list = session.selectList("alarm.alarmGBJ", member_no);
+		session.close();
+		return list;
+	}
+	
+	//4989알림 공동구매 참여신청 수락
+	public static int updateGBJOk(int gbj_no) {
+		SqlSession session = factory.openSession();
+		int re = session.update("groupBuying.updateGBJOk", gbj_no);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	//4989알림 공동구매 참여신청 거절
+	public static int updateGBJNo(int gbj_no) {
+		SqlSession session = factory.openSession();
+		int re = session.update("groupBuying.updateGBJNo", gbj_no);
+		session.commit();
+		session.close();
+		return re;
+	}
+		
 	//윤서우
 	//공동구매 전체 레코드 수
 	public static int getTotalRecord(HashMap map) {

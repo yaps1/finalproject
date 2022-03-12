@@ -8,6 +8,40 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(function(){
+		
+		$("#btn-insert").click(function(){
+			let rest_name = $("#rest_name").val();
+			let rest_tel = $("#rest_tel").val();
+			let rest_addr = $("#rest_addr").val();
+			let rest_avg_score = $("#rest_avg_score").val();
+			//console.log(rest_name);
+			//console.log(rest_tel);
+			//console.log(rest_addr);
+			//console.log(rest_avg_score);
+			
+			$.ajax({
+				url:"insertRest",
+				type:"post",
+				data:{
+					rest_name:rest_name,
+					rest_tel:rest_tel,
+					rest_addr:rest_addr,
+					rest_avg_score:rest_avg_score
+				},
+				success:function(){
+					alert("맛집등록에 성공하였습니다!");
+					location.href="/rest";
+				}
+				
+			})
+		});
+	
+	
+	
+});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,7 +76,7 @@
 			<!-- 버튼 -->
 			<div class="mt-3" style="display: inline-block; width: 100%;">
 				<div style="float: left;">
-				<button class="mb-2 btn btn-lg rounded-4 btn-primary" style="width: 340px; height: 60px;" type="submit">등록</button>
+				<button id="btn-insert" class="mb-2 btn btn-lg rounded-4 btn-primary" style="width: 340px; height: 60px;" type="button">등록</button>
 				</div>
 				
 				<div style="float: right;">
