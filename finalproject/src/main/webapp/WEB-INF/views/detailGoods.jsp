@@ -78,7 +78,7 @@ function chat() {
     	 $("#myModal").modal('show');
 
     }else{
-		
+		location.href="room";
     }
 }
 $('#my-modal').modal({

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="alarm">
+
+ <!-- 공동구매 참여 알람 test-->
+  <select id="alarmGBJ" resultType="alarmVO">
+  	select gb.gb_no gb_no, gb.gb_title gb_title, m.member_nickname member_nickname, gbj.gbj_no gbj_no
+	from group_buying_join gbj, group_buying gb, member m
+	where gbj.gb_no = gb.gb_no and 
+	m.member_no = gbj.member_no and
+	gb.member_no=#{gb.member_no} and
+	gbj.is_view=0
+  </select>
+</mapper>

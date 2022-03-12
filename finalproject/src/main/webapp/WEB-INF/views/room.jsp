@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -11,57 +13,48 @@
 	margin:0;
 	padding:0;
 }
+/*
 .container{
-	width: 500px;
+	width: 800px;
 	margin: 0 auto;
 	padding: 25px
 }
+*/
 .container h1{
 	text-align: left;
 	padding: 5px 5px 5px 15px;
-	color: #FFBB00;
-	border-left: 3px solid #FFBB00;
+	color: #787b7b;
+	border-left: 3px solid #787b7b;
 	margin-bottom: 20px;
 }
+/*
 .roomContainer{
 	background-color: #F6F6F6;
 	width: 500px;
 	height: 500px;
 	overflow: auto;
 }
+*/
 .roomList{
 	border: none;
 }
 .roomList th{
-	border: 1px solid #FFBB00;
+	border: 1px solid #787b7b;
 	background-color: #fff;
-	color: #FFBB00;
+	color: #787b7b;
 }
 .roomList td{
-	border: 1px solid #FFBB00;
+	border: 1px solid #787b7b;
 	background-color: #fff;
-	text-align: left;
-	color: #FFBB00;
+	text-align: center;
+	color: #787b7b;
 }
 .roomList .num{
-	width: 75px;
 	text-align: center;
-}
-.roomList .room{
-	width: 350px;
 }
 .roomList .go{
-	width: 71px;
+	
 	text-align: center;
-}
-button{
-	background-color: #FFBB00;
-	font-size: 14px;
-	color: #000;
-	border: 1px solid #000;
-	border-radius: 5px;
-	padding: 3px;
-	margin: 3px;
 }
 .inputTable th{
 	padding: 5px;
@@ -116,7 +109,7 @@ button{
 				tag += "<tr>"+
 							"<td class='num'>"+(idx+1)+"</td>"+
 							"<td class='room'>"+ room_name +"</td>"+
-							"<td class='go'><button type='button' onclick='goRoom(\""+room_no+"\", \""+room_name+"\")'>참여</button></td>" +
+							"<td class='go'><button type='button' onclick='goRoom(\""+room_no+"\", \""+room_name+"\")' class='btn btn-outline-secondary'>참여</button></td>" +
 						"</tr>";	
 			});
 			$("#roomList").empty().append(tag);
@@ -140,21 +133,23 @@ button{
 	}
 </script>
 <body>
+	<jsp:include page="header2.jsp"></jsp:include>
 	<input type="hidden" name="member_no" id="member_no" value="${m.member_no }">
-	<div class="container">
-		<h1>4989 채팅 - ${m.member_nickname }님의 채팅방</h1>
-		<div id="roomContainer" class="roomContainer">
-			<table id="roomList" class="roomList"></table>
+	<div class="container" style="width: 800px;margin: 0 auto;padding: 25px">
+		<h1><strong>${m.member_nickname }</strong>님의 채팅방</h1>
+		<div id="roomContainer" class="roomContainer" style="background-color: #F6F6F6;width: 500px;height: 500px;overflow: auto;">
+			<table id="roomList" class="roomList" style="text-align: center;width: 100%;"></table>
 		</div>
 		<div>
 			<table class="inputTable">
 				<tr>
-					<th>방 이름</th>
-					<th><input type="text" name="roomName" id="roomName"></th>
-					<th><button id="createRoom">방 만들기</button></th>
+					<th>채팅창</th>
+					<th><input type="text" name="roomName" id="roomName" style="height:30px;"></th>
+					<th><button id="createRoom" class="btn btn-outline-secondary">만들기</button></th>
 				</tr>
 			</table>
 		</div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

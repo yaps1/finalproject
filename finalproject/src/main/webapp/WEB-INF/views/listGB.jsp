@@ -29,8 +29,9 @@ $(function () {
 </script>
 </head>
 <body>
-<jsp:include page="header2.jsp"></jsp:include>
-<hr>
+	<jsp:include page="header2.jsp"></jsp:include>
+	<br>
+	<br>
 	<h2 style="text-align : center;"><strong>공동구매</strong></h2>
 	<br>
 	
@@ -65,7 +66,7 @@ $(function () {
 			<form action="listGB" method="post" class="d-flex align-items-center">	
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		        <input type="hidden" name="searchColumn" value="gb_title">
-		        <input  class="form-control me-2" type="search" placeholder="제목" aria-label="Search" name="keyword">
+		        <input class="form-control me-2" type="search" placeholder="제목" aria-label="Search" name="keyword">
 		        <input type="submit" value="검색" class="btn btn-outline-secondary">
 		    </form>
 	    	</div>
@@ -90,9 +91,9 @@ $(function () {
     <br>
     <br>
     <div style="margin-left: auto; margin-right: auto; width: 60%">
-	    <table class="table table-dark table-hover" >
+	    <table class="table table-dark table-hover" name="list">
 	    	<thead>
-		        <tr>
+		        <tr style="text-align: center;text-valign: middle;">
 		            <th scope="col">번호</th>
 		            <th scope="col">진행상태</th>
 		            <th scope="col">분류</th>
@@ -137,7 +138,8 @@ $(function () {
 	    <c:if test="${lastPage < totalPage }"><li class="page-item"><a class="page-link" href="listGB?pageNum=${lastPage+1}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></c:if>
 	  </ul>
 	</nav>
-	
+    <br>
+    <br>
     <br>
     <br>
 <jsp:include page="footer.jsp"></jsp:include>

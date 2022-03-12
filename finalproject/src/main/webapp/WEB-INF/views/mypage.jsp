@@ -76,16 +76,20 @@ $(function() {
 	
 	//회원 탈퇴 버튼
 	$("#deleteMember").click(function(){
-  		$.ajax({
-  			url:"/deleteMember",
-  			data:$("#f").serializeArray(),
-  			success:function(r){
-  				alert("회원 탈퇴 완료");
-  				$("#memberModal").hide();
-  				$('.modal-backdrop').hide();
-  				location.replace("/header1.jsp");
-  			}
-  		});
+		if (confirm("정말 탈퇴하시겠습니까? (모든 정보가 삭제됩니다)") == true){  
+			$.ajax({
+	  			url:"/deleteMember",
+	  			data:$("#f").serializeArray(),
+	  			success:function(r){
+	  				//alert("회원 탈퇴 완료");
+	  				$("#memberModal").hide();
+	  				$('.modal-backdrop').hide();
+	  				location.replace("/main");
+	  			}
+	  		});
+		 }else{   
+		     return false;
+		 }
   	});
 	
 	//취소 버튼
@@ -307,10 +311,11 @@ $(function() {
         
         <form id="f"> 
         <input type="hidden" name="member_no" id="member_no" value="${m.member_no}">
+        <h5>회원정보 수정을 위해서는 지역인증이 반드시 필요합니다</h5>
         <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 		    <div class="col-sm-10">
-		      <input type="email" class="form-control" id="inputEmail3"  value="${m.member_id }" readonly="readonly" >
+		      <input type="email" class="form-control" id="inputEmail3"  value="${m.member_id }" readonly="readonly" style="width: 400px;">
 		    </div>
 		</div>
 
@@ -324,14 +329,14 @@ $(function() {
 		<div class="row mb-3">
 		    <label for="member_name" class="col-sm-2 col-form-label">이름</label>
 		    <div class="col-sm-10">
-		      <input type="text"  value="${m.member_name }" id="member_name" readonly="readonly" class="form-control">
+		      <input type="text"  value="${m.member_name }" id="member_name" readonly="readonly" class="form-control" style="width: 400px;">
 		    </div>
 		</div>
 		
 		<div class="row mb-3">
 		   	<label for="member_nickname" class="col-sm-2 col-form-label">닉네임</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="member_nickname" id="member_nickname" value="${m.member_nickname }" class="form-control">
+		      <input type="text" name="member_nickname" id="member_nickname" value="${m.member_nickname }" class="form-control"  style="width: 400px;">
 		    </div>
 		    <span class="nickname1">사용 가능한 닉네임입니다.</span>
 			<span class="nickname2">해당 닉네임이 이미 존재합니다.</span>
@@ -340,7 +345,7 @@ $(function() {
 		<div class="row mb-3">
 		    <label for="member_gender" class="col-sm-2 col-form-label">성별</label>
 		    <div class="col-sm-10">
-		      <input type="text" value="${m.member_gender }" id="member_gender" class="form-control" readonly="readonly">
+		      <input type="text" value="${m.member_gender }" id="member_gender" class="form-control" readonly="readonly" style="width: 400px;">
 		    </div>
 		</div>
 		
@@ -349,19 +354,18 @@ $(function() {
 		    <div style="display: inline-block; " class="col-sm-10">
 				<div>
 				<div class="col-md mx-0" style="float: left; width: 70px;">
-				<input type="text" class="form-control" value="${tel1 }" name="member_tel1" id="member_tel1" maxlength="3" style="height: 45px;" placeholder="010">
+					<input type="text" class="form-control" value="${tel1 }" name="member_tel1" id="member_tel1" maxlength="3" placeholder="010">
 				</div>
-				<div class="col-md mx-2" style="float: left; width: 110px;">
-				<input type="text" class="form-control" value="${tel2 }" name="member_tel2" id="member_tel2" maxlength="4" style="height: 45px;" placeholder="중간번호"> 
+				<div class="col-md mx-2" style="float: left; width: 90px;">
+					<input type="text" class="form-control" value="${tel2 }" name="member_tel2" id="member_tel2" maxlength="4" placeholder="중간번호"> 
 				</div>
-				<div class="col-md mx-0" style="float: left; width: 110px;">
-				<input type="text" class="form-control" value="${tel3 }" name="member_tel3" id="member_tel3" maxlength="4" style="height: 45px;" placeholder="뒷번호">
+				<div class="col-md mx-0" style="float: left; width: 90px;">
+					<input type="text" class="form-control" value="${tel3 }" name="member_tel3" id="member_tel3" maxlength="4" placeholder="뒷번호">
 				</div>
-				
 				<div style="display: inline-block; float: right; padding-right: 15px;">
-           			<button type="button" id="tel_check_btn" class="btn btn-secondary btn-sm" style="height:45px; width: 90px;margin-left: -280px">휴대폰인증</button> 
+           			<button type="button" id="tel_check_btn" class="btn btn-secondary btn-sm" style="height:40px; width: 90px;margin-left: -295px">휴대폰인증</button> 
              	</div>
-             	<div class=" p-0 m-0" id="telCheck" style="display:inline-block;">
+             	<div class="p-0 m-0" id="telCheck" style="display:inline-block;">
              		<span>(연락처를 입력한 후 휴대폰인증을 진행해주세요)</span>
              	</div>
              	</div>
@@ -385,64 +389,50 @@ $(function() {
 		<div class="row mb-3">
 		    <label for="member_birth" class="col-sm-2 col-form-label">생년월일</label>
 		    <div class="col-sm-10">
-		      <input type="text" id="member_birth" value="${m.member_birth }" readonly="readonly" class="form-control">
+		      <input type="text" id="member_birth" value="${m.member_birth }" readonly="readonly" class="form-control" style="width: 400px;">
 		    </div>
 		</div>
 		<!-- 
-		<div class="row mb-3">
-		    <label for="member_addr" class="col-sm-2 col-form-label">주소</label>
-		    <div class="col-sm-10">
-		      <input type="text" name="member_addr" id="member_addr" value="${m.member_addr }" class="form-control">
-		    </div>
-		</div>
 		
-		<div class="row mb-3">
-		    <label for="member_loc" class="col-sm-2 col-form-label">지역인증</label>
-		    <div class="col-sm-10">
-		      <input type="text" name="member_loc" id="member_loc" value="${m.member_loc }">
-		    </div>
-		</div>
-		 -->
 		<!-- 주소 input -->
-              
         <div class="row mb-3">
             <label for="member_addr" class="col-sm-2 col-form-label">주소</label>
-        </div>
-            <div>
-	             <!-- 시/도 선택 -->
-	             <select class="member_addr1 form-control col-sm-10" name="member_addr1" id="member_addr1" style="width:115px; height: 45px;"></select>
+            <div style="display: inline-block; " class="col-sm-10">
+            	<div class="col-sm-10">
+			      <input type="text"  value="${m.member_addr }" id="member_addr" readonly="readonly" class="form-control" style="margin-bottom: 10px;width: 400px;">
+			    </div>
+	            <div class="col-md mx-0" style="float: left; width: 100px;">
+		        <!-- 시/도 선택 -->
+	            	<select class="member_addr1 form-control" name="member_addr1" id="member_addr1" style="height: 45px;"></select>
 	            </div>
-	           <div class="col-sm-10">
-	             <!-- 나머지 주소 -->
-	             <input type="text" class="form-control col-sm-10" name="member_addr2" id="member_addr2" placeholder="나머지 주소" style="width: 300px; height: 45px;">	
-           		</div>
-           		 <div style="display: block;">
-           		 	<span class="mx-3">**주소 입력후 지역인증을 해주세요.**</span>
-	             </div>
-           	  
+	            <div class="col-md mx-0" style="float: left; width: 290px;">
+	            <!-- 나머지 주소 -->
+	            	<input type="text" class="form-control" name="member_addr2" id="member_addr2" placeholder="나머지 주소" style=" height: 45px;margin-left: 10px;">	
+	          	</div>
+          		<div style="display: inline-block;">
+          			<span>(주소를 입력한 후 지역인증을 해주세요)</span>
+            	</div>
+            </div>
+        </div>  	  
             
-            
-            <!--지역인증 -->
-			  <div class="col-sm-10">
-              	<div class="col-sm-10">
-              	 	<label for="check_loc" class="form-label">지역인증</label>
-               	</div>
-                <div class="col-sm-10" style="display: inline-block; float: left;">
-              	 	<button type="button" id="check_btn" class=" btn btn-secondary btn-sm" style=" float: left;">지역인증</button> 
-                </div>
-	        	<!-- 지역인증 결과 div -->
-              	<div class="col-sm-10" id="check_addr_box" style="display: none;">
-	                <!-- 지역인증 input -->
-	              	<div >
-              			<input type="text" class="form-control" name="member_loc" id="member_loc" placeholder="지역인증 주소" style="width: 430px; height: 45px;">
-          			</div>
-				    <!-- 지역인증 결과 div -->
-		            <div class="col-sm-10" >
-		              	<span class="check_Addr" id="check_Addr" style="color: green; display: none;"><i class="bi bi-check-all" style="padding-right: 5px;"></i>지역인증 완료!</span>
-		            </div>
+		<!--지역인증 -->
+	    <div class="row mb-3">
+            <label for="check_loc" class="col-sm-2 form-label">지역인증</label>
+            <div class="col-sm-10" style="display: inline-block;">
+            	<button type="button" id="check_btn" class="btn btn-secondary btn-sm" style="float: left;height: 40px;margin-right: 20px;">지역인증</button> 
+	       		<!-- 지역인증 결과 div -->
+	            <div class="col-sm-10" id="check_addr_box" style="display: none;">
+	            <!-- 지역인증 input -->
+	            <div class="col-md mx-0">
+	            	<input type="text" class="form-control" name="member_loc" id="member_loc" placeholder="지역인증 주소" style="width: 250px;">
+	        	</div>
+			    <!-- 지역인증 결과 div -->
+	            <div class="col-md mx-0">
+	              	<span class="check_Addr" id="check_Addr" style="color: green;display: none;"><i class="bi bi-check-all" style="padding-right: 5px;"></i>지역인증 완료</span>
+	            </div>
 				</div>
-				</div>
-      		<!-- 지역인증 div 끝 -->
+			</div>
+		</div>
         </form>
         </div>
         
@@ -482,10 +472,10 @@ $(function() {
 			</div>
 		</div>
 	</div>
-
 	<br>
 	<br>
 	<br>
 	<br>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

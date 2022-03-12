@@ -43,10 +43,15 @@
 	
 </script>
 <style type="text/css">
-	#header_ul{
+	#top_header_ul{
+		/*display:inline-block;
+		background:red;*/
 		list-style: none;
 		margin: 0;
+		width: 300px;
+	
 	}
+	/*
 	.header_li{
 		display: inline-block;
 		margin-right: 20px;
@@ -55,6 +60,17 @@
 		text-decoration: none;
 		outline: none;
 		color: inherit;
+	}*/
+	.top_header_a{
+		text-decoration: none;
+		outline: none;
+		color: inherit;
+		float: left;
+	}
+	#top_header_li{
+		/*display: inline-block;*/
+		margin-right: 10px;
+		float: left;
 	}
 </style>
 </head>
@@ -66,17 +82,17 @@
 <!-- top-header session유무에 따라 달라지는 메뉴-->
  <div class="p-1 bg-secondary bg-gradient text-end text-white d-flex justify-content-end">
          <c:if test="${not empty m}">
-			<ul style="display: inline-block;" id="header_ul">
+			<ul style="display: inline-block;" id="top_header_ul">
 		
-			<li class="text-end text-white" id="top-header header_li" style="float: left;"><a href="mypage?member_no=${m.member_no }" class="header_a">마이페이지</a><li>
-			<li class="text-end text-white" id="top-header header_li" style="float: left;"><a href="#" class="header_a">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
-			<li class="text-end text-white" id="top-header header_li" style="float: right;"><a href="logout" class="header_a">로그아웃</a><li> 	
-	         </ul>
+			<li class="text-end text-white" id="top_header_li"><a href="mypage?member_no=${m.member_no }" class="top_header_a">마이페이지</a><li>
+			<li class="text-end text-white" id="top_header_li"><a href="#" class="top_header_a">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
+			<li class="text-end text-white" id="top_header_li"><a href="logout" class="top_header_a">로그아웃</a><li> 	
+	        </ul>
 		 </c:if>
 		
          <c:if test="${empty m}">
-          <ul id="header_ul">
-         	<li class="text-end text-white" id="top-header header_li"><a href="/jointype" class="header_a">로그인/회원가입</a><li>
+          <ul style="display: inline-block;" id="top_header_ul">
+         	<li class="text-end text-white" id="top-header_li"><a href="/jointype" class="header_a">로그인/회원가입</a><li>
          </ul>
          </c:if>
         

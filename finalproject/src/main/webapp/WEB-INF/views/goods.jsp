@@ -262,7 +262,7 @@
 				    <p class="card-text">${g.goods_addr }</p>
 				    <p class="card-text">♥ ${g.cnt }</p>
 				    <c:if test="${g.dd >0 }"><p class="card-text">${g.dd }일 전</p></c:if>
-				    <c:if test="${g.hh >0 and g.hh<24 }"><p class="card-text">${g.hh }시간 전</p></c:if>
+				    <c:if test="${g.hh > 0 and g.hh<24 }"><p class="card-text">${g.hh }시간 전</p></c:if>
 				    <c:if test="${g.mm >= 0 and g.mm<60  }"><p class="card-text">${g.mm }분 전</p></c:if>			
 				  </div>
 				</div>

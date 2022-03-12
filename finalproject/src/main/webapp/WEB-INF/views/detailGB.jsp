@@ -15,11 +15,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
-.container {
-	background-color : #EAEAEA;
-	width: 60%;
-	border-radius: 5px; 5px;
-}
 .top{
 	background-color : white;
 	width:800px;
@@ -220,8 +215,7 @@ function deleteComment(n) {
 </script>
 </head>
 <body>
-<jsp:include page="header2.jsp"></jsp:include>
-<hr>
+	<jsp:include page="header2.jsp"></jsp:include>
 	<input type="hidden" value="${m.member_no }" id="member_no">
 	<input type="hidden" value="${g.member_no }" id="member_no_writer">
 	<br>
@@ -244,7 +238,7 @@ function deleteComment(n) {
 	</nav>
 	<br>
 	<br>
-	<div class="container">
+	<div class="container" style="background-color: #EAEAEA;width: 60%;border-radius: 5px; 5px;">
 	<br>
 	<!-- 상단 바 -->
 	<div class="top">
@@ -379,6 +373,7 @@ function deleteComment(n) {
 	<br>
 	<br>
 	<br>
+
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

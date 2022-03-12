@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,10 +41,7 @@ public class ChatController {
 		return mv;
 	}
 	
-	/**
-	 * 방 페이지
-	 * @return
-	 */
+	//채팅방 목록
 	@RequestMapping("/room")
 	public ModelAndView room() {
 		ModelAndView mv = new ModelAndView();
@@ -51,11 +49,7 @@ public class ChatController {
 		return mv;
 	}
 	
-	/**
-	 * 방 생성하기
-	 * @param params
-	 * @return
-	 */
+	//채팅방 생성
 	@RequestMapping("/createRoom")
 	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
 		String roomName = (String) params.get("roomName");
@@ -68,18 +62,7 @@ public class ChatController {
 		return roomList;
 	}
 	
-	/**
-	 * 방 정보가져오기
-	 * @param params
-	 * @return
-	 */
-	/*
-	@RequestMapping("/getRoom")
-	public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
-		return roomList;
-	}
-	*/
-	
+	//채팅방 정보
 	@RequestMapping("/getRoom")
 	public @ResponseBody List<ChatRoomVO> getRoom(@RequestParam HashMap<Object, Object> params,int member_no){
 		//System.out.println(dao.listChatRoomByMember(member_no));
@@ -87,10 +70,7 @@ public class ChatController {
 	}
 	
 	
-	/**
-	 * 채팅방
-	 * @return
-	 */
+	//채팅방 이동
 	@RequestMapping("/moveChating")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params,int member_no) {
 		ModelAndView mv = new ModelAndView();
@@ -121,7 +101,7 @@ public class ChatController {
 	@RequestMapping(value="/insertChatImage",method = RequestMethod.POST)
     public String insertChatImage(ChatMessageVO c) {
 		String chat_image = SocketHandler.fileName;
-		System.out.println(chat_image);
+		//System.out.println(chat_image);
         c.setChat_image(chat_image);
         dao.insertChatImage(c);
         return "ok";
