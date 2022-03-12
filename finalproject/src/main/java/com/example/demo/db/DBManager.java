@@ -442,7 +442,7 @@ public class DBManager {
 		return re;
 	}
 		
-	//소모임 댓글 등록 ㅠ
+	//소모임 댓글 등록
 	public static int insertSGC(SGCVO sc) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("smallGroup.insertSGC", sc);

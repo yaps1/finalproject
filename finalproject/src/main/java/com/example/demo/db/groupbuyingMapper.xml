@@ -117,4 +117,14 @@
   	delete group_buying_comment where gb_comment_no=#{gb_comment_no}
   </delete>
   
+   <!-- 4989알림에서 공동구매 참여를 수락한 경우 -->
+  <update id="updateGBJOk">
+  	update group_buying_join set gbj_accept=1,is_view=1 where gbj_no=#{gbj_no}
+  </update>
+  
+  <!-- 4989알림에서 공동구매 참여를 거절한 경우 -->
+   <update id="updateGBJNo">
+  	update group_buying_join set is_view=1 where gbj_no=#{gbj_no}
+  </update>
+  
 </mapper>
