@@ -29,7 +29,7 @@ public class SocketHandler extends TextWebSocketHandler {
 
 	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 담아둘 맵
 	List<HashMap<String, Object>> rls = new ArrayList<>();
-	private static final String FILE_UPLOAD_PATH = "C:/test/";
+	private static final String FILE_UPLOAD_PATH = "C:/test/websocket/";
 	static int fileUploadIdx = 0;
 	static String fileUploadSession = "";
 	
