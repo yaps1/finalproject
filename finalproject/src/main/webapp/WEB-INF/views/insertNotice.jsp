@@ -13,7 +13,7 @@
 
 </script>
 <style type="text/css">
-	body{
+	.container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -39,7 +39,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <hr>
+<div id="container">
 <p class="fs-1" style="text-align: center">공지사항 작성</p>
 	<form action="insertNotice" method="post"
 					enctype="multipart/form-data">					
@@ -68,5 +70,7 @@
 	<button type="submit" class="btn btn-outline-secondary" id="btns">등록</button>
 	<button type="reset" class="btn btn-outline-secondary" id="btnr">취소</button>
 	</form>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

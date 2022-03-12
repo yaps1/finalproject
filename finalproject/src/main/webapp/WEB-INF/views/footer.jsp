@@ -9,11 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style type="text/css">
 	
-	ul{
+	.footer_ul{
 		list-style: none;
 		margin: 0;
 	}
-	li{
+	.footer_li{
 		display: inline-block;
 		margin-right: 20px;
 	}
@@ -31,12 +31,12 @@
 <body>
 <div class="border-top" style="height: 135px;">
   <footer class="bg-light py-1 ">
-    <ul class="bg-light nav justify-content-center border-bottom pb-1 mb-3">
-      <li class="nav-item"><a href="loginOK" class="nav-link px-2 text-muted">메인</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">이용약관</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">서비스약관</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">개인정보 취급방침</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    <ul class="bg-light nav justify-content-center border-bottom pb-1 mb-3 footer_ul">
+      <li class="nav-item footer_li"><a href="loginOK" class="nav-link px-2 text-muted">메인</a></li>
+      <li class="nav-item footer_li"><a href="#" class="nav-link px-2 text-muted footer_a">이용약관</a></li>
+      <li class="nav-item footer_li"><a href="#" class="nav-link px-2 text-muted footer_a">서비스약관</a></li>
+      <li class="nav-item footer_li"><a href="#" class="nav-link px-2 text-muted footer_a">개인정보 취급방침</a></li>
+      <li class="nav-item footer_li"><a href="#" class="nav-link px-2 text-muted footer_a">About</a></li>
     </ul>
     <p class="text-center text-muted">© 2022. 4989 Company All right reserved. <br>Designed by TeamB3</p>
   </footer>

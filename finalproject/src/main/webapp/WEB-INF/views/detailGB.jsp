@@ -57,7 +57,7 @@ img{
 	padding:10px;
 	text-align: center;
 }
-a{
+#gb_a{
 	text-decoration-line : none;
 }
 table{
@@ -220,6 +220,8 @@ function deleteComment(n) {
 </script>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
+<hr>
 	<input type="hidden" value="${m.member_no }" id="member_no">
 	<input type="hidden" value="${g.member_no }" id="member_no_writer">
 	<br>
@@ -232,10 +234,10 @@ function deleteComment(n) {
 	   
 	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="/listGB">목록</a>
+	       <a class="navbar-brand" href="/listGB" id="gb_a">목록</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="/insertGB">등록</a>
+	       <a class="navbar-brand" href="/insertGB" id="gb_a">등록</a>
 	      </li>
 	    </ul>
 	  </div>
@@ -377,5 +379,6 @@ function deleteComment(n) {
 	<br>
 	<br>
 	<br>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

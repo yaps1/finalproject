@@ -90,8 +90,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<br>
-	<br>
+<jsp:include page="header2.jsp"></jsp:include>
+<hr>
 	<h2 style="text-align : center;"><strong>공동구매 등록</strong></h2>
 	<br>
 	<!-- 네비게이션바 -->
@@ -175,7 +175,6 @@ $(function(){
 	</div>
 	<br>
 	<br>
-	<br>
-	<br>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

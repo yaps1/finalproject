@@ -28,7 +28,7 @@
 	}
 </script>
 <style type="text/css">
-	body{
+	#container{
 
   		justify-content: center;
 		width: 80%;
@@ -78,7 +78,9 @@
 </style>
 </head>
 <body>
+
 	<hr>
+	<div id="container">
 	<p class="fs-1">문의사항 관리</p>
 	<nav>
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -213,6 +215,7 @@
 		</ul>
 	  </div>
 	</div>
-
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

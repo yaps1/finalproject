@@ -71,11 +71,24 @@ function condition(e){
 
 }
 
+function chat() {
+	var uid = <%=(Integer)session.getAttribute("member_no")%>;
+	//console.log(uid);
+    if(uid==null){ 
+    	 $("#myModal").modal('show');
+
+    }else{
+		
+    }
+}
+$('#my-modal').modal({
+    show: 'false'
+}); 
 
 
 </script>
 <style type="text/css">
-	body{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -89,6 +102,8 @@ function condition(e){
 </style>
 </head>
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
+<div id="container">
 	<hr>
 
 	<div id="carouselExampleIndicators" class="carousel slide w-75 mx-auto bg-secondary" data-bs-ride="carousel">
@@ -151,7 +166,7 @@ function condition(e){
 		<c:if test="${gd.goods_condition == 2 }"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">예약중</button></c:if>
 		<c:if test="${gd.goods_condition == 3 }"><button type="button" class="btn btn-primary" >판매완료</button></c:if>
 		</c:if>
-		<button type="button" class="btn btn-success">채팅하기</button>
+		<button type="button" class="btn btn-success" onclick="chat()">채팅하기</button>
 		<button type="button" class="btn btn-danger" id="check_module">결제하기</button>
 	</label>
 	</c:if>
@@ -220,5 +235,27 @@ function condition(e){
 	</div>
 	<br>
 	<br>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
+
+	<div class="modal" tabindex="-1" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">로그인 알림</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p>로그인이 필요한 항목입니다.</p>
+	        <p>로그인하시겠습니까?.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='login'">로그인</button>
+	      </div>
+	    </div>
+	  </div>
+	 </div>
+
 </body>
 </html>

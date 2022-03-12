@@ -14,19 +14,19 @@ $(function(){
 	var keyword = new Array();
 	
 	var docWidth = $( 'div#hot' ).innerWidth()+150; // 문서 가로값
-	var docHeight = $( 'div#hot' ).innerHeight()+50; // 문서 세로값
+	var docHeight = $( 'div#hot' ).innerHeight()+300; // 문서 세로값
 
 
 	// 설정값
 
 	var maxRox = 0; // random offset x 최대값
 
-	var maxRoh = 0; // random offset y 최대값
+	var maxRoh = 300; // random offset y 최대값
 
 	
 	var minRox = 300; // random offset x 최소값
 
-	var minRoh = 80; // random offset y 최소값
+	var minRoh = 450; // random offset y 최소값
 
 
 	var imgWidth = 200; // 이미지 가로 크기
@@ -110,8 +110,8 @@ $(function(){
 
 </style>
 </head>
-<!--<jsp:include page="header2.jsp"></jsp:include>-->
 <body>
+<jsp:include page="header2.jsp"></jsp:include>
 <!-- body 대신 div-->
 <div style="margin: 0 auto;	justify-content: center; width: 80%;">
 	<hr>
@@ -130,7 +130,7 @@ $(function(){
 	      <div class="card-body" >
 	        <h2 class="card-title" style="line-height :1.8em; padding: 40px;">중고거래</h2>
 	        <p class="card-text" style="line-height :1.8em; padding: 40px;">버리기에는 쓸만하고 나에게는 필요없는 물건들을 거래하고 싶다면 동네주민과 직거래 혹은 원거리 택배로 중고거래를 해보세요!</p>
-	        <a href="#" class="btn btn-info" style="margin-left: 40px;">중고거래 바로가기</a>
+	        <a href="session?delete=1"" class="btn btn-info" style="margin-left: 40px;">중고거래 바로가기</a>
 	      </div>
 	    </div>
 	  </div>
@@ -145,7 +145,7 @@ $(function(){
 	      <div class="card-body" >
 	        <h2 class="card-title" style="line-height :1.8em; padding: 40px;">공동구매</h2>
 	        <p class="card-text" style="line-height :1.8em; padding: 40px;">구입하고싶은 식자재가 대용량이거나 ott플랫폼 가입비가 부담스럽다면 4989를 통해 공동구매를 해보세요!</p>
-	        <a href="listGB" class="btn btn-info" style="margin-left: 40px;">공동구매 바로가기</a>
+	        <a href="session?delete=2" class="btn btn-info" style="margin-left: 40px;">공동구매 바로가기</a>
 	      </div>
 	    </div>
 	  </div>

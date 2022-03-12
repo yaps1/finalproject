@@ -415,8 +415,8 @@ th,td{
 </script>
 </head>
 <body>
-	<br>
-	<br>
+<jsp:include page="header2.jsp"></jsp:include>
+<hr>
 	<h2 style="text-align : center;"><strong><a href="/mypage?member_no=${m.member_no }" class="link-dark" style="text-decoration-line : none;">마이페이지</a></strong></h2>
 	<br>
 	
@@ -594,5 +594,6 @@ th,td{
 	</div>
 	<br>
 	<br>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

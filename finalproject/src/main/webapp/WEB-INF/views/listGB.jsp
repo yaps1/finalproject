@@ -29,8 +29,8 @@ $(function () {
 </script>
 </head>
 <body>
-	<br>
-	<br>
+<jsp:include page="header2.jsp"></jsp:include>
+<hr>
 	<h2 style="text-align : center;"><strong>공동구매</strong></h2>
 	<br>
 	
@@ -140,7 +140,6 @@ $(function () {
 	
     <br>
     <br>
-    <br>
-    <br>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

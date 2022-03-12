@@ -234,4 +234,5 @@ public class SearchController {
 		 //ModelAndView mav = new ModelAndView();
 		 //mav.addObject("searchkeyword", searchkeyword);
 	}
+	
 }

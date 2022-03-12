@@ -35,10 +35,10 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="sticky-footer.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
   </head>
   <body class="d-flex flex-column h-100">
-    
+ <jsp:include page="header2.jsp"></jsp:include>   
 <!-- Begin page content -->
 <main class="flex-shrink-0">
   <div class="container">
@@ -47,6 +47,6 @@
     <p><a href="main">메인</a>으로 이동해주세요</p>
   </div>
 </main>
-
+<jsp:include page="footer.jsp"></jsp:include>
   </body>
 </html>

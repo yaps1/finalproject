@@ -25,13 +25,6 @@ function update(){
 		width: 80%;
 
 	}
-	a{
-	text-decoration: none; /* 링크의 밑줄 제거 */
-  	color: inherit; /* 링크의 색상 제거 */
-  	}
-  	p{
-  		text-align: center;
-  	}
   	.container{
   		border: 3px black;
   		width: 80%;
@@ -46,7 +39,7 @@ function update(){
 <body>
 	<hr>
 	<div class="container">
-		<p class="fs-1">문의사항 관리</p>
+		<p class="fs-1 text-center">문의사항 관리</p>
 		  <div class="mb-3 row">
 		    <label for="staticEmail" class="col-sm-2 col-form-label">닉네임</label>
 		    <div class="col-sm-10">
@@ -77,7 +70,7 @@ function update(){
 	</div>
 	<hr>
 	<div class="container">
-		<p class="fs-1">문의사항 답변</p>
+		<p class="fs-1 text-center">문의사항 답변</p>
 		<div class="form-floating">
 			<form action="updateQna?qna_no=${q.qna_no }" method="post" class="form-floating" id="sm">
 			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
