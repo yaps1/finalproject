@@ -43,7 +43,7 @@ $(function name() {
 			<ul style="display: inline-block;">
 		
 			<li class="text-end text-white" id="top-header" style="float: left;"><a href="mypage?member_no=${m.member_no }">마이페이지</a><li>
-			<li class="text-end text-white" id="top-header" style="float: left;"><a href="#">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
+			<li class="text-end text-white" id="top-header" style="float: left;"><a href="saguPalguTalk">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
 			<li class="text-end text-white" id="top-header" style="float: right;"><a href="logout">로그아웃</a><li> 	
 	         </ul>
 		 </c:if>

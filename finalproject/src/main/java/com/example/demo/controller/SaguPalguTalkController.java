@@ -20,7 +20,7 @@ public class SaguPalguTalkController {
 	@Autowired
 	private AlarmDAO dao;
 	
-	@RequestMapping(value = "SaguPalguTalk", method = RequestMethod.GET)
+	@RequestMapping(value = "saguPalguTalk", method = RequestMethod.GET)
 	public void SaguPalguTalk() {}
 	
 	@RequestMapping(value = "saguPalguAlarm", method = RequestMethod.GET)

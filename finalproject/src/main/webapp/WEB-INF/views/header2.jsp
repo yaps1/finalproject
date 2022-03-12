@@ -85,7 +85,7 @@
 			<ul style="display: inline-block;" id="top_header_ul">
 		
 			<li class="text-end text-white" id="top_header_li"><a href="mypage?member_no=${m.member_no }" class="top_header_a">마이페이지</a><li>
-			<li class="text-end text-white" id="top_header_li"><a href="#" class="top_header_a">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
+			<li class="text-end text-white" id="top_header_li"><a href="saguPalguTalk" class="top_header_a">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
 			<li class="text-end text-white" id="top_header_li"><a href="logout" class="top_header_a">로그아웃</a><li> 	
 	        </ul>
 		 </c:if>
