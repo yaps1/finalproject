@@ -65,7 +65,6 @@
 </style>
 </head>
 <body>
-	<hr>
 	<p class="fs-1">공지사항</p>
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">

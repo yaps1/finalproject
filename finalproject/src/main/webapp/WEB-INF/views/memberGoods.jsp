@@ -218,11 +218,12 @@ $(function(){
 </script>
 </head>
 <body>
-<br>
+	<jsp:include page="header2.jsp"></jsp:include>
+	<br>
 	<br>
 	<h2 style="text-align : center;"><strong><a href="/mypage?member_no=${m.member_no }" class="link-dark" style="text-decoration-line : none;">마이페이지</a></strong></h2>
 	<br>
-	
+	<div class="bodycontainer">
 	<!-- 네비게이션바 -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid" style="text-align : center; width: 70%">
@@ -241,13 +242,14 @@ $(function(){
 
 <!-- 찜상품 탭 -->
 <input type="hidden" value="${m.member_no }" id="member_no">
-<div class="container">
+<div class="container" style="width: 70%;margin: auto;">
 	<ul class="tabs"  style="text-align: center;">
 		<li class="tab-link current" data-tab="tab-1" id="saleGoods"><strong>판매상품</strong></li>
 		<li class="tab-link" data-tab="tab-2" id="purchaseGoods"><strong>구매상품</strong></li>
 		<li class="tab-link" data-tab="tab-3" id="favorGoods"><strong>찜상품</strong></li>
 	</ul>
 	
+	<div>
 	<!-- 첫 화면 선택시 보이는 탭 -->	
 	<div id="tab-1" class="tab-content current">
 		<br>
@@ -269,8 +271,11 @@ $(function(){
 		<hr>
 		<div id="favor"></div>
 	</div>
-</div>
-<br>
-<br>
+	</div>
+	</div>
+	</div>
+	<br>
+	<br>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

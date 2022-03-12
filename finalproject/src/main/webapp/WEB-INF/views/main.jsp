@@ -87,7 +87,7 @@ $(function(){
 
 			}
 			let p =$("<p style='position: absolute; left:"+rox+"px; top:"+roh+"px; z-index:1000; font-size: "+size+"px; '></p>").html("#"+this)
-			let a=$("<a href='search?keyword="+this+"'></a>").append(p);
+			let a=$("<a href='searchkeyword?searchkeyword="+this+"'></a>").append(p);
 			$("#hot").append(a);
 			
 		});
@@ -110,8 +110,9 @@ $(function(){
 
 </style>
 </head>
-<!--<jsp:include page="header2.jsp"></jsp:include>-->
+
 <body>
+<jsp:include page="header1.jsp"></jsp:include>
 <!-- body 대신 div-->
 <div style="margin: 0 auto;	justify-content: center; width: 80%;">
 	<hr>

@@ -36,7 +36,11 @@ img{
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	$("#search").click(function() {
+	$(document).ready(function () {
+		search();
+	});
+	
+	function search() {
 		let searchkeyword = $("#searchkeyword").val();
 		if(searchkeyword == null || searchkeyword == undefined || searchkeyword == ""){ alert('검색어를 입력해주세요.'); $('#searchkeyword').focus(); return false;} 
 		
@@ -170,14 +174,20 @@ $(function () {
 	        success:function(data){
 	        	 $("#cntTotal").append("<h2><h2>").html("통합검색 검색결과("+data+"건)");
 	    }});
-	});
+	}
+	
+	$("#search").click(function(){
+		search();
+	})
+	
 });
 </script>
 </head>
 <body>
+	<jsp:include page="header2.jsp"></jsp:include>
 	<br>
 	<br>
-	<h2 style="text-align : center;"><strong><a href="/search.jsp" class="link-dark" style="text-decoration-line : none;">통합검색</a></strong></h2>
+	<h2 style="text-align : center;"><strong><a href="/search" class="link-dark" style="text-decoration-line : none;">통합검색</a></strong></h2>
 	<br>
 	
 	<!-- 검색창 -->
@@ -251,5 +261,6 @@ $(function () {
     </div>
     <br>
     <br>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

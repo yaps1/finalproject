@@ -83,7 +83,7 @@ div{
 	<br>
 	<br>
 	<br>
-	<h2 style="text-align : center;"><strong>관리자</strong></h2>
+	<h2 style="text-align : center;"><strong><a href="../../manager.jsp" class="link-dark" style="text-decoration-line : none;">관리자</a></strong></h2>
 	<br>
 	<br>
 	<!-- 네비게이션바 -->
@@ -91,16 +91,16 @@ div{
 	  <div class="container-fluid" style="text-align : center; width: 70%">
 	    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="#">차트 분석</a>
+	       <a class="navbar-brand" href="#">차트분석</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="#">회원 관리</a>
+	       <a class="navbar-brand" href="managerListMember">회원관리</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="#">공지사항 관리</a>
+	       <a class="navbar-brand" href="managerNotice">공지사항관리</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="#">문의사항 관리</a>
+	       <a class="navbar-brand" href="listQna">문의사항관리</a>
 	      </li>
 	    </ul>
 	  </div>

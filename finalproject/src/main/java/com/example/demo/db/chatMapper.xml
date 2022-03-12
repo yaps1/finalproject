@@ -16,6 +16,6 @@
  	</insert>
  	
  	<select id="listChatMessage" resultType="chatMessageVO">
- 		select message_no,message,time,member_nickname,room_no,chat_image from chat_message c,member m where m.member_no=c.member_no and room_no=#{room_no} order by message_no
+ 		select message_no,message,to_char(time,'YYYY/MM/DD HH24:MI') time,member_nickname,room_no,chat_image from chat_message c,member m where m.member_no=c.member_no and room_no=#{room_no} order by message_no
  	</select>
 </mapper>

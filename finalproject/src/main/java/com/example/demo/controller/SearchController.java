@@ -216,6 +216,14 @@ public class SearchController {
 		 //mav.addObject("searchkeyword", searchkeyword);
 	}
 	
+	@RequestMapping("/searchkeyword")
+	public String searchkeyword(String searchkeyword, HttpSession session) {
+		session.setAttribute("searchkeyword", searchkeyword);
+		return "redirect:/search";
+	}
+
+	
+	/*
 	@RequestMapping("/test")
 	public void testSearch(HttpSession session,String searchkeyword) {
 		
@@ -234,4 +242,5 @@ public class SearchController {
 		 //ModelAndView mav = new ModelAndView();
 		 //mav.addObject("searchkeyword", searchkeyword);
 	}
+	*/
 }

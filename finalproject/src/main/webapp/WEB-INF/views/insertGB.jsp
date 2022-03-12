@@ -8,16 +8,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
-.container {
-  background-color : #EAEAEA;
-  width: 60%;
-}
-
 label{
 	font-weight: bold;
 	font-size: large;
 }
-
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -90,6 +84,7 @@ $(function(){
 </script>
 </head>
 <body>
+	<jsp:include page="header2.jsp"></jsp:include>
 	<br>
 	<br>
 	<h2 style="text-align : center;"><strong>공동구매 등록</strong></h2>
@@ -102,7 +97,7 @@ $(function(){
 	</nav>
 	<br>
 	<br>
-	<div class="container">
+	<div class="container" style=" background-color : #EAEAEA;width: 60%;">
    	<form  action="insertGB?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post" id="insertGB">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		<input type="hidden" id="gb_no" value="${no }" name="gb_no"><br>
@@ -177,5 +172,6 @@ $(function(){
 	<br>
 	<br>
 	<br>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

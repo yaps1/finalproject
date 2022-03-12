@@ -10,7 +10,7 @@
 <style type="text/css">
 body{
 	margin-top: 100px;
-	line-height: 1.6
+	line-height: 1.6;
 }
 .container{
 	width: 70%;
@@ -415,8 +415,9 @@ th,td{
 </script>
 </head>
 <body>
-	<br>
-	<br>
+	<jsp:include page="header2.jsp"></jsp:include>
+	<div style="margin-top: 100px;line-height: 1.6; ">
+	
 	<h2 style="text-align : center;"><strong><a href="/mypage?member_no=${m.member_no }" class="link-dark" style="text-decoration-line : none;">마이페이지</a></strong></h2>
 	<br>
 	
@@ -438,15 +439,15 @@ th,td{
 	
 	<!-- 작성한 글 탭 -->
 	<input type="hidden" value="${m.member_no }" id="member_no">
-	<div class="container">
-		<ul class="tabs" style="text-align: center;">
+	<div class="container" style="width: 70%;margin: auto;">
+		<ul class="tabs" style="text-align: center;margin-left: 0px;padding: 0px;">
 			<li class="tab-link current" data-tab="tab-1" id="content"><strong>작성한 게시물</strong></li>
 			<li class="tab-link" data-tab="tab-2" id="comment"><strong>작성한 댓글</strong></li>
 			<li class="tab-link" data-tab="tab-3" id="review"><strong>작성한 후기</strong></li>
 			<li class="tab-link" data-tab="tab-4" id="qna"><strong>작성한 문의사항</strong></li>
 		</ul>
 	
-		<div id="tab-1" class="tab-content current">
+		<div id="tab-1" class="tab-content current" >
 			<br>
 			<h4 id="cntWriting">작성한 게시글</h4>
 			<hr>
@@ -592,7 +593,9 @@ th,td{
 		    </div>
 		</div>
 	</div>
+	</div>
 	<br>
 	<br>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
