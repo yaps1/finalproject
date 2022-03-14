@@ -49,12 +49,14 @@ $(function() {
 	
 	//수정 버튼(빈칸 체크 후 등록)
 	$("#updateMember").click(function(){
+		let member_no = $("#member_no").val();
 		let member_nickname = $("#member_nickname").val();
 		let member_tel1 = $("#member_tel1").val();
 		let member_tel2 = $("#member_tel2").val();
 		let member_tel3 = $("#member_tel3").val();
 		let member_addr = $("#member_addr").val();
 		let member_loc = $("#member_loc").val();
+		let member_tel = member_tel1 + member_tel2 + member_tel3;
 		
 		if(member_nickname == null || member_nickname == undefined || member_nickname == ""){ alert('닉네임을 입력해주세요.'); $('#member_nickname').focus(); return false;}
 		if(member_tel1 == null || member_tel1 == undefined || member_tel1 == ""){ alert('연락처를 입력해주세요.'); $('#member_tel1').focus(); return false;}
@@ -65,11 +67,17 @@ $(function() {
 
 		$.ajax({
   			url:"updateMember",
-  			data:$("#f").serializeArray(),
+  			data:{
+  				member_nickname:member_nickname,
+  				member_tel:member_tel,
+  				member_addr:member_addr,
+  				member_loc:member_loc
+  			},
   			success:function(r){
   				alert("회원 정보 수정 완료");
-  				$("#memberModal").hide();
-  				$('.modal-backdrop').hide();
+  				//$("#memberModal").hide();
+  				//$('.modal-backdrop').hide();
+  				location.href="mypage?member_no="+member_no;
   			}
   		});
   	});
@@ -243,7 +251,7 @@ $(function() {
 						      	if(addr_check == member_addr_check){	//만약 주소가 일치한다면
 						      		//console.log("일치");	
 						      		$("#check_addr").click(function(){
-						      			alert("주소가 일치해요!");
+						      			//alert("주소가 일치해요!");
 						      			$("#member_loc").val(addr_check).attr("readonly",true);
 						      			$("#MapModal").fadeOut();
 						      			$(".check_Addr").css("display","inline-block");

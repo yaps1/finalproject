@@ -21,6 +21,7 @@ import com.example.demo.dao.GoodsDAO;
 import com.example.demo.dao.HotKeyWordDAO;
 import com.example.demo.dao.NoticeDAO;
 import com.example.demo.dao.SGDAO;
+import com.example.demo.vo.GBCVO;
 import com.example.demo.vo.GBVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.NoticeVO;
@@ -237,7 +238,5 @@ public class SearchController {
         dao5.insertKeyword(searchkeyword);
         return "ok";
     }
-
-
 
 }

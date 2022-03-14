@@ -595,10 +595,6 @@ th,td{
 	</div>
 	<br>
 	<br>
-<<<<<<< HEAD
-<jsp:include page="footer.jsp"></jsp:include>
-=======
 	<jsp:include page="footer.jsp"></jsp:include>
->>>>>>> branch 'master' of https://github.com/yaps1/finalproject.git
 </body>
 </html>
