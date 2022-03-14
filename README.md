@@ -75,8 +75,10 @@
 |4989톡채팅|https://user-images.githubusercontent.com/91479004/158111338-2ee30b53-953d-44be-a433-7746a6dacf00.mp4|
 |회원탈퇴|https://user-images.githubusercontent.com/91479004/158110628-1ec5c665-40f4-41f4-a04d-4549976d68e8.mp4|
 |관리자차트|https://user-images.githubusercontent.com/91479004/158111395-db0c44f6-10c5-4489-afb1-347220af66ef.mp4|
-|메인페이지||
-|공지사항||
-|문의사항||
-|중고거래||
+|공지사항|https://user-images.githubusercontent.com/91479004/158113086-e0880668-98ba-4a8e-aa58-e1cc6550f57d.mp4|
+|문의사항|https://user-images.githubusercontent.com/91479004/158113105-9afb5f75-6c4f-4b97-a4ad-6d6763f0ecc2.mp4|
+|중고거래|https://user-images.githubusercontent.com/91479004/158112766-3f91268b-919e-4f1d-a5f4-f6152d02470c.mp4|
+|결제|https://user-images.githubusercontent.com/91479004/158112874-2cb2f063-1d3f-44c3-88ea-77d433f168d8.mp4|
+|공지사항관리|https://user-images.githubusercontent.com/91479004/158112509-f9e185fb-8976-4b33-b63e-c53d2e390c2d.mp4|
+|문의사항관리|https://user-images.githubusercontent.com/91479004/158112541-a17a8384-83d3-4b51-b9d3-f5fdd304552d.mp4|
 
