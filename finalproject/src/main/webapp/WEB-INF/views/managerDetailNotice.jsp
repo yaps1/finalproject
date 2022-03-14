@@ -25,7 +25,7 @@ function btn_delete(){
 } 
 </script>
 <style type="text/css">
-	.container{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;

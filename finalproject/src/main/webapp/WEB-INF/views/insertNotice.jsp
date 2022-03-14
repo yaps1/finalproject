@@ -13,7 +13,7 @@
 
 </script>
 <style type="text/css">
-	.container{
+	#container{
 		margin: 0 auto;	
 		justify-content: center;
 		width: 80%;
@@ -47,7 +47,7 @@
 					enctype="multipart/form-data">					
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div class="mb-3">
-	<table border="2">
+	<table border="2" style="margin: 0 auto;">
 	    <tr>
 	      <th>제목</th>
 	      <td><input type="text" class="form-control" id="exampleFormControlInput1" name="notice_title"></td>
@@ -71,6 +71,7 @@
 	<button type="reset" class="btn btn-outline-secondary" id="btnr">취소</button>
 	</form>
 </div>
+<br>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -79,7 +79,7 @@
 	   select goods_image1, goods_name,goods_price ,member_no,g.goods_no goods_no
 		from goods g,
 		(select goods_no, goods_image1, goods_state
-		from goods_detail where goods_condition=1) gd 
+		from goods_detail where goods_condition=1 or goods_condition=2) gd 
 		where g.goods_no = gd.goods_no and 
 		g.member_no = (select member_no from goods where goods_no=#{goods_no})
 	 </select>
@@ -160,7 +160,7 @@
   	<insert id="purchaseGoods" parameterType="goodsPurchaseVO">
   		insert into goods_purchase values((select nvl(max(goods_purchase_no),0)+1 from goods_purchase),#{goods_no},#{member_no})
   	</insert>
-  	<update id="updatePurchase">
+  	<update id="updatePurchase" parameterType="java.lang.Integer">
   		update goods_detail set goods_condition =3 where goods_no = #{goods_no}
   	</update>
   	<select id="checkPurchase" resultType="java.lang.Integer">

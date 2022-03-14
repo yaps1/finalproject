@@ -160,7 +160,7 @@ public class GoodsController {
 		GoodsDetailVO gd = dao.getGoodsImage(goods_no);
 		model.addAttribute("gd", gd);
 		session.setAttribute("g", dao.getGoodsInfo(goods_no));
-		//session.setAttribute("goods_no",goods_no);
+		session.setAttribute("goods_no",goods_no);
 		int check=0;
 		int checkPurchase=0;
 		GoodsFavorVO gf = new GoodsFavorVO();
@@ -224,31 +224,31 @@ public class GoodsController {
 		
 		
 		
-		int totalPage = dao.totalPage;
+		int totalPageReview = dao.totalPage;
 
-		int pageCount = dao.pageCount;
-		if(totalPage<dao.pageCount) {
-			pageCount = totalPage;
+		int pageCountReview = dao.pageCount;
+		if(totalPageReview<dao.pageCount) {
+			pageCountReview = totalPageReview;
 		}
-		int pageGroup = (int)Math.ceil(pageNUM/(double)pageCount);
-		int last =pageGroup*pageCount;
-		if(last>totalPage) {
-			last = totalPage;
+		int pageGroup = (int)Math.ceil(pageNUM/(double)pageCountReview);
+		int lastReview =pageGroup*pageCountReview;
+		if(lastReview>totalPageReview) {
+			lastReview = totalPageReview;
 		}
-		int first = last -(pageCount-1);
-		int next = last +1;
-		int prev = first-1;
-		System.out.println("토탈:"+totalPage);
-		System.out.println("first"+first);
-		System.out.println("last:"+last);
+		int firstReview = lastReview -(pageCountReview-1);
+		int nextReview = lastReview +1;
+		int prevReview = firstReview-1;
+		System.out.println("토탈:"+totalPageReview);
+		System.out.println("first"+firstReview);
+		System.out.println("last:"+lastReview);
 		
 		//dao에 계산된 전체페이지수를 model에 상태유지합니다.
-		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("totalPageReview", totalPageReview);
 		
-		model.addAttribute("last",last);
-		model.addAttribute("first",first);
-		model.addAttribute("next",next);
-		model.addAttribute("prev",prev);
+		model.addAttribute("lastReview",lastReview);
+		model.addAttribute("firstReview",firstReview);
+		model.addAttribute("nextReview",nextReview);
+		model.addAttribute("prevReview",prevReview);
 		model.addAttribute("pageNUM",pageNUM);
 		
 
@@ -259,6 +259,7 @@ public class GoodsController {
 		model.addAttribute("sr", dao.sellerReview(map));
 		model.addAttribute("goods",goods);
 		model.addAttribute("goodsSold",goodsSold);
+		model.addAttribute("goods_no",goods_no);
 	}
 
 
@@ -355,8 +356,10 @@ public class GoodsController {
 		model.addAttribute("goods_no", goods_no);
 	}
 	@RequestMapping(value="/reviewGoods", method = RequestMethod.POST)
-	public ModelAndView reviewGoodsSubmit(GoodsReviewVO gr) {
+	public ModelAndView reviewGoodsSubmit(GoodsReviewVO gr,HttpSession session) {
 		ModelAndView mav = new ModelAndView("redirect:/goods");
+		MemberVO m=(MemberVO)session.getAttribute("m");
+		gr.setMember_no(m.getMember_no());
 		int re = dao.reviewGoods(gr);
 		if(re!=1) {
 			mav.setViewName("error");

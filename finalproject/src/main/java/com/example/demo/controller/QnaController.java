@@ -35,8 +35,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/insertQna", method = RequestMethod.POST)
-	public ModelAndView insertSubmit(QnaVO q ) {
-		ModelAndView mav = new ModelAndView("redirect:/listQna");
+	public ModelAndView insertSubmit(QnaVO q ,HttpSession session) {
+		MemberVO m = (MemberVO) session.getAttribute("m");
+		ModelAndView mav = new ModelAndView("redirect:/mypage?member_no="+m.getMember_no());
 		int re = dao.insertQna(q);
 		if(re != 1) {
 			mav.setViewName("error");

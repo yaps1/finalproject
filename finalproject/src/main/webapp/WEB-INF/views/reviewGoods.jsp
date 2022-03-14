@@ -42,8 +42,10 @@
 		}else if(goodsR ==""){
 			alert("리뷰내용을 남겨주세요",'warning');
 		}else{
-			insertR.submit();
-			window.close();
+			//insertR.submit();
+			//window.close();
+			 setTimeout(function () { insertR.submit(); }, 500);
+        	window.onfocus = function () { setTimeout(function () { window.close(); }, 500); }
 		}
 	}
 </script>

@@ -163,7 +163,7 @@ function MovePage(e) {
 	      <div class="swiper-wrapper">
 	      <c:forEach var="sgs" items="${sgs }">
 	        <div class="swiper-slide card">
-	       		<img src="../images/${sgs.goods_image1 }" class="card-img-top "name="${sgs.goods_no }" onclick="MovePage(this)">
+	       		<img src="../images/${sgs.goods_image1 }" class="card-img-top "name="${sgs.goods_no }" onclick="MovePage(this)" style="width: 100%; height: 150px;">
 					<div class="card-body">
 					<h5 class="card-title">${sgs.goods_name }</h5>
 					<p class="card-text">${sgs.goods_price }</p>
@@ -210,12 +210,12 @@ function MovePage(e) {
 		</c:forEach>
 		
 		<ul style="list-style: none;">
-			<c:if test="${prev > 0 }"><li><a href="seller?pageNUM=${first-1 }" id='prev'>이전</a></li></c:if>
-			<c:forEach var="i" begin="${first }" end="${last }">
+			<c:if test="${prevReview > 0 }"><li><a href="seller?pageNUM=${firstReview-1 }" id='prev'>이전</a></li></c:if>
+			<c:forEach var="i" begin="${firstReview }" end="${lastReview }">
 				<c:if test="${i == pageNUM }"><li class='on'><a href="seller?pageNUM=${i }">${i }</a></li></c:if>
 				<c:if test="${i != pageNUM }"><li><a href="seller?pageNUM=${i }">${i }</a></li></c:if>
 			</c:forEach>
-			<c:if test="${last < totalPage }"><li><a href="seller?pageNUM=${last+1 }" id='next'>다음</a></li></c:if>
+			<c:if test="${lastReview < totalPageReview }"><li><a href="seller?pageNUM=${lastReview+1 }" id='next'>다음</a></li></c:if>
 		</ul>
 		
 		<br>

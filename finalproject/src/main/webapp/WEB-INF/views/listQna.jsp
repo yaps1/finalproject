@@ -95,7 +95,7 @@
 	       <a class="navbar-brand" href="managerListMember">회원관리</a>
 	      </li>
 	      <li class="nav-item">
-	       <a class="navbar-brand" href="listNotice">공지사항관리</a>
+	       <a class="navbar-brand" href="managerNotice">공지사항관리</a>
 	      </li>
 	      <li class="nav-item">
 	       <a class="navbar-brand" href="">문의사항관리</a>
