@@ -48,7 +48,7 @@
   </select>
   
   <insert id="insertGB" parameterType="gbVO">
-  	insert into group_buying values(#{gb_no},0,#{gb_category},#{gb_start_date},#{gb_end_date},#{gb_title},#{gb_capacity},#{member_no})
+  	insert into group_buying values(#{gb_no},1,#{gb_category},#{gb_start_date},#{gb_end_date},#{gb_title},#{gb_capacity},#{member_no})
   </insert>
   
    <insert id="insertGBD" parameterType="gbdVO">
