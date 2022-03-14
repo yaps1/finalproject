@@ -236,8 +236,6 @@
 		<c:if test="${addr>0 }">
 		  	<p class="fs-1" style="text-align: center">우리동네 중고거래</p>
 		</c:if>
-
-		
 		<form class="d-flex">		
         	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keywordGoods"id="keywordGoods">
         	<button class="btn btn-outline-success" type="submit">Search</button>

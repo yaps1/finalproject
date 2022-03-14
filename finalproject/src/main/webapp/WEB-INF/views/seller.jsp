@@ -111,8 +111,6 @@ function MovePage(e) {
 		<p class="text-light bg-dark">판매 중 상품</p>
 		<br>
 		<p class="fs-5 fw-bold lh-1" style="display:inline;">상품 ${goods }개</p>
-		
-
 		<!-- Swiper -->
 	    <div class="swiper mySwiper">
 	      <div class="swiper-wrapper">
