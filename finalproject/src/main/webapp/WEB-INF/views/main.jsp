@@ -14,7 +14,7 @@ $(function(){
 	var keyword = new Array();
 	
 	var docWidth = $( 'div#hot' ).innerWidth()+150; // 문서 가로값
-	var docHeight = $( 'div#hot' ).innerHeight()+300; // 문서 세로값
+	var docHeight = $( 'div#hot' ).innerHeight()+280; // 문서 세로값
 
 
 	// 설정값
@@ -26,7 +26,7 @@ $(function(){
 	
 	var minRox = 300; // random offset x 최소값
 
-	var minRoh = 450; // random offset y 최소값
+	var minRoh = 430; // random offset y 최소값
 
 
 	var imgWidth = 200; // 이미지 가로 크기
