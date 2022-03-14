@@ -65,10 +65,12 @@
 ## 웹페이지 기능 구현
 |기능|시연영상|
 |:--:|:--:|
-|로그인/회원가입||
-|소모임||
-|맛집후기||
-|4989톡알림||
+|로그인|https://user-images.githubusercontent.com/91479004/158153136-6f8cfc02-b869-4f11-aa20-f16f1ff396b1.mp4 https://user-images.githubusercontent.com/91479004/158153804-0609a094-4001-4e38-a4de-96718ff7f37e.mp4 https://user-images.githubusercontent.com/91479004/158154148-f69cefec-cfe8-4ddd-bf1b-7dbc13ba841c.mp4|
+|회원가입|https://user-images.githubusercontent.com/91479004/158153315-d2c362b1-df3d-46b1-a1fa-f81cc6b623e5.mp4|
+|소모임|https://user-images.githubusercontent.com/91479004/158153368-8df25b2d-f8a8-4180-8b01-8a12722e4121.mp4  https://user-images.githubusercontent.com/91479004/158153425-a2732df5-c7a3-4688-979f-c4a3d0d24406.mp4|
+|맛집후기|https://user-images.githubusercontent.com/91479004/158154895-7b28e613-d30f-4503-8b43-0be3d6f1d544.mp4|
+|회원관리|https://user-images.githubusercontent.com/91479004/158153706-582b8cf9-6e99-4de6-a762-8fe9c2cbdcb3.mp4|
+|4989톡알림|https://user-images.githubusercontent.com/91479004/158153586-58d82b80-6ab5-4c3c-aed1-608ab639b0c3.mp4|
 |통합검색/헤더1|https://user-images.githubusercontent.com/91479004/158111224-acda8f42-af22-4790-b73d-28dbf8322d12.mp4|
 |마이페이지|https://user-images.githubusercontent.com/91479004/158111423-b95f5a50-c5f3-4c80-b4c0-e78e0cea5775.mp4|
 |공동구매|https://user-images.githubusercontent.com/91479004/158111308-76f374c8-4738-470e-925b-6ddc51daf7f9.mp4|
