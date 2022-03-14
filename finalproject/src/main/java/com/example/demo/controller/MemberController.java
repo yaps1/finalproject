@@ -127,15 +127,15 @@ public class MemberController {
 	
 	//로그인 성공
 	@RequestMapping("/loginOK") 
-	public void loginOK(HttpSession session) {
-		//ModelAndView mav = new ModelAndView("/main");
+	public ModelAndView loginOK(HttpSession session) {
+		ModelAndView mav = new ModelAndView("/main");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal(); 
 		String member_id = user.getUsername();
 	
 		MemberVO m = dao.isMember(member_id);
 		session.setAttribute("m", m);
-		//return mav;
+		return mav;
 	}
 	
 	//아이디 찾기 폼
