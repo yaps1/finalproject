@@ -106,7 +106,8 @@ public class GoodsController {
 		//dao를 통해 검색한 결과를 model에 저장한다.
 		//이대 findAll메소드에서 전체레코드수를 구하고 
 		//그 값을 갖고 전체페이지수도 계산합니다.
-		model.addAttribute("list", dao.listAllGoods(map));
+		List<GoodsVO> list = dao.listAllGoods(map);
+		model.addAttribute("list", list);
 		model.addAttribute("member_no", member_no);
 		model.addAttribute("addr", addr);
 		

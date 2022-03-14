@@ -255,7 +255,7 @@
 		  <c:forEach var="g" items="${list }">
 		    <div class="col">
 		      <div class="card" style="width: 18rem;">
-				  <a href="detailGoods?goods_no=${g.goods_no }"><img src="../images/${g.goods_image1 }" class="card-img-top" style="width: 286px; height: 200px;"></a>
+				  <a href="detailGoods?goods_no=${g.goods_no }"><img src="../images/${g.goods_image1 }" class="card-img-top" style="width: 100%; height: 200px;"></a>
 				  <div class="card-body">
 				    <h5 class="card-title">${g.goods_name }</h5>
 				    <p class="card-text">${g.goods_price }</p>

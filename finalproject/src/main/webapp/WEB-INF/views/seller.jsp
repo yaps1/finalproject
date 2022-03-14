@@ -118,7 +118,7 @@ function MovePage(e) {
 	      <div class="swiper-wrapper">
 	      <c:forEach var="sg" items="${sg }">
 	        <div class="swiper-slide card">
-	       		<img src="../images/${sg.goods_image1 }" class="card-img-top " name="${sg.goods_no }" onclick="MovePage(this)" >
+	       		<img src="../images/${sg.goods_image1 }" class="card-img-top " name="${sg.goods_no }" onclick="MovePage(this)" style="width: 100%; height: 150px;">
 					<div class="card-body">
 					<h5 class="card-title">${sg.goods_name }</h5>
 					<p class="card-text">${sg.goods_price }</p>
