@@ -18,18 +18,14 @@ $(function(){
 	
 	$(document).on("click","#searchPWD",function(){ 
 		location.href="/searchPwd";
-	});
-		
-	
-	
-	
+	});	
 	
 });
-
 </script>
 </head>
 <body>
-<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin" style="margin-top: 150px;">
+<jsp:include page="header1.jsp"></jsp:include>	
+<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin" style="margin-top: 150px; margin-bottom: 100px; padding-right: 80px;">
   <div class="modal-dialog" role="document" style="margin: 0 auto;">
     <div class="modal-content rounded-5 shadow" style="width: 600px;">
       <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">	
@@ -93,15 +89,11 @@ $(function(){
 		         	 <button class="mb-1 btn btn-lg rounded-4 btn-secondary" type="submit" style="padding:10px 70px;" onclick="location.href='/searchId'">아이디찾기</button>
 		          </div>
 	          </div>
-          </c:if>
-          
-          
-        
-        
+          </c:if>   
       </div>
-
     </div>
   </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>	
 </body>
 </html>
