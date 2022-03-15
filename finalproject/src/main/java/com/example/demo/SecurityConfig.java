@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		
 		http.authorizeHttpRequests()
-		.mvcMatchers("/images/**","/main","/join","/login","/searchId","/searchIdOK","/searchPwd","/searchPwdOK","/updatePwd","/insertSG","/deleteSG","/listOfSG","/insertSGC","/updateSGC","/deleteSGC","/id_check","/sendNumber","/nickname_check","/kakao_login","/getRestInfo","/listRestReview","/managerListMember","/KakaoLoginOK").permitAll()
+		.mvcMatchers("/images/**","/main","/join","/login","/searchId","/searchIdOK","/searchPwd","/searchPwdOK","/updatePwd","/insertSG","/deleteSG","/listOfSG","/insertSGC","/updateSGC","/deleteSGC","/id_check","/sendNumber","/nickname_check","/kakao_login","/getRestInfo","/listRestReview","/managerListMember","/KakaoLoginOK","/jointype").permitAll()
 		.anyRequest().authenticated();
 		
 		http.formLogin().loginPage("/login")
@@ -43,7 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().ignoringAntMatchers("/insertChatImage");
 		http.csrf().ignoringAntMatchers("/deleteGBC");
 		http.csrf().ignoringAntMatchers("/listChatMessage");
-
+		http.csrf().ignoringAntMatchers("/updatePwd");
+		http.csrf().ignoringAntMatchers("/updateGBJOk");
+		http.csrf().ignoringAntMatchers("/updateGBJNo");
+		http.csrf().ignoringAntMatchers("/insertRest");
+		
 		http.httpBasic(); 
 		
 		
