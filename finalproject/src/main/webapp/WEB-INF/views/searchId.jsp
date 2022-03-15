@@ -19,7 +19,8 @@
 </script>
 </head>
 <body>
-<div class="modal modal-signin position-static d-block py-5" id="searchId" tabindex="-1" role="dialog" id="modalSignin" style="margin-top:100px;">
+<jsp:include page="header1.jsp"></jsp:include>
+<div class="modal modal-signin position-static d-block py-5" id="searchId" tabindex="-1" role="dialog" id="modalSignin"  style="margin-top:50px; margin-bottom: 50px;">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-5 shadow">
       
@@ -69,5 +70,6 @@
     </div>
   </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
