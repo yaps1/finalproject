@@ -140,7 +140,8 @@
       </div>
     </div>
   </nav>
-  
+	
+  <c:if test="${empty m}">
     <div class="modal" tabindex="-1" id="myModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -159,6 +160,7 @@
 	    </div>
 	  </div>
 	 </div>
+    </c:if>
   </header>
   <input type="hidden" id="memberno" value="${m.member_no }">
 
