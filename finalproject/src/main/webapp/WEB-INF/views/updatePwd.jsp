@@ -22,29 +22,37 @@ $(function(){
 		//});
 	
 		$("#btn").click(function check_pwd(){
+			let member_id = document.getElementById("member_id").value;
 			let member_pwd = document.getElementById("member_pwd").value;
 			let member_pwd_check = document.getElementById("member_pwd_check").value;
-			
+			//alert(member_id);
 			if(member_pwd==member_pwd_check){
-				alert("비밀번호가 일치합니다.");
-				location.href='/login';
-				return true;
+				$.ajax({
+					url:"updatePwd",
+					type:"post",
+					data:{
+						member_id:member_id,
+						member_pwd:member_pwd
+					},
+					success:function(){
+						alert("비밀번호 수정에 성공하였습니다");
+						location.href='/login';
+					}
+				})
 			}else{
 				alert("비밀번호가 다릅니다.");		
 				false;
-			}
+			}			
 		});
 		
 		
 		
-});
-	
-	
-	
+});	
 </script>
 </head>
 <body>
-<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
+<jsp:include page="header1.jsp"></jsp:include>
+<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin" style="margin-top:50px; margin-bottom: 100px;">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-5 shadow">
       
@@ -64,8 +72,6 @@ $(function(){
 			
         <!-- 입력태그 감싸는 div -->
          <div class="mb-3">
-         
-         <!-- test -->
          <!-- 아이디 작성란 -->
           <div style="position: relative; text-align: right;">
 	          <div style="display: inline-block; width: 120px; margin-right: 10px;">
@@ -75,12 +81,8 @@ $(function(){
 	            <input type="email" class="form-control rounded-4" id="member_id" name="member_id" placeholder="아이디(이메일)" style="width: 260px;">
 	            <label for="floatingId">아이디(이메일)</label>
 	          </div>
-          </div>
-         <!-- test -->
-         
-         
+          </div>  
          <!-- 비밀번호 -->
-         
           <div style="position: relative; text-align: right;">
 	          <div style="display: inline-block; width: 120px;">
 	          	<label>비밀번호</label>
@@ -112,5 +114,6 @@ $(function(){
     </div>
   </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
