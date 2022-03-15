@@ -17,22 +17,19 @@ $(function(){
 	});
 });
 
-	
-	
-		function checkInput(){
-			let member_id = document.getElementById("member_id").value;
-			let member_name = document.getElementById("member_name").value;
-			let member_tel = document.getElementById("member_tel").value;
-			if(member_id == ""){alert("아이디를 입력해주세요");}
-			if(member_name == ""){alert("이름을 입력해주세요");}
-			if(member_tel == ""){alert("휴대전화번호를 입력해주세요");}
-		}
-
-
+function checkInput(){
+	let member_id = document.getElementById("member_id").value;
+	let member_name = document.getElementById("member_name").value;
+	let member_tel = document.getElementById("member_tel").value;
+	if(member_id == ""){alert("아이디를 입력해주세요");}
+	if(member_name == ""){alert("이름을 입력해주세요");}
+	if(member_tel == ""){alert("휴대전화번호를 입력해주세요");}
+}
 </script>
 </head>
 <body>
-<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin">
+<jsp:include page="header1.jsp"></jsp:include>
+<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin" style="margin-top:50px; margin-bottom: 50px;">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-5 shadow">
       
@@ -97,8 +94,6 @@ $(function(){
     </div>
   </div>
 </div>
-
-
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
