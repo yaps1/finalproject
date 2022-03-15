@@ -220,7 +220,7 @@
 		$("#code_check_btn").click(function(){
 			//alert("gi");
 			if(code == $("#code_check").val()){
-				alert("인증번호가 일치합니다!.");
+				alert("인증번호가 일치합니다!");
 				$("#member_tel1").attr("readonly",true)
 				$("#member_tel2").attr("readonly",true)
 				$("#member_tel3").attr("readonly",true)
@@ -377,8 +377,8 @@
 	</div>
 <!-- 모달창 끝 -->
 
-<div style="padding:100px 100px; height: 1300px;">
-	<div class="col-md-7 col-lg-8 border" style="margin: 0 auto; padding: 0 250px;">
+<div style="padding:100px 300px; height: 1300px; margin-bottom: 200px;">
+	<div class="col-md-7 col-lg-8 border" style="margin: 0 auto; padding: 0 100px;">
 		<!-- 회원가입 제목 -->
 		<div class="pt-3 mt-5 mb-5" style="display: inline-block; width: 100%; padding-left: 90px;">
 		<div style="float: left;" >
