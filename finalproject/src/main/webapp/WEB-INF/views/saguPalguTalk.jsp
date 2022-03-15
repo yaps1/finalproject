@@ -22,12 +22,11 @@
 		});
 	});
 	
-	//알람 함수 2초마다 동작함
+	//알람 함수 1초마다 동작함
 	function alarmList(){
 	let member_no = $("#member_no").val();
 	//alert(member_no);
 	
-	//타이머................ 
 	timer = setInterval( function () {
 	$("#alarm-box").empty();
 	$.ajax({
@@ -52,7 +51,7 @@
 		}//success끝
 	})//ajax끝
 	
-	}, 2000);
+	}, 1000);
 }//함수 끝
 	
 	
@@ -69,7 +68,7 @@
 			//alert(gbj_no);
 			$(".modal").fadeIn();
 		
-			//수락할 경우 ~~~~
+			//수락할 경우
 			$("#btnOK").click(function(){
 				//alert("ok");
 				$.ajax({
@@ -162,6 +161,7 @@ ul.tabs li.current{
 <body>
 <jsp:include page="header2.jsp"></jsp:include>
 <input type="hidden" value="${m.member_no }">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 
 <!-- Modal -->
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="padding-top: 300px;">
@@ -176,19 +176,14 @@ ul.tabs li.current{
       </div>
       <div class="mb-3" style="text-align: center; width: 100%;">
       	<button type="button" id="btnOK" class="btn btn-lg btn-primary" style="padding: 0px 50px; height: 45px;">수락</button>
-       	<button type="button" id="btnNO" class="btn btn-lg btn-secondary" style="padding: 0px 50px; height: 45px;" data-dismiss="modal">취소</button>
+       	<button type="button" id="btnNO" class="btn btn-lg btn-secondary" style="padding: 0px 50px; height: 45px;" data-dismiss="modal">거절</button>
       </div>
     </div>
   </div>
 </div>
 <!-- 모달끝 -->
 
-
-
-
-<!-- setInterval(function(){},5000) -->
 <div style="padding: 200px; height: 900px;">
-
 	<div class="container">
 		<ul class="tabs" style="text-align: center;">
 			<li class="tab-link current text-bold" data-tab="tab-1" id="alarm"><strong style="font-size: 20px;">4989알림</strong></li>
@@ -200,9 +195,7 @@ ul.tabs li.current{
 			<ol class="p-1 mb-0 pb-3" id="alarm-box"></ol>	
 		</div>
 		<!-- tab-1끝 -->
-		
-		
-		
+
 		<div id="tab-2" class="tab-content" style="width: 80%; margin: 0 auto; text-align: center; padding-top:40px;">
 			<div class="pt-3 pb-3" style="background: white; width: 70%; margin: 0 auto; border-radius: 15px;">
 			<a href="room" style="list-style: none; color: inherit; text-decoration: none;"><i class="bi bi-chat-dots-fill display-3">4989톡</i></a>
