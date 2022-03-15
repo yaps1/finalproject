@@ -39,16 +39,15 @@ $(function name() {
 <header class="fixed-top;">
 
  <div class="p-1 bg-secondary bg-gradient text-end text-white d-flex justify-content-end">
-         <c:if test="${not empty m}">
-			<ul class="mb-0" style="display: inline-block;">
+       <c:if test="${not empty m}">
+	<ul class="mb-0" style="display: inline-block;">
+		<li class="text-end text-white" id="top-header" style="float: left;"><a href="mypage?member_no=${m.member_no }">마이페이지</a><li>
+		<li class="text-end text-white" id="top-header" style="float: left;"><a href="saguPalguTalk">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
+		<li class="text-end text-white" id="top-header" style="float: right;"><a href="logout">로그아웃</a><li> 	
+	</ul>
+	</c:if>
 		
-			<li class="text-end text-white" id="top-header" style="float: left;"><a href="mypage?member_no=${m.member_no }">마이페이지</a><li>
-			<li class="text-end text-white" id="top-header" style="float: left;"><a href="saguPalguTalk">4989톡<i class="bi bi-chat-quote-fill" style="margin-left: 5px;"></i></a><li>
-			<li class="text-end text-white" id="top-header" style="float: right;"><a href="logout">로그아웃</a><li> 	
-	         </ul>
-		 </c:if>
-		
-         <c:if test="${empty m}">
+        <c:if test="${empty m}">
           <ul class="mb-0">
          	<li class="text-end text-white" id="top-header"><a href="/jointype">로그인/회원가입</a><li>
          </ul>
