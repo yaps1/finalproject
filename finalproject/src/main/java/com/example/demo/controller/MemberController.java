@@ -108,12 +108,12 @@ public class MemberController {
 		String code="";
 		Random r = new Random();
 		code = r.nextInt(88888888)+11111111+"";
-		String msg = "[TEST]인증번호:"+code;
+		String msg = "[4989 본인확인]인증번호:"+code;
 		
 		BitSms sms = new BitSms();
 		sms.sendMsg("01025598279", member_tel, msg);
-		System.out.println("member_tel:"+member_tel);
-		System.out.println("code"+code);
+		//System.out.println("member_tel:"+member_tel);
+		//System.out.println("code"+code);
 		return code;
 	}
 	
@@ -153,13 +153,13 @@ public class MemberController {
 		
 		//String masking_id = member_id.replaceAll("(?<=.{2}).", "*");
 		String [] arr = member_id.split("@");
-		System.out.println("1"+arr[0]);
-		System.out.println("2"+arr[1]);
+		//System.out.println("1"+arr[0]);
+		//System.out.println("2"+arr[1]);
 		
 		String id1 = arr[0].replaceAll("(?<=.{2}).", "*");
 		String id2 = arr[1];
-		System.out.println(id1);
-		System.out.println(id2);
+		//System.out.println(id1);
+		//System.out.println(id2);
 		
 		String masking_id = id1+"@"+id2;
 		//mav.addObject("member_id", member_id);
@@ -194,7 +194,7 @@ public class MemberController {
 
 		}
 		mav.addObject("code", code);
-		mav.addObject("member_id", member_id); //테스트
+		mav.addObject("member_id", member_id);
 		return mav;	
 	}
 	
@@ -213,7 +213,7 @@ public class MemberController {
 		str += "4989에서 인증코드를 입력해주세요!\n";
 		mailMessage.setText(str);
 		mailMessage.setFrom("wlguswlgusg@gmail.com");
-		mailMessage.setTo("wlguswlgusg@naver.com"); //test후 member_id로 바꿈
+		mailMessage.setTo(member_id);
 		try {
 			javaMailSender.send(mailMessage);
 			System.out.println("code:"+code);
@@ -225,7 +225,7 @@ public class MemberController {
 		return code;
 	}
 	
-	//이메일 인증 코드와 비교?????
+	//이메일 인증 코드 비교
 	@RequestMapping(value = "/searchPwdOK",method = RequestMethod.POST)
 	public ModelAndView searchPwdOK(String member_id) {
 		ModelAndView mav = new ModelAndView("/updatePwd");
@@ -293,9 +293,9 @@ public class MemberController {
 	@ResponseBody
 	public int deleteListMember(@RequestParam(value = "arr[]") List<Integer> arr) {
 		int re = 0;
-		System.out.println("arr:"+arr);
+		//System.out.println("arr:"+arr);
 		int cnt = arr.size();
-		System.out.println("cnt:"+cnt);
+		//System.out.println("cnt:"+cnt);
 		
 		for(int i=0;i<arr.size();i++) {
 			re = dao.deleteMember(arr.get(i));
