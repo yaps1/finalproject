@@ -38,7 +38,10 @@
    - gb_ref not null number
    - gb_level not null number
    - gb_step not null number
-
+  3. small_group_comment 테이블 컬럼 추가
+   - sg_ref not null number
+   - sg_level not null number
+   - sg_step not null number
 ## 역할분담
 - 김지현
   - 회원가입/로그인
